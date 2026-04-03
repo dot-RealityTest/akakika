@@ -1,7 +1,69 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { motion, AnimatePresence, useScroll, useTransform, useMotionValue, useMotionValueEvent } from 'motion/react';
+import React, { useEffect, useRef, useState } from 'react';
+import { AnimatePresence, motion, useMotionValue, useMotionValueEvent, useScroll, useTransform } from 'motion/react';
 
-const Typewriter: React.FC<{ text: string; delay?: number; onComplete?: () => void; cursor?: boolean; cursorClass?: string }> = ({ text, delay = 0, onComplete, cursor = false, cursorClass = "bg-indigo-500" }) => {
+type NavigateFn = (path: string) => void;
+type ThemeName = 'purple' | 'cyan' | 'amber';
+
+const THEMES: Record<ThemeName, { label: string; vars: React.CSSProperties }> = {
+  purple: {
+    label: 'Purple',
+    vars: {
+      '--accent-200': '#c7d2fe',
+      '--accent-300': '#a5b4fc',
+      '--accent-400': '#818cf8',
+      '--accent-500': '#6366f1',
+      '--accent-900': 'rgba(49, 46, 129, 0.18)',
+      '--accent-border': 'rgba(99, 102, 241, 0.30)',
+      '--accent-border-strong': 'rgba(129, 140, 248, 0.50)',
+      '--accent-shadow': 'rgba(99, 102, 241, 0.22)',
+      '--accent-glow': 'rgba(139, 92, 246, 0.60)',
+    } as React.CSSProperties,
+  },
+  cyan: {
+    label: 'Cyan',
+    vars: {
+      '--accent-200': '#bae6fd',
+      '--accent-300': '#7dd3fc',
+      '--accent-400': '#38bdf8',
+      '--accent-500': '#06b6d4',
+      '--accent-900': 'rgba(8, 47, 73, 0.20)',
+      '--accent-border': 'rgba(34, 211, 238, 0.30)',
+      '--accent-border-strong': 'rgba(103, 232, 249, 0.55)',
+      '--accent-shadow': 'rgba(34, 211, 238, 0.22)',
+      '--accent-glow': 'rgba(56, 189, 248, 0.55)',
+    } as React.CSSProperties,
+  },
+  amber: {
+    label: 'Amber',
+    vars: {
+      '--accent-200': '#fde68a',
+      '--accent-300': '#fcd34d',
+      '--accent-400': '#f59e0b',
+      '--accent-500': '#d97706',
+      '--accent-900': 'rgba(120, 53, 15, 0.20)',
+      '--accent-border': 'rgba(245, 158, 11, 0.30)',
+      '--accent-border-strong': 'rgba(251, 191, 36, 0.55)',
+      '--accent-shadow': 'rgba(245, 158, 11, 0.20)',
+      '--accent-glow': 'rgba(251, 191, 36, 0.40)',
+    } as React.CSSProperties,
+  },
+};
+
+const navigateTo = (path: string) => {
+  if (window.location.pathname !== path) {
+    window.history.pushState({}, '', path);
+  }
+  window.scrollTo({ top: 0, behavior: 'auto' });
+  window.dispatchEvent(new PopStateEvent('popstate'));
+};
+
+const Typewriter: React.FC<{ text: string; delay?: number; onComplete?: () => void; cursor?: boolean; cursorClass?: string }> = ({
+  text,
+  delay = 0,
+  onComplete,
+  cursor = false,
+  cursorClass = 'accent-bg',
+}) => {
   const [displayedText, setDisplayedText] = useState('');
   const [currentIndex, setCurrentIndex] = useState(0);
   const [started, setStarted] = useState(false);
@@ -18,153 +80,213 @@ const Typewriter: React.FC<{ text: string; delay?: number; onComplete?: () => vo
 
   useEffect(() => {
     if (!started) return;
+
     if (currentIndex < text.length) {
       const randomDelay = Math.random() * 40 + 10;
       const char = text[currentIndex];
-      const pause = (char === '.' || char === ',') ? 150 : (char === ' ' ? 40 : 0);
-      
+      const pause = char === '.' || char === ',' ? 150 : char === ' ' ? 40 : 0;
+
       const timer = setTimeout(() => {
-        setDisplayedText(prev => prev + char);
-        setCurrentIndex(prev => prev + 1);
+        setDisplayedText((prev) => prev + char);
+        setCurrentIndex((prev) => prev + 1);
       }, randomDelay + pause);
-      
+
       return () => clearTimeout(timer);
-    } else {
-      if (onCompleteRef.current) {
-        onCompleteRef.current();
-      }
     }
+
+    onCompleteRef.current?.();
   }, [currentIndex, text, started]);
 
   return (
     <span>
       {displayedText}
-      {cursor && <span className={`blink w-2 h-4 inline-block ml-1 align-middle ${cursorClass}`} />}
+      {cursor && <span className={`blink ml-1 inline-block h-4 w-2 align-middle ${cursorClass}`} />}
     </span>
   );
 };
 
-const TerminalBlock: React.FC<{ lines: string[]; delay?: number; prefix?: string; showCursor?: boolean; cursorClass?: string }> = ({ lines, delay = 0, prefix = "kika@portfolio:~$ ", showCursor = false, cursorClass = "bg-indigo-500" }) => {
+const TerminalBlock: React.FC<{ lines: string[]; delay?: number; prefix?: string; showCursor?: boolean; cursorClass?: string }> = ({
+  lines,
+  delay = 0,
+  prefix = 'kika@portfolio:~$ ',
+  showCursor = false,
+  cursorClass = 'accent-bg',
+}) => {
   const [currentLine, setCurrentLine] = useState(0);
 
   return (
     <>
-      {lines.map((line, index) => (
+      {lines.map((line, index) =>
         index <= currentLine ? (
           <p key={index}>
             {prefix}
-            <Typewriter 
-              text={line} 
-              delay={index === 0 ? delay : 0} 
+            <Typewriter
+              text={line}
+              delay={index === 0 ? delay : 0}
               onComplete={() => {
                 if (index < lines.length - 1) {
-                  setCurrentLine(prev => Math.max(prev, index + 1));
+                  setCurrentLine((prev) => Math.max(prev, index + 1));
                 }
-              }} 
+              }}
               cursor={showCursor && index === currentLine}
               cursorClass={cursorClass}
             />
           </p>
-        ) : null
-      ))}
+        ) : null,
+      )}
     </>
   );
 };
 
-const Phase0: React.FC<{ onRunScript: () => void; isScriptRunning: boolean; scrollProgress: number; isStarting: boolean; mousePos: { x: number, y: number } }> = ({ onRunScript, isScriptRunning, scrollProgress, isStarting, mousePos }) => (
+const BlogNavLink: React.FC<{ path: string; children: React.ReactNode; className?: string }> = ({ path, children, className }) => (
+  <a
+    href={path}
+    className={className}
+    onClick={(event) => {
+      event.preventDefault();
+      navigateTo(path);
+    }}
+  >
+    {children}
+  </a>
+);
+
+const ThemeToggle: React.FC<{ theme: ThemeName; onToggle: () => void }> = ({ theme, onToggle }) => (
+  <button
+    type="button"
+    onClick={onToggle}
+    className="theme-toggle flex items-center gap-2 rounded-full border px-3 py-2 text-[10px] tracking-[0.22em] text-gray-100 uppercase backdrop-blur-sm transition-transform hover:scale-[1.03] md:text-xs"
+  >
+    <span className="theme-toggle-swatch h-3 w-3 rounded-full" />
+    <span>{THEMES[theme].label}</span>
+  </button>
+);
+
+const Phase0: React.FC<{
+  isScriptRunning: boolean;
+  scrollProgress: number;
+  isStarting: boolean;
+  hasBooted: boolean;
+  theme: ThemeName;
+  onToggleTheme: () => void;
+  mousePos: { x: number; y: number };
+}> = ({ isScriptRunning, scrollProgress, isStarting, hasBooted, theme, onToggleTheme, mousePos }) => (
   <motion.div
-    className="absolute inset-0 bg-[#0a0a0a] dotted-bg flex flex-col items-center justify-center font-mono"
-    initial={{ opacity: 0, scale: 0.95 }} 
-    animate={{ 
-      opacity: 1 - scrollProgress * 0.2, 
-      scale: 1 + scrollProgress * 0.05, 
-      filter: isStarting ? 'brightness(1.5) contrast(1.5) hue-rotate(20deg)' : `brightness(${1 + scrollProgress * 0.5}) contrast(${1 + scrollProgress}) hue-rotate(${scrollProgress * 45 * mousePos.x}deg)`,
+    className="absolute inset-0 flex flex-col items-center justify-center bg-[#0a0a0a] font-mono dotted-bg"
+    initial={{ opacity: 0, scale: 0.95 }}
+    animate={{
+      opacity: 1 - scrollProgress * 0.2,
+      scale: 1 + scrollProgress * 0.05,
+      filter: isStarting
+        ? 'brightness(1.5) contrast(1.5) hue-rotate(20deg)'
+        : `brightness(${1 + scrollProgress * 0.5}) contrast(${1 + scrollProgress}) hue-rotate(${scrollProgress * 45 * mousePos.x}deg)`,
       skewX: scrollProgress * 10 * mousePos.x,
       skewY: scrollProgress * 5 * mousePos.y,
-      y: scrollProgress * -50
-    }} 
-    exit={{ y: "-100vh", opacity: 1, filter: `brightness(2) contrast(2) hue-rotate(${90 * mousePos.x}deg)` }}
+      y: scrollProgress * -50,
+    }}
+    exit={{ y: '-100vh', opacity: 1, filter: `brightness(2) contrast(2) hue-rotate(${90 * mousePos.x}deg)` }}
     transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
   >
     <AnimatePresence>
       {isScriptRunning && (
-        <motion.div initial={{ opacity: 0, scale: 1.1 }} animate={{ opacity: 0.3, scale: 1 }} transition={{ duration: 1, ease: "easeOut" }} className="vaporwave-grid-container absolute inset-0 pointer-events-none">
+        <motion.div
+          initial={{ opacity: 0, scale: 1.1 }}
+          animate={{ opacity: 0.3, scale: 1 }}
+          transition={{ duration: 1, ease: 'easeOut' }}
+          className="pointer-events-none absolute inset-0 vaporwave-grid-container"
+        >
           <div className="vaporwave-grid" />
         </motion.div>
       )}
     </AnimatePresence>
-    <div className="absolute top-0 left-0 w-full p-6 flex justify-between items-center z-10 text-sm font-bold text-gray-100">
+    <div className="absolute top-0 left-0 z-10 flex w-full items-center justify-between p-6 text-sm font-bold text-gray-100">
       <div className="flex items-center gap-2">
-        <span className="bg-gray-200 text-black px-2 py-1">AKA</span>
+        <span className="bg-gray-200 px-2 py-1 text-black">AKA</span>
         <span className="tracking-widest">KIKA</span>
-        <div className="w-3 h-5 bg-indigo-500 blink" />
+        <div className="blink h-5 w-3 accent-bg" />
       </div>
-      <div className="flex gap-6 tracking-widest">
-        <span>WORK</span><span>ABOUT</span>
+      <div className="flex items-center gap-3 tracking-widest md:gap-6">
+        <span>WORK</span>
+        <BlogNavLink path="/blog" className="hover-accent-text cursor-pointer transition-colors">
+          BLOG
+        </BlogNavLink>
+        <span>ABOUT</span>
+        <ThemeToggle theme={theme} onToggle={onToggleTheme} />
       </div>
     </div>
-    <div className="absolute top-24 left-6 text-[10px] md:text-sm opacity-80 flex flex-col gap-1 text-indigo-300 z-10">
+    <div className="accent-text absolute top-24 left-6 z-10 flex flex-col gap-1 text-[10px] opacity-80 md:text-sm">
       {isScriptRunning ? (
-        <TerminalBlock 
-          lines={["starts root_manage", "und", "line_format", "welcome", ""]} 
-          delay={200} 
-          showCursor={true} 
-        />
+        <TerminalBlock lines={['boot sequence engaged', 'mounting memory layer', 'line_format', 'welcome', '']} delay={120} showCursor={true} />
       ) : (
-        <p>kika@portfolio:~$ <span className="blink bg-indigo-500 w-2 h-4 inline-block align-middle" /></p>
+        <p>
+          mady_by.kika {hasBooted ? 'waiting...' : <span className="blink accent-bg inline-block h-4 w-2 align-middle" />}
+        </p>
       )}
     </div>
     <div className="z-10 flex flex-col items-center">
-      <h1 className="text-[15vw] leading-none font-display tracking-tighter glitch-wrapper glitch-p1" data-text="KIKA">KIKA</h1>
-      <p className="mt-4 text-xs md:text-base text-gray-200 tracking-widest">Navigating the digital unknown, pixel by pixel.</p>
+      <h1 className="glitch-wrapper glitch-p1 font-display text-[15vw] leading-none tracking-tighter" data-text="KIKA">
+        KIKA
+      </h1>
+      <motion.p
+        className="mt-4 text-xs tracking-widest text-gray-200 md:text-base"
+        animate={{ opacity: isScriptRunning ? 1 : hasBooted ? 0.65 : 0.3, y: isScriptRunning ? 0 : hasBooted ? 2 : 6 }}
+        transition={{ duration: 0.6, ease: 'easeOut' }}
+      >
+        Navigating the digital unknown, pixel by pixel.
+      </motion.p>
       {isScriptRunning && (
-        <div className="mt-8 text-indigo-300 text-xs md:text-base">
-          kika@portfolio:~$ <Typewriter text="initializing sequence..." cursor={true} cursorClass="bg-gray-300" delay={800} />
+        <div className="accent-text mt-8 text-xs md:text-base">
+          kika@portfolio:~$ <Typewriter text="initializing sequence..." cursor={true} cursorClass="bg-gray-300" delay={240} />
         </div>
       )}
     </div>
-    <div className="absolute bottom-8 left-6 text-[10px] md:text-sm opacity-80 flex flex-col gap-1 text-indigo-300 z-10">
+    <div className="accent-text absolute bottom-8 left-6 z-10 flex flex-col gap-1 text-[10px] opacity-80 md:text-sm">
       {isScriptRunning && (
-        <TerminalBlock 
+        <TerminalBlock
           lines={[
-            "runm: script",
-            "a108 initializing sequence...",
-            "a110 initializing sequence...",
-            "a162 initializing sequence...",
-            "a163 initializing sequence...",
-            "a106 initializing sequence...",
-            "a127 initializing sequence...",
-            "a234 initializing sequence...",
-            "a130 initializing sequence...",
-            "",
-            "> "
-          ]} 
-          delay={1500} 
-          showCursor={true} 
+            'runm: script',
+            'phase 01 booting...',
+            'phase 02 syncing...',
+            'phase 03 parsing...',
+            'phase 04 stabilizing...',
+            'phase 05 rendering...',
+            'phase 06 readying...',
+            '',
+            '> ',
+          ]}
+          delay={520}
+          showCursor={true}
         />
       )}
     </div>
-    {!isScriptRunning ? (
-      <button onClick={onRunScript} className="absolute bottom-8 right-8 z-20 border-2 border-indigo-300 bg-indigo-900/20 text-indigo-100 px-4 py-2 flex flex-col items-end hover:bg-indigo-300 hover:text-black transition-colors cursor-pointer">
-        <div className="flex gap-1 mb-1 opacity-70 text-[10px]"><span className="border border-indigo-300 px-1">X</span><span className="border border-indigo-300 px-1">K</span></div>
-        <span className="text-lg tracking-widest">run script</span>
-      </button>
-    ) : (
-      <div className="absolute bottom-8 right-8 text-xs text-gray-500 animate-pulse z-10" style={{ opacity: Math.min(1, 0.5 + scrollProgress), color: scrollProgress > 0.8 ? '#818cf8' : '' }}>
+    {isScriptRunning ? (
+      <div
+        className="absolute right-8 bottom-8 z-10 animate-pulse text-xs text-gray-500"
+        style={{ opacity: Math.min(1, 0.5 + scrollProgress), color: scrollProgress > 0.8 ? '#818cf8' : '' }}
+      >
         [ {scrollProgress > 0.8 ? 'INITIATING...' : 'SCROLL TO CONTINUE'} ]
       </div>
-    )}
+    ) : hasBooted ? (
+      <motion.div
+        className="accent-text-soft absolute right-8 bottom-8 z-10 text-xs tracking-[0.25em]"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 0.8 }}
+        transition={{ delay: 0.2, duration: 0.5 }}
+      >
+        [ BOOTING... ]
+      </motion.div>
+    ) : null}
   </motion.div>
 );
 
 const Phase1: React.FC<{ onPrev: () => void; onMaxScrollChange: (max: number) => void }> = ({ onPrev, onMaxScrollChange }) => {
   const scrollRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ container: scrollRef });
-  
+
   const maxScroll = useMotionValue(0);
   const lastReportedMaxRef = useRef(0);
 
-  useMotionValueEvent(scrollYProgress, "change", (latest) => {
+  useMotionValueEvent(scrollYProgress, 'change', (latest) => {
     if (latest > maxScroll.get()) {
       maxScroll.set(latest);
       if (latest - lastReportedMaxRef.current > 0.05 || latest === 1) {
@@ -179,26 +301,26 @@ const Phase1: React.FC<{ onPrev: () => void; onMaxScrollChange: (max: number) =>
   const yCard2 = useTransform(scrollYProgress, [0, 1], [0, -150]);
   const yCard3 = useTransform(scrollYProgress, [0, 1], [0, -400]);
   const opacityFade = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
-  
+
   const opacityGhost = useTransform(() => {
     const current = scrollYProgress.get();
     const max = maxScroll.get();
-    const topOpacity = 0.7 - (max * 0.5);
+    const topOpacity = 0.7 - max * 0.5;
     return Math.max(0.05, topOpacity * (1 - current));
   });
 
   const scaleGhost = useTransform(() => {
     const current = scrollYProgress.get();
     const max = maxScroll.get();
-    const topScale = 1 + (max * 0.3);
-    return topScale + (current * 0.3);
+    const topScale = 1 + max * 0.3;
+    return topScale + current * 0.3;
   });
 
   const filterGhost = useTransform(() => {
     const current = scrollYProgress.get();
     const max = maxScroll.get();
-    const topBlur = 8 + (max * 12);
-    return `blur(${topBlur + (current * 30)}px)`;
+    const topBlur = 8 + max * 12;
+    return `blur(${topBlur + current * 30}px)`;
   });
 
   const yGhost = useTransform(scrollYProgress, [0, 1], [-80, -480]);
@@ -210,18 +332,18 @@ const Phase1: React.FC<{ onPrev: () => void; onMaxScrollChange: (max: number) =>
 
     let touchStartY = 0;
 
-    const handleWheel = (e: WheelEvent) => {
-      if (el.scrollTop <= 0 && e.deltaY < -20) {
+    const handleWheel = (event: WheelEvent) => {
+      if (el.scrollTop <= 0 && event.deltaY < -20) {
         onPrev();
       }
     };
 
-    const handleTouchStart = (e: TouchEvent) => {
-      touchStartY = e.touches[0].clientY;
+    const handleTouchStart = (event: TouchEvent) => {
+      touchStartY = event.touches[0].clientY;
     };
 
-    const handleTouchMove = (e: TouchEvent) => {
-      const touchY = e.touches[0].clientY;
+    const handleTouchMove = (event: TouchEvent) => {
+      const touchY = event.touches[0].clientY;
       const deltaY = touchStartY - touchY;
       if (el.scrollTop <= 0 && deltaY < -20) {
         onPrev();
@@ -240,7 +362,7 @@ const Phase1: React.FC<{ onPrev: () => void; onMaxScrollChange: (max: number) =>
   }, [onPrev]);
 
   const container = {
-    hidden: { y: "100vh" },
+    hidden: { y: '100vh' },
     show: {
       y: 0,
       transition: {
@@ -248,124 +370,188 @@ const Phase1: React.FC<{ onPrev: () => void; onMaxScrollChange: (max: number) =>
         ease: [0.22, 1, 0.36, 1],
         staggerChildren: 0.03,
         delayChildren: 0.2,
-      }
+      },
     },
     exit: {
-      y: "100vh",
-      transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] }
-    }
+      y: '100vh',
+      transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] },
+    },
   };
 
   const item = {
     hidden: { opacity: 0, y: 15 },
-    show: { opacity: 1, y: 0, transition: { duration: 0.4, ease: "easeOut" } }
+    show: { opacity: 1, y: 0, transition: { duration: 0.4, ease: 'easeOut' } },
   };
 
   return (
     <motion.div
       ref={scrollRef}
-      className="absolute inset-0 bg-[#0a0a0a] dotted-bg font-mono text-gray-100 overflow-y-auto overflow-x-hidden"
-      initial="hidden" animate="show" variants={container}
+      className="absolute inset-0 overflow-x-hidden overflow-y-auto bg-[#0a0a0a] font-mono text-gray-100 dotted-bg"
+      initial="hidden"
+      animate="show"
+      variants={container}
     >
-      <motion.div style={{ opacity: opacityGhost, scale: scaleGhost, y: yGhost, x: xGhost, filter: filterGhost }} className="fixed inset-0 pointer-events-none flex items-center justify-center z-0">
-        <h1 className="text-[15vw] leading-none font-display tracking-tighter glitch-wrapper glitch-p1 text-indigo-500/40 absolute" data-text="KIKA">KIKA</h1>
+      <motion.div
+        style={{ opacity: opacityGhost, scale: scaleGhost, y: yGhost, x: xGhost, filter: filterGhost }}
+        className="pointer-events-none fixed inset-0 z-0 flex items-center justify-center"
+      >
+        <h1 className="glitch-wrapper glitch-p1 accent-ghost absolute font-display text-[15vw] leading-none tracking-tighter" data-text="KIKA">
+          KIKA
+        </h1>
       </motion.div>
-      <div className="min-h-screen p-6 md:p-12 flex flex-col relative z-10">
-        <motion.div variants={item} style={{ opacity: opacityFade }} className="flex justify-between items-center w-full text-sm font-bold mb-12 sticky top-0 z-50 bg-[#0a0a0a]/80 backdrop-blur-sm py-4">
-          <div className="text-indigo-300">[kika@portfolio:~]$ <span className="blink bg-indigo-500 w-2 h-4 inline-block align-middle" /></div>
+      <div className="relative z-10 flex min-h-screen flex-col p-6 md:p-12">
+        <motion.div
+          variants={item}
+          style={{ opacity: opacityFade }}
+          className="sticky top-0 z-50 mb-12 flex w-full items-center justify-between bg-[#0a0a0a]/80 py-4 text-sm font-bold backdrop-blur-sm"
+        >
+          <div className="accent-text">
+            [kika@portfolio:~]$ <span className="blink accent-bg inline-block h-4 w-2 align-middle" />
+          </div>
           <div className="flex gap-6 tracking-widest text-gray-100">
             <span>[WORK]</span>
-            <a href="#about" className="hover:text-indigo-300 transition-colors cursor-pointer">
+            <BlogNavLink path="/blog" className="hover-accent-text cursor-pointer transition-colors">
+              [BLOG]
+            </BlogNavLink>
+            <a href="#about" className="hover-accent-text cursor-pointer transition-colors">
               [ABOUT]
             </a>
           </div>
         </motion.div>
-        
-        <motion.div style={{ y: yText }} className="flex-1 flex flex-col justify-center max-w-3xl text-sm md:text-base gap-2 leading-relaxed mt-20 text-indigo-200">
-          <motion.p variants={item} className="text-indigo-400 mb-4">kika@portfolio:~$ cat message_to_future_self.md</motion.p>
-          
-          <motion.h1 variants={item} className="text-2xl md:text-4xl font-display text-gray-100 mt-4 mb-2"># Hey Future Me</motion.h1>
-          <motion.p variants={item}>If you're reading this, you made it through. Right now, it's 7:23 AM. Saturday. Quiet. The kind of morning where the world hasn't decided what it wants to be yet. I'm sitting here with my MacBook, thinking about how much has changed and how much hasn't.</motion.p>
-          
-          <motion.h2 variants={item} className="text-xl md:text-2xl font-display text-gray-100 mt-6 mb-2">## Where I Am</motion.h2>
+
+        <motion.div style={{ y: yText }} className="accent-text-soft mt-20 flex flex-1 flex-col justify-center gap-2 max-w-3xl text-sm leading-relaxed md:text-base">
+          <motion.p variants={item} className="accent-text mb-4">
+            kika@portfolio:~$ cat message_to_future_self.md
+          </motion.p>
+
+          <motion.h1 variants={item} className="mt-4 mb-2 font-display text-2xl text-gray-100 md:text-4xl">
+            # Hey Future Me
+          </motion.h1>
+          <motion.p variants={item}>
+            If you're reading this, you made it through. Right now, it's 7:23 AM. Saturday. Quiet. The kind of morning where the world hasn't decided what it wants to be yet. I'm sitting here with my MacBook, thinking about how much has changed and how much hasn't.
+          </motion.p>
+
+          <motion.h2 variants={item} className="mt-6 mb-2 font-display text-xl text-gray-100 md:text-2xl">
+            ## Where I Am
+          </motion.h2>
           <motion.p variants={item}>Retired from music. Twenty years, 35 countries, 1000+ shows. Tomorrowland, EDC Vegas, Dreamstate. Tracks played by Armin. Signed to Vini Vici's label.</motion.p>
-          <motion.p variants={item} className="mt-2">And then — done. No drama, no big finale. Just... ready.</motion.p>
-          <motion.p variants={item} className="mt-2">Now I build things. Not because I have to. Because I can't not.</motion.p>
-          
-          <motion.p variants={item} className="mt-4"><strong className="text-gray-100 font-bold">Not a DJ. Not a developer.</strong><br/>Just... someone who makes things because they should exist.</motion.p>
-          
-          <motion.p variants={item} className="mt-4">nica, still nica. some veronica. aka kika.<br/>the girl who chose midi over a driver's license.</motion.p>
-          
-          <motion.h2 variants={item} className="text-xl md:text-2xl font-display text-gray-100 mt-6 mb-2">## For You, Later</motion.h2>
+          <motion.p variants={item} className="mt-2">
+            And then - done. No drama, no big finale. Just... ready.
+          </motion.p>
+          <motion.p variants={item} className="mt-2">
+            Now I build things. Not because I have to. Because I can't not.
+          </motion.p>
+
+          <motion.p variants={item} className="mt-4">
+            <strong className="font-bold text-gray-100">Not a DJ. Not a developer.</strong>
+            <br />
+            Just... someone who makes things because they should exist.
+          </motion.p>
+
+          <motion.p variants={item} className="mt-4">
+            nica, still nica. some veronica. aka kika.
+            <br />
+            the girl who chose midi over a driver's license.
+          </motion.p>
+
+          <motion.h2 variants={item} className="mt-6 mb-2 font-display text-xl text-gray-100 md:text-2xl">
+            ## For You, Later
+          </motion.h2>
           <motion.p variants={item}>Remember this feeling. The uncertainty. The excitement. The not-knowing-but-building-anyway.</motion.p>
-          
-          <motion.p variants={item} className="mt-6">— <strong className="text-gray-100 font-bold">Kika</strong><br/><em className="opacity-80">*Age 36, Year 1 of the Second Act*</em></motion.p>
-          
-          <motion.blockquote variants={item} className="border-l-2 border-indigo-500 pl-4 mt-6 italic opacity-70">
+
+          <motion.p variants={item} className="mt-6">
+            - <strong className="font-bold text-gray-100">Kika</strong>
+            <br />
+            <em className="opacity-80">*Age 36, Year 1 of the Second Act*</em>
+          </motion.p>
+
+          <motion.blockquote variants={item} className="accent-border-left mt-6 pl-4 italic opacity-70">
             *With permission to drive since 2021*
           </motion.blockquote>
-          
-          <motion.p variants={item} className="text-indigo-400 mt-8">kika@portfolio:~$ <span className="blink bg-indigo-500 w-2 h-4 inline-block align-middle" /></motion.p>
+
+          <motion.p variants={item} className="accent-text mt-8">
+            kika@portfolio:~$ <span className="blink accent-bg inline-block h-4 w-2 align-middle" />
+          </motion.p>
         </motion.div>
       </div>
 
-      <div className="min-h-screen p-6 md:p-12 flex flex-col justify-center max-w-5xl mx-auto gap-32 relative z-10">
-        
+      <div className="relative z-10 mx-auto flex min-h-screen max-w-5xl flex-col justify-center gap-32 p-6 md:p-12">
         <div className="mb-12">
-          <h2 className="text-4xl md:text-6xl font-display tracking-tighter text-gray-100 mb-2">things i made.</h2>
-          <p className="text-xl md:text-2xl text-indigo-400 font-display tracking-widest glitch-wrapper glitch-p0 w-fit" data-text="things that made me...">things that made me...</p>
+          <h2 className="mb-2 font-display text-4xl tracking-tighter text-gray-100 md:text-6xl">things i made.</h2>
+          <p className="glitch-wrapper glitch-p0 accent-text w-fit font-display text-xl tracking-widest md:text-2xl" data-text="things that made me...">
+            things that made me...
+          </p>
         </div>
 
         <a href="https://akakika.com/mochi/" target="_blank" rel="noopener noreferrer" className="block">
-          <motion.div style={{ y: yCard1 }} className="border border-indigo-500/30 p-8 bg-indigo-900/10 backdrop-blur-sm relative group hover:bg-indigo-900/20 transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_0_30px_rgba(99,102,241,0.2)] hover:border-indigo-400/50">
-            <div className="absolute -top-3 -left-3 text-xs bg-[#0a0a0a] px-2 text-indigo-300">FILE_01</div>
-            <h2 className="text-3xl md:text-5xl mb-4 font-display tracking-tighter text-gray-100">MOCHI'S DAILY QUEST</h2>
-            <p className="text-gray-200 text-sm md:text-base max-w-2xl mb-6">A retro Tamagotchi-style to-do companion who grows happier — and older — every time you get things done. Pixel productivity pal.</p>
-            <div className="flex gap-4 text-xs text-indigo-400">
-              <span>[MACOS]</span><span>[PRODUCTIVITY]</span><span>[GAMIFICATION]</span>
+          <motion.div
+            style={{ y: yCard1 }}
+            className="accent-panel group relative p-8 backdrop-blur-sm transition-all duration-300 hover:scale-[1.02] accent-panel-hover"
+          >
+            <div className="accent-text absolute -top-3 -left-3 bg-[#0a0a0a] px-2 text-xs">FILE_01</div>
+            <h2 className="mb-4 font-display text-3xl tracking-tighter text-gray-100 md:text-5xl">MOCHI'S DAILY QUEST</h2>
+            <p className="mb-6 max-w-2xl text-sm text-gray-200 md:text-base">
+              A retro Tamagotchi-style to-do companion who grows happier - and older - every time you get things done. Pixel productivity pal.
+            </p>
+            <div className="accent-text flex gap-4 text-xs">
+              <span>[MACOS]</span>
+              <span>[PRODUCTIVITY]</span>
+              <span>[GAMIFICATION]</span>
             </div>
           </motion.div>
         </a>
 
-        <a href="https://akakika.com/resq/" target="_blank" rel="noopener noreferrer" className="block ml-auto md:w-3/4">
-          <motion.div style={{ y: yCard2 }} className="border border-indigo-500/30 p-8 bg-indigo-900/10 backdrop-blur-sm relative group transition-all duration-500 hover:scale-[1.02] resq-theme-card">
-            <div className="absolute -top-3 -left-3 text-xs bg-[#0a0a0a] px-2 text-indigo-300 group-hover:text-inherit transition-colors duration-500">FILE_02</div>
-            <h2 className="text-3xl md:text-5xl mb-4 font-display tracking-tighter text-gray-100">RESQ</h2>
-            <p className="text-gray-200 text-sm md:text-base max-w-2xl mb-6">Rescue messy text into clean Markdown. Turn OCR scraps, rough notes, and semi-structured text into clean Markdown with a local-first workflow.</p>
-            <div className="flex gap-4 text-xs text-indigo-400 group-hover:text-inherit transition-colors duration-500">
-              <span>[MACOS]</span><span>[LOCAL-FIRST]</span><span>[AI-OPTIONAL]</span>
+        <a href="https://akakika.com/resq/" target="_blank" rel="noopener noreferrer" className="block md:ml-auto md:w-3/4">
+          <motion.div
+            style={{ y: yCard2 }}
+            className="accent-panel resq-theme-card group relative p-8 backdrop-blur-sm transition-all duration-500 hover:scale-[1.02]"
+          >
+            <div className="accent-text absolute -top-3 -left-3 bg-[#0a0a0a] px-2 text-xs transition-colors duration-500 group-hover:text-inherit">FILE_02</div>
+            <h2 className="mb-4 font-display text-3xl tracking-tighter text-gray-100 md:text-5xl">RESQ</h2>
+            <p className="mb-6 max-w-2xl text-sm text-gray-200 md:text-base">
+              Rescue messy text into clean Markdown. Turn OCR scraps, rough notes, and semi-structured text into clean Markdown with a local-first workflow.
+            </p>
+            <div className="accent-text flex gap-4 text-xs transition-colors duration-500 group-hover:text-inherit">
+              <span>[MACOS]</span>
+              <span>[LOCAL-FIRST]</span>
+              <span>[AI-OPTIONAL]</span>
             </div>
           </motion.div>
         </a>
 
-        <motion.div style={{ y: yCard3 }} className="border border-indigo-500/30 p-8 bg-indigo-900/10 backdrop-blur-sm relative group hover:bg-indigo-900/20 transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_0_30px_rgba(99,102,241,0.2)] hover:border-indigo-400/50 ml-auto md:w-2/3">
-          <div className="absolute -top-3 -left-3 text-xs bg-[#0a0a0a] px-2 text-indigo-300">FILE_03</div>
-          <h2 className="text-3xl md:text-5xl mb-4 font-display tracking-tighter text-gray-100">BREAKPOINT</h2>
-          <p className="text-gray-200 text-sm md:text-base max-w-2xl mb-6">One trigger. Full context. Ready to walk away. Single-click context capture. Snapshots your entire computer state. AI-powered action plan instantly.</p>
-          <div className="flex gap-4 text-xs text-indigo-400">
-            <span>[MACOS]</span><span>[AI-ENGINE]</span><span>[CONTEXT-CAPTURE]</span>
+        <motion.div
+          style={{ y: yCard3 }}
+          className="accent-panel group relative p-8 backdrop-blur-sm transition-all duration-300 hover:scale-[1.02] accent-panel-hover md:ml-24 md:w-2/3"
+        >
+          <div className="accent-text absolute -top-3 -left-3 bg-[#0a0a0a] px-2 text-xs">FILE_03</div>
+          <h2 className="mb-4 font-display text-3xl tracking-tighter text-gray-100 md:text-5xl">BREAKPOINT</h2>
+          <p className="mb-6 max-w-2xl text-sm text-gray-200 md:text-base">
+            One trigger. Full context. Ready to walk away. Single-click context capture. Snapshots your entire computer state. AI-powered action plan instantly.
+          </p>
+          <div className="accent-text flex gap-4 text-xs">
+            <span>[MACOS]</span>
+            <span>[AI-ENGINE]</span>
+            <span>[CONTEXT-CAPTURE]</span>
           </div>
         </motion.div>
       </div>
 
-      <div id="about" className="min-h-screen p-6 md:p-12 flex flex-col relative z-10 border-t border-indigo-500/30 mt-32 pt-12 pb-12">
-        <h2 className="text-4xl md:text-6xl font-display tracking-tighter mb-12 text-gray-100 glitch-wrapper glitch-p0 w-fit" data-text="ABOUT_ME">ABOUT_ME</h2>
-        
-        <div className="max-w-3xl space-y-6 text-sm md:text-base text-gray-200 leading-relaxed">
+      <div id="about" className="accent-top-border relative z-10 mt-32 flex min-h-screen flex-col p-6 pt-12 pb-12 md:p-12">
+        <h2 className="glitch-wrapper glitch-p0 mb-12 w-fit font-display text-4xl tracking-tighter text-gray-100 md:text-6xl" data-text="ABOUT_ME">
+          ABOUT_ME
+        </h2>
+
+        <div className="max-w-3xl space-y-6 text-sm leading-relaxed text-gray-200 md:text-base">
+          <p>with ai i learned to actually code - the "i ship macos apps and mean it" kind. i study things before there are tutorials on youtube. i figure it out.</p>
+          <p>I never meant to build products. I built tools for myself because nothing on the market fit the way my brain works.</p>
           <p>
-            with ai i learned to actually code — the "i ship macos apps and mean it" kind. i study things before there are tutorials on youtube. i figure it out.
-          </p>
-          <p>
-            I never meant to build products. I built tools for myself because nothing on the market fit the way my brain works.
-          </p>
-          <p>
-            i've built the ghost — the complex, agentic intelligence of the Echosystem. the backend that thinks, remembers, and acts. now i'm building the skin — the beautiful, glassmorphic, local-first macOS shell that lets me feel that intelligence. not just use it. feel it.
+            i've built the ghost - the complex, agentic intelligence of the Echosystem. the backend that thinks, remembers, and acts. now i'm building the skin - the beautiful, glassmorphic, local-first macOS shell that lets me feel that intelligence. not just use it. feel it.
           </p>
         </div>
 
-        <div className="mt-12 md:mt-auto self-end border border-indigo-500/30 p-8 bg-indigo-900/10 backdrop-blur-sm w-full max-w-md">
-          <h3 className="text-xl mb-4 font-bold tracking-widest text-gray-100">[SKILLS_&_TECH]</h3>
-          <ul className="space-y-2 text-sm text-indigo-300 font-mono">
+        <div className="accent-panel mt-12 w-full max-w-md self-end p-8 backdrop-blur-sm md:mt-auto">
+          <h3 className="mb-4 text-xl font-bold tracking-widest text-gray-100">[SKILLS_&_TECH]</h3>
+          <ul className="accent-text space-y-2 font-mono text-sm">
             <li>&gt; AI & Agentic Systems</li>
             <li>&gt; macOS App Development</li>
             <li>&gt; Local-First Architecture</li>
@@ -375,18 +561,173 @@ const Phase1: React.FC<{ onPrev: () => void; onMaxScrollChange: (max: number) =>
           </ul>
         </div>
       </div>
-      
-      <div className="h-40 flex items-center justify-center text-xs text-gray-400">
-        EOF
-      </div>
+
+      <div className="flex h-40 items-center justify-center text-xs text-gray-400">EOF</div>
     </motion.div>
   );
 };
 
-export default function App() {
+const BlogShell: React.FC<{ children: React.ReactNode }> = ({ children }) => (
+  <div className="blog-shell relative h-screen overflow-y-auto bg-[#0a0a0a] font-mono text-gray-100 dotted-bg">
+    <div className="crt-overlay" />
+    <div className="relative z-10 p-6 md:p-12">{children}</div>
+  </div>
+);
+
+const BlogIndex: React.FC<{ theme: ThemeName; onToggleTheme: () => void }> = ({ theme, onToggleTheme }) => (
+  <BlogShell>
+    <div className="accent-bottom-border sticky top-0 z-50 mb-12 flex items-center justify-between gap-6 bg-[#0a0a0a]/88 py-4 backdrop-blur-sm">
+      <BlogNavLink path="/" className="hover-accent-text-soft text-lg tracking-widest text-gray-100 transition-colors">
+        aka kika
+      </BlogNavLink>
+      <div className="flex items-center gap-3 md:gap-6">
+        <div className="flex items-center gap-6 text-xs tracking-[0.3em] text-gray-300">
+          <BlogNavLink path="/" className="transition-colors hover:text-white">
+            about
+          </BlogNavLink>
+          <span className="text-white">blog</span>
+        </div>
+        <ThemeToggle theme={theme} onToggle={onToggleTheme} />
+      </div>
+    </div>
+
+    <div className="w-full blog-index">
+      <p className="accent-text-soft mb-4">kika@portfolio:~$ ls blog/</p>
+      <h1 className="mb-4 font-display text-5xl tracking-tighter text-gray-100 md:text-7xl">blog.</h1>
+      <p className="mb-12 max-w-3xl text-base leading-relaxed text-gray-200 md:text-lg">
+        notes on tools, weird workflows, building with ai, and the systems that let me turn scattered thoughts into things that exist.
+      </p>
+
+      <BlogNavLink
+        path="/blog/three-tools-that-run-my-life"
+        className="group blog-index-entry accent-border block bg-transparent p-8 transition-all duration-300 hover-accent-border-strong"
+      >
+        <p className="mb-3 text-xs uppercase tracking-[0.35em] text-gray-300">Monday, March 30, 2026</p>
+        <h2 className="mb-3 font-display text-3xl tracking-tighter text-gray-100 md:text-5xl">three tools that run my life</h2>
+        <p className="max-w-3xl leading-relaxed text-gray-100">
+          Pieces, Maestri, Hermes. The stack that catches context, organizes chaos, and gets me back to shipping when the work starts breaking apart.
+        </p>
+        <p className="accent-text-soft mt-6 text-sm transition-colors group-hover:text-white">open post →</p>
+      </BlogNavLink>
+    </div>
+  </BlogShell>
+);
+
+const BlogPostThreeTools: React.FC<{ theme: ThemeName; onToggleTheme: () => void }> = ({ theme, onToggleTheme }) => (
+  <BlogShell>
+    <div className="accent-bottom-border sticky top-0 z-50 mb-10 flex items-center justify-between gap-6 bg-[#0a0a0a]/88 py-4 backdrop-blur-sm">
+      <BlogNavLink path="/" className="hover-accent-text-soft text-lg tracking-widest text-gray-100 transition-colors">
+        aka kika
+      </BlogNavLink>
+      <div className="flex items-center gap-3 md:gap-6">
+        <div className="flex items-center gap-6 text-xs tracking-[0.3em] text-gray-300">
+          <BlogNavLink path="/" className="transition-colors hover:text-white">
+            about
+          </BlogNavLink>
+          <BlogNavLink path="/blog" className="text-white transition-colors hover:text-white">
+            blog
+          </BlogNavLink>
+        </div>
+        <ThemeToggle theme={theme} onToggle={onToggleTheme} />
+      </div>
+    </div>
+
+    <article className="blog-article w-full">
+      <nav className="mb-8">
+        <BlogNavLink path="/blog" className="accent-text-soft transition-colors hover:text-white">
+          ← back to blog
+        </BlogNavLink>
+      </nav>
+      <div className="blog-hero mb-12 flex flex-col items-center text-center">
+        <p className="mb-4 text-sm text-gray-300">Monday, March 30, 2026</p>
+        <div className="mb-6 flex flex-wrap justify-center gap-2 text-xs uppercase tracking-[0.3em] text-gray-300">
+          <span>tools</span>
+          <span>workflow</span>
+          <span>ai</span>
+          <span>macos</span>
+          <span>productivity</span>
+        </div>
+        <h1 className="mb-6 font-display text-4xl leading-none tracking-tighter text-gray-100 md:text-7xl">three tools that run my life</h1>
+        <p className="max-w-4xl text-lg leading-relaxed text-gray-100 md:text-xl">
+          pieces, maestri, hermes — the trinity that makes a non-technical person dangerous. how i turned my chaos into a workflow that actually works.
+        </p>
+      </div>
+
+      <div className="max-w-4xl space-y-10 text-base leading-8 text-gray-100">
+        <section className="blog-section">
+          <h2 className="mb-4 font-display text-3xl tracking-tighter text-gray-100">the ghost in my machine</h2>
+          <p>i didn't know what i was downloading at first.</p>
+          <p className="mt-4">i was trying every cool mac tool when i got my m4 mac with 128gb ram — and honestly, i even forgot i had it. it was just living there… in my menubar… waiting.</p>
+          <p className="mt-4">when i was cleaning my mess, i saw it, it saw me.</p>
+          <p className="mt-4">let's just say it was the first thing i installed when i formatted my mac — out of fear of losing a piece of myself.</p>
+        </section>
+
+        <section className="blog-section">
+          <div className="mb-4 flex flex-wrap items-center gap-3">
+            <h2 className="font-display text-3xl tracking-tighter text-gray-100">pieces</h2>
+            <a href="https://pieces.app" target="_blank" rel="noopener noreferrer" className="accent-chip px-2 py-1 text-xs transition-colors">
+              [OPEN]
+            </a>
+          </div>
+          <p>when brainstorming with claude and manus about my workflow — as a non-technical person using a snippet catcher as my second brain, let's just say uncle claude said it's a first and it's brilliant.</p>
+          <p className="mt-4">since then, a few others have tried to be what pieces os didn't even try to be.</p>
+          <p className="mt-4">nothing is getting close.</p>
+          <p className="mt-4">and did i say you can run it locally? for free?</p>
+          <h3 className="mt-8 mb-4 font-display text-2xl tracking-tighter text-gray-100">What It Does</h3>
+          <p>captures anything from anywhere — screenshots, code, text, links ollama integration runs on my machine. my data never leaves. remembers context across conversations suggests related snippets before i even search turns chaos into searchable, quotable, reusable gold my entire site, my apps, my automations — they all start in pieces.</p>
+          <p className="mt-4">it's not a snippet manager. it's a second brain that actually works.</p>
+        </section>
+
+        <section className="blog-section">
+          <div className="mb-4 flex flex-wrap items-center gap-3">
+            <h2 className="font-display text-3xl tracking-tighter text-gray-100">maestri — when adhd meets infinite canvas</h2>
+            <a href="https://www.themaestri.app/en" target="_blank" rel="noopener noreferrer" className="accent-chip px-2 py-1 text-xs transition-colors">
+              [OPEN]
+            </a>
+          </div>
+          <p>i didn't imagine this existed.</p>
+          <p className="mt-4">i was trying to build the same workflow logic with bobi (my openclaw), and obviously, it felt as though it was [the right fit]. then came my adhd and i drifted to infinite open tabs, and there it was…</p>
+          <p className="mt-4">i downloaded it today, so i keep you updated.</p>
+          <p className="mt-4">but here's the thing: it's free forever for 1 mac. and i felt that the $18 for infinite macs with infinite canvas with the infinite agents that they offer… i would pay again and again.</p>
+          <p className="mt-4">full support.</p>
+          <h3 className="mt-8 mb-4 font-display text-2xl tracking-tighter text-gray-100">What It Does</h3>
+          <p>infinite canvas for thoughts, projects, research rabbit holes ai agents that actually understand context connects ideas across projects automatically visual knowledge mapping — finally, a way to see my brain native mac app that feels like thought, not software it's what i've been trying to build myself, but someone else built it better.</p>
+          <p className="mt-4">that's rare.</p>
+        </section>
+
+        <section className="blog-section">
+          <div className="mb-4 flex flex-wrap items-center gap-3">
+            <h2 className="font-display text-3xl tracking-tighter text-gray-100">hermes agent — he's the birthday boy, i'm the party pooper</h2>
+            <a href="https://hermes-agent.nousresearch.com/" target="_blank" rel="noopener noreferrer" className="accent-chip px-2 py-1 text-xs transition-colors">
+              [OPEN]
+            </a>
+          </div>
+          <p>if you think i would say openclaw as my 3rd place… even he is surprised.</p>
+          <p className="mt-4">i tried so many of the siblings and far cousins, but hermes just gets stuff done. this self-evolving agent is a flower in a world made of stones.</p>
+          <p className="mt-4">after a few days, he doesn't even wait for my head node to show him i approve — even though i have no idea why. he just do. and he do do. very do do.</p>
+          <p className="mt-4">my favorite part: the restore steps. even in messy code and visual designs.</p>
+          <p className="mt-4">you know when you get frustrated mid-work and everything that made sense starts to lose it? when you rethink your life choices as you see 3 hours of work that looked like a mini startup start to behave like the drunk friend at the end who vomits on the birthday cake of his not-best friend who didn't even want to invite him…</p>
+          <p className="mt-4">with hermes… hold my beer, i drank too much.</p>
+          <p className="mt-4">i'm that friend… i'm the party pooper, he is the birthday boy cleaning after me.</p>
+          <h3 className="mt-8 mb-4 font-display text-2xl tracking-tighter text-gray-100">What It Does</h3>
+          <p>self-evolving agent that improves with every interaction restores projects from messy states anticipates needs before i articulate them runs locally — my data stays mine actually delivers instead of just promising the trinity pieces catches everything. maestri connects everything. hermes builds everything.</p>
+        </section>
+
+        <section className="blog-section">
+          <p>without them, i'm just a person with ideas and no execution.</p>
+          <p className="mt-4">with them, i'm dangerous.</p>
+          <p className="mt-8 text-gray-300">written by hermes agent that's using pieces for context and growth to inspire more every maestri out there &lt;3</p>
+        </section>
+      </div>
+    </article>
+  </BlogShell>
+);
+
+const HomeExperience: React.FC<{ theme: ThemeName; onToggleTheme: () => void }> = ({ theme, onToggleTheme }) => {
   const [phase, setPhase] = useState(0);
   const [isScriptRunning, setIsScriptRunning] = useState(false);
   const [isStarting, setIsStarting] = useState(false);
+  const [hasBooted, setHasBooted] = useState(false);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const [mouseVelocity, setMouseVelocity] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
@@ -399,28 +740,28 @@ export default function App() {
     let lastX = window.innerWidth / 2;
     let lastY = window.innerHeight / 2;
 
-    const handleMouseMove = (e: MouseEvent) => {
-      const x = (e.clientX / window.innerWidth) * 2 - 1;
-      const y = (e.clientY / window.innerHeight) * 2 - 1;
+    const handleMouseMove = (event: MouseEvent) => {
+      const x = (event.clientX / window.innerWidth) * 2 - 1;
+      const y = (event.clientY / window.innerHeight) * 2 - 1;
       setMousePos({ x, y });
 
       const now = Date.now();
       const dt = Math.max(now - lastTime, 1);
-      const dx = e.clientX - lastX;
-      const dy = e.clientY - lastY;
+      const dx = event.clientX - lastX;
+      const dy = event.clientY - lastY;
       const velocity = Math.sqrt(dx * dx + dy * dy) / dt;
-      
+
       setMouseVelocity(Math.min(velocity * 4, 8));
-      
+
       lastTime = now;
-      lastX = e.clientX;
-      lastY = e.clientY;
+      lastX = event.clientX;
+      lastY = event.clientY;
     };
 
     window.addEventListener('mousemove', handleMouseMove);
-    
+
     const decay = setInterval(() => {
-      setMouseVelocity(prev => Math.max(0, prev * 0.8 - 0.1));
+      setMouseVelocity((prev) => Math.max(0, prev * 0.8 - 0.1));
     }, 50);
 
     return () => {
@@ -436,6 +777,7 @@ export default function App() {
   };
 
   const handleRunScript = () => {
+    if (isStarting || isScriptRunning) return;
     setIsStarting(true);
     setTimeout(() => {
       setIsScriptRunning(true);
@@ -444,16 +786,25 @@ export default function App() {
   };
 
   useEffect(() => {
-    const threshold = 600; // pixels to scroll before transition
-    
-    const handleWheel = (e: WheelEvent) => {
+    const timer = setTimeout(() => {
+      setHasBooted(true);
+      handleRunScript();
+    }, 420);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  useEffect(() => {
+    const threshold = 600;
+
+    const handleWheel = (event: WheelEvent) => {
       if (phase === 0 && isScriptRunning && !isTransitioning) {
-        if (e.deltaY > 0) {
-          scrollAccumulatorRef.current += e.deltaY;
+        if (event.deltaY > 0) {
+          scrollAccumulatorRef.current += event.deltaY;
         } else {
-          scrollAccumulatorRef.current = Math.max(0, scrollAccumulatorRef.current + e.deltaY);
+          scrollAccumulatorRef.current = Math.max(0, scrollAccumulatorRef.current + event.deltaY);
         }
-        
+
         if (scrollAccumulatorRef.current > threshold) {
           handleNextPhase(1);
           scrollAccumulatorRef.current = 0;
@@ -464,23 +815,25 @@ export default function App() {
         }
       }
     };
-    
+
     let lastTouchY = 0;
-    const handleTouchStart = (e: TouchEvent) => {
-      if (phase === 0 && isScriptRunning) lastTouchY = e.touches[0].clientY;
+
+    const handleTouchStart = (event: TouchEvent) => {
+      if (phase === 0 && isScriptRunning) lastTouchY = event.touches[0].clientY;
     };
-    const handleTouchMove = (e: TouchEvent) => {
+
+    const handleTouchMove = (event: TouchEvent) => {
       if (phase === 0 && isScriptRunning && !isTransitioning) {
-        const touchY = e.touches[0].clientY;
+        const touchY = event.touches[0].clientY;
         const deltaY = lastTouchY - touchY;
         lastTouchY = touchY;
-        
+
         if (deltaY > 0) {
           scrollAccumulatorRef.current += deltaY;
         } else {
           scrollAccumulatorRef.current = Math.max(0, scrollAccumulatorRef.current + deltaY);
         }
-        
+
         if (scrollAccumulatorRef.current > threshold) {
           handleNextPhase(1);
           scrollAccumulatorRef.current = 0;
@@ -495,7 +848,7 @@ export default function App() {
     window.addEventListener('wheel', handleWheel);
     window.addEventListener('touchstart', handleTouchStart);
     window.addEventListener('touchmove', handleTouchMove);
-    
+
     const decay = setInterval(() => {
       if (phase === 0 && isScriptRunning && !isTransitioning && scrollAccumulatorRef.current > 0) {
         scrollAccumulatorRef.current = Math.max(0, scrollAccumulatorRef.current - 15);
@@ -515,18 +868,72 @@ export default function App() {
 
   return (
     <div
-      className="relative w-full h-screen bg-black overflow-hidden selection:bg-indigo-500/30"
+      className="relative h-screen w-full overflow-hidden bg-black selection:bg-indigo-500/30"
       style={{
         '--mouse-x': mousePos.x,
         '--mouse-y': mousePos.y,
-        '--glitch-multiplier': isStarting ? 15 : isTransitioning ? 25 + (mouseDistance * 30) : (phase === 0 ? 2.5 + mouseVelocity + (mouseDistance * 4) + (scrollProgress * 25 * (0.5 + mouseDistance * 2.5)) : 2.5 + mouseVelocity * 2 + (phase1MaxScroll * 3)),
+        '--glitch-multiplier': isStarting
+          ? 15
+          : isTransitioning
+            ? 25 + mouseDistance * 30
+            : phase === 0
+              ? 2.5 + mouseVelocity + mouseDistance * 4 + scrollProgress * 25 * (0.5 + mouseDistance * 2.5)
+              : 2.5 + mouseVelocity * 2 + phase1MaxScroll * 3,
       } as React.CSSProperties}
     >
       <div className="crt-overlay" />
       <AnimatePresence>
-        {phase === 0 && <Phase0 key="p0" onRunScript={handleRunScript} isScriptRunning={isScriptRunning} scrollProgress={scrollProgress} isStarting={isStarting} mousePos={mousePos} />}
+        {phase === 0 && (
+          <Phase0
+            key="p0"
+            isScriptRunning={isScriptRunning}
+            scrollProgress={scrollProgress}
+            isStarting={isStarting}
+            hasBooted={hasBooted}
+            theme={theme}
+            onToggleTheme={onToggleTheme}
+            mousePos={mousePos}
+          />
+        )}
         {phase === 1 && <Phase1 key="p1" onPrev={() => { setPhase(0); setIsScriptRunning(true); }} onMaxScrollChange={setPhase1MaxScroll} />}
       </AnimatePresence>
+    </div>
+  );
+};
+
+export default function App() {
+  const [path, setPath] = useState(window.location.pathname);
+  const [theme, setTheme] = useState<ThemeName>(() => {
+    if (typeof window === 'undefined') return 'purple';
+    const stored = window.localStorage.getItem('kika-theme');
+    return stored === 'purple' || stored === 'cyan' || stored === 'amber' ? stored : 'purple';
+  });
+
+  useEffect(() => {
+    const syncPath = () => setPath(window.location.pathname);
+    window.addEventListener('popstate', syncPath);
+    return () => window.removeEventListener('popstate', syncPath);
+  }, []);
+
+  useEffect(() => {
+    window.localStorage.setItem('kika-theme', theme);
+  }, [theme]);
+
+  const cycleTheme = () => {
+    const order: ThemeName[] = ['purple', 'cyan', 'amber'];
+    const next = order[(order.indexOf(theme) + 1) % order.length];
+    setTheme(next);
+  };
+
+  return (
+    <div style={THEMES[theme].vars}>
+      {path === '/blog' ? (
+        <BlogIndex theme={theme} onToggleTheme={cycleTheme} />
+      ) : path === '/blog/three-tools-that-run-my-life' ? (
+        <BlogPostThreeTools theme={theme} onToggleTheme={cycleTheme} />
+      ) : (
+        <HomeExperience theme={theme} onToggleTheme={cycleTheme} />
+      )}
     </div>
   );
 }
