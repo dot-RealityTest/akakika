@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion, useMotionValue, useMotionValueEvent, useScroll, useTransform } from 'motion/react';
+import Lenis from 'lenis';
 
 type NavigateFn = (path: string) => void;
 type ThemeName = 'purple' | 'cyan' | 'amber';
@@ -151,6 +152,36 @@ const BlogNavLink: React.FC<{ path: string; children: React.ReactNode; className
   </a>
 );
 
+const useSmoothScroll = (wrapperRef: React.RefObject<HTMLElement | HTMLDivElement | null>, contentRef?: React.RefObject<HTMLElement | HTMLDivElement | null>) => {
+  useEffect(() => {
+    const wrapper = wrapperRef.current;
+    if (!wrapper) return;
+
+    const lenis = new Lenis({
+      wrapper,
+      content: contentRef?.current ?? (wrapper.firstElementChild as HTMLElement | null) ?? undefined,
+      duration: 1.15,
+      smoothWheel: true,
+      syncTouch: false,
+      touchMultiplier: 1.1,
+      wheelMultiplier: 0.9,
+    });
+
+    let frame = 0;
+    const raf = (time: number) => {
+      lenis.raf(time);
+      frame = window.requestAnimationFrame(raf);
+    };
+
+    frame = window.requestAnimationFrame(raf);
+
+    return () => {
+      window.cancelAnimationFrame(frame);
+      lenis.destroy();
+    };
+  }, [wrapperRef, contentRef]);
+};
+
 const ThemeToggle: React.FC<{ theme: ThemeName; onToggle: () => void }> = ({ theme, onToggle }) => (
   <button
     type="button"
@@ -162,6 +193,56 @@ const ThemeToggle: React.FC<{ theme: ThemeName; onToggle: () => void }> = ({ the
   </button>
 );
 
+const HomeStickyHeader: React.FC<{
+  theme: ThemeName;
+  onToggleTheme: () => void;
+  workHref?: string;
+  aboutHref?: string;
+}> = ({ theme, onToggleTheme, workHref, aboutHref }) => (
+  <motion.div
+    className="home-toolbar sticky top-0 z-50 mb-12 flex w-full items-center justify-between px-6 py-4 text-sm font-bold md:px-12 -mt-6 md:-mt-12"
+    style={{
+      paddingRight: 'max(1.5rem, env(safe-area-inset-right))',
+      paddingLeft: 'max(1.5rem, env(safe-area-inset-left))',
+    }}
+  >
+    <div className="flex items-center gap-2 text-gray-100">
+      <span className="bg-gray-200 px-2 py-1 text-black">AKA</span>
+      <span className="tracking-widest">KIKA</span>
+      <span className="blink h-5 w-3 accent-bg" />
+    </div>
+    <div className="flex items-center gap-3 tracking-widest text-gray-100 md:gap-6">
+      <BlogNavLink path="/" className="hover-accent-text cursor-pointer transition-colors">
+        HOME
+      </BlogNavLink>
+      {workHref ? (
+        <BlogNavLink path={workHref} className="hover-accent-text cursor-pointer transition-colors">
+          WORK
+        </BlogNavLink>
+      ) : (
+        <span>WORK</span>
+      )}
+      <BlogNavLink path="/apps" className="hover-accent-text cursor-pointer transition-colors">
+        APPS
+      </BlogNavLink>
+      <BlogNavLink path="/blog" className="hover-accent-text cursor-pointer transition-colors">
+        BLOG
+      </BlogNavLink>
+      {aboutHref ? (
+        <BlogNavLink path={aboutHref} className="hover-accent-text cursor-pointer transition-colors">
+          ABOUT
+        </BlogNavLink>
+      ) : (
+        <a href="#about" className="hover-accent-text cursor-pointer transition-colors">
+          ABOUT
+        </a>
+      )}
+      <ThemeToggle theme={theme} onToggle={onToggleTheme} />
+    </div>
+  </motion.div>
+);
+
+
 const Phase0: React.FC<{
   isScriptRunning: boolean;
   scrollProgress: number;
@@ -170,10 +251,11 @@ const Phase0: React.FC<{
   theme: ThemeName;
   onToggleTheme: () => void;
   mousePos: { x: number; y: number };
-}> = ({ isScriptRunning, scrollProgress, isStarting, hasBooted, theme, onToggleTheme, mousePos }) => (
+  transitionDirection: 1 | -1;
+}> = ({ isScriptRunning, scrollProgress, isStarting, hasBooted, theme, onToggleTheme, mousePos, transitionDirection }) => (
   <motion.div
     className="absolute inset-0 flex flex-col items-center justify-center bg-[#0a0a0a] font-mono dotted-bg"
-    initial={{ opacity: 0, scale: 0.95 }}
+    initial={{ opacity: 0, scale: 0.95, y: transitionDirection === -1 ? '-18vh' : 0 }}
     animate={{
       opacity: 1 - scrollProgress * 0.2,
       scale: 1 + scrollProgress * 0.05,
@@ -184,7 +266,12 @@ const Phase0: React.FC<{
       skewY: scrollProgress * 5 * mousePos.y,
       y: scrollProgress * -50,
     }}
-    exit={{ y: '-100vh', opacity: 1, filter: `brightness(2) contrast(2) hue-rotate(${90 * mousePos.x}deg)` }}
+    exit={{
+      y: transitionDirection === -1 ? '18vh' : '-28vh',
+      opacity: 0,
+      scale: 1.04,
+      filter: `brightness(1.6) contrast(1.6) hue-rotate(${90 * mousePos.x}deg) blur(4px)`,
+    }}
     transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
   >
     <AnimatePresence>
@@ -199,7 +286,7 @@ const Phase0: React.FC<{
         </motion.div>
       )}
     </AnimatePresence>
-    <div className="absolute top-0 left-0 z-10 flex w-full items-center justify-between p-6 text-sm font-bold text-gray-100">
+    <div className="home-toolbar absolute top-0 left-0 z-10 flex w-full items-center justify-between p-4 text-sm font-bold text-gray-100 md:p-6">
       <div className="flex items-center gap-2">
         <span className="bg-gray-200 px-2 py-1 text-black">AKA</span>
         <span className="tracking-widest">KIKA</span>
@@ -207,6 +294,9 @@ const Phase0: React.FC<{
       </div>
       <div className="flex items-center gap-3 tracking-widest md:gap-6">
         <span>WORK</span>
+        <BlogNavLink path="/apps" className="hover-accent-text cursor-pointer transition-colors">
+          APPS
+        </BlogNavLink>
         <BlogNavLink path="/blog" className="hover-accent-text cursor-pointer transition-colors">
           BLOG
         </BlogNavLink>
@@ -223,12 +313,25 @@ const Phase0: React.FC<{
         </p>
       )}
     </div>
-    <div className="z-10 flex flex-col items-center">
+    <motion.div
+      className="phase0-hero z-10 flex flex-col items-center"
+      animate={{
+        y: -scrollProgress * 32,
+        scale: 1 + scrollProgress * 0.035,
+        opacity: 1 - scrollProgress * 0.28,
+      }}
+      transition={{ duration: 0.25, ease: 'easeOut' }}
+    >
+      <div className="phase0-kicker mb-6 flex items-center gap-3 text-[10px] tracking-[0.35em] text-gray-300 md:text-xs">
+        <span>digital craft</span>
+        <span className="h-px w-10 bg-white/20" />
+        <span>macos systems</span>
+      </div>
       <h1 className="glitch-wrapper glitch-p1 font-display text-[15vw] leading-none tracking-tighter" data-text="KIKA">
         KIKA
       </h1>
       <motion.p
-        className="mt-4 text-xs tracking-widest text-gray-200 md:text-base"
+        className="phase0-subtitle mt-5 max-w-3xl text-center text-xs tracking-[0.28em] text-gray-200 md:text-base"
         animate={{ opacity: isScriptRunning ? 1 : hasBooted ? 0.65 : 0.3, y: isScriptRunning ? 0 : hasBooted ? 2 : 6 }}
         transition={{ duration: 0.6, ease: 'easeOut' }}
       >
@@ -239,7 +342,7 @@ const Phase0: React.FC<{
           kika@portfolio:~$ <Typewriter text="initializing sequence..." cursor={true} cursorClass="bg-gray-300" delay={240} />
         </div>
       )}
-    </div>
+    </motion.div>
     <div className="accent-text absolute bottom-8 left-6 z-10 flex flex-col gap-1 text-[10px] opacity-80 md:text-sm">
       {isScriptRunning && (
         <TerminalBlock
@@ -279,9 +382,19 @@ const Phase0: React.FC<{
   </motion.div>
 );
 
-const Phase1: React.FC<{ onPrev: () => void; onMaxScrollChange: (max: number) => void }> = ({ onPrev, onMaxScrollChange }) => {
+const Phase1: React.FC<{
+  onPrev: () => void;
+  onMaxScrollChange: (max: number) => void;
+  theme: ThemeName;
+  onToggleTheme: () => void;
+  transitionDirection: 1 | -1;
+}> = ({ onPrev, onMaxScrollChange, theme, onToggleTheme, transitionDirection }) => {
   const scrollRef = useRef<HTMLDivElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
+  const returnAccumulatorRef = useRef(0);
   const { scrollYProgress } = useScroll({ container: scrollRef });
+
+  useSmoothScroll(scrollRef, contentRef);
 
   const maxScroll = useMotionValue(0);
   const lastReportedMaxRef = useRef(0);
@@ -300,41 +413,62 @@ const Phase1: React.FC<{ onPrev: () => void; onMaxScrollChange: (max: number) =>
   const yCard1 = useTransform(scrollYProgress, [0, 1], [0, -300]);
   const yCard2 = useTransform(scrollYProgress, [0, 1], [0, -150]);
   const yCard3 = useTransform(scrollYProgress, [0, 1], [0, -400]);
-  const opacityFade = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
-
+  const card1Scale = useTransform(scrollYProgress, [0, 0.2, 0.55], [1, 1.02, 0.96]);
+  const card2Scale = useTransform(scrollYProgress, [0.08, 0.4, 0.78], [0.94, 1.01, 0.97]);
+  const card3Scale = useTransform(scrollYProgress, [0.24, 0.62, 1], [0.92, 1, 0.98]);
+  const card1Opacity = useTransform(scrollYProgress, [0, 0.16, 0.5], [0.82, 1, 0.62]);
+  const card2Opacity = useTransform(scrollYProgress, [0.1, 0.38, 0.76], [0.42, 1, 0.72]);
+  const card3Opacity = useTransform(scrollYProgress, [0.26, 0.64, 1], [0.3, 1, 1]);
+  const card1Rotate = useTransform(scrollYProgress, [0, 0.45], [-1.5, 0.6]);
+  const card2Rotate = useTransform(scrollYProgress, [0.08, 0.55], [1.8, -0.4]);
+  const card3Rotate = useTransform(scrollYProgress, [0.22, 0.8], [-1.2, 0.3]);
+  const projectTitleX = useTransform(scrollYProgress, [0.1, 0.4, 0.72], [0, 420, 1400]);
+  const projectTitleOpacity = useTransform(scrollYProgress, [0.1, 0.48, 0.76], [1, 0.42, 0]);
+  const projectTitleSkew = useTransform(scrollYProgress, [0.12, 0.38, 0.68], [0, 10, 18]);
+  const projectTitleBlur = useTransform(scrollYProgress, [0.22, 0.7], [0, 14]);
+  const projectTitleFilter = useTransform(projectTitleBlur, (value) => `blur(${value}px)`);
   const opacityGhost = useTransform(() => {
     const current = scrollYProgress.get();
     const max = maxScroll.get();
-    const topOpacity = 0.7 - max * 0.5;
-    return Math.max(0.05, topOpacity * (1 - current));
+    const topOpacity = 0.74 - max * 0.18;
+    if (current < 0.58) return Math.max(0.3, topOpacity - current * 0.32);
+    if (current < 0.86) return 0.24 - (current - 0.58) * 0.42;
+    return Math.max(0.08, 0.12 - (current - 0.86) * 0.28);
   });
 
   const scaleGhost = useTransform(() => {
     const current = scrollYProgress.get();
     const max = maxScroll.get();
-    const topScale = 1 + max * 0.3;
-    return topScale + current * 0.3;
+    const topScale = 1 + max * 0.22;
+    return topScale + current * 0.16;
   });
 
   const filterGhost = useTransform(() => {
     const current = scrollYProgress.get();
     const max = maxScroll.get();
-    const topBlur = 8 + max * 12;
-    return `blur(${topBlur + current * 30}px)`;
+    const topBlur = 6 + max * 8;
+    return `blur(${topBlur + current * 14}px)`;
   });
 
-  const yGhost = useTransform(scrollYProgress, [0, 1], [-80, -480]);
-  const xGhost = useTransform(scrollYProgress, [0, 1], [120, 250]);
+  const yGhost = useTransform(scrollYProgress, [0, 1], [-80, -360]);
+  const xGhost = useTransform(scrollYProgress, [0, 1], [120, 190]);
 
   useEffect(() => {
     const el = scrollRef.current;
     if (!el) return;
 
     let touchStartY = 0;
+    const returnThreshold = 240;
 
     const handleWheel = (event: WheelEvent) => {
-      if (el.scrollTop <= 0 && event.deltaY < -20) {
-        onPrev();
+      if (el.scrollTop <= 0 && event.deltaY < 0) {
+        returnAccumulatorRef.current += Math.abs(event.deltaY);
+        if (returnAccumulatorRef.current > returnThreshold) {
+          returnAccumulatorRef.current = 0;
+          onPrev();
+        }
+      } else if (event.deltaY > 0) {
+        returnAccumulatorRef.current = 0;
       }
     };
 
@@ -345,8 +479,14 @@ const Phase1: React.FC<{ onPrev: () => void; onMaxScrollChange: (max: number) =>
     const handleTouchMove = (event: TouchEvent) => {
       const touchY = event.touches[0].clientY;
       const deltaY = touchStartY - touchY;
-      if (el.scrollTop <= 0 && deltaY < -20) {
-        onPrev();
+      if (el.scrollTop <= 0 && deltaY < 0) {
+        returnAccumulatorRef.current += Math.abs(deltaY);
+        if (returnAccumulatorRef.current > returnThreshold) {
+          returnAccumulatorRef.current = 0;
+          onPrev();
+        }
+      } else if (deltaY > 0) {
+        returnAccumulatorRef.current = 0;
       }
     };
 
@@ -355,6 +495,7 @@ const Phase1: React.FC<{ onPrev: () => void; onMaxScrollChange: (max: number) =>
     el.addEventListener('touchmove', handleTouchMove);
 
     return () => {
+      returnAccumulatorRef.current = 0;
       el.removeEventListener('wheel', handleWheel);
       el.removeEventListener('touchstart', handleTouchStart);
       el.removeEventListener('touchmove', handleTouchMove);
@@ -365,6 +506,8 @@ const Phase1: React.FC<{ onPrev: () => void; onMaxScrollChange: (max: number) =>
     hidden: { y: '100vh' },
     show: {
       y: 0,
+      opacity: 1,
+      scale: 1,
       transition: {
         duration: 0.8,
         ease: [0.22, 1, 0.36, 1],
@@ -373,7 +516,9 @@ const Phase1: React.FC<{ onPrev: () => void; onMaxScrollChange: (max: number) =>
       },
     },
     exit: {
-      y: '100vh',
+      y: transitionDirection === -1 ? '20vh' : '100vh',
+      opacity: transitionDirection === -1 ? 0 : 1,
+      scale: transitionDirection === -1 ? 0.985 : 1,
       transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] },
     },
   };
@@ -387,109 +532,91 @@ const Phase1: React.FC<{ onPrev: () => void; onMaxScrollChange: (max: number) =>
     <motion.div
       ref={scrollRef}
       className="absolute inset-0 overflow-x-hidden overflow-y-auto bg-[#0a0a0a] font-mono text-gray-100 dotted-bg"
-      initial="hidden"
+      initial={{ y: '20vh', opacity: 0, scale: 0.985 }}
       animate="show"
       variants={container}
     >
-      <motion.div
-        style={{ opacity: opacityGhost, scale: scaleGhost, y: yGhost, x: xGhost, filter: filterGhost }}
-        className="pointer-events-none fixed inset-0 z-0 flex items-center justify-center"
-      >
-        <h1 className="glitch-wrapper glitch-p1 accent-ghost absolute font-display text-[15vw] leading-none tracking-tighter" data-text="KIKA">
-          KIKA
-        </h1>
-      </motion.div>
-      <div className="relative z-10 flex min-h-screen flex-col p-6 md:p-12">
-        <motion.div
-          variants={item}
-          style={{ opacity: opacityFade }}
-          className="sticky top-0 z-50 mb-12 flex w-full items-center justify-between bg-[#0a0a0a]/80 py-4 text-sm font-bold backdrop-blur-sm"
-        >
-          <div className="accent-text">
-            [kika@portfolio:~]$ <span className="blink accent-bg inline-block h-4 w-2 align-middle" />
+      <div ref={contentRef} className="relative min-h-full">
+        <HomeStickyHeader theme={theme} onToggleTheme={onToggleTheme} />
+        <div className="relative flex min-h-screen flex-col overflow-hidden p-6 md:p-12">
+          <motion.div
+            style={{ opacity: opacityGhost, scale: scaleGhost, y: yGhost, x: xGhost, filter: filterGhost }}
+            className="pointer-events-none absolute inset-0 z-0 flex items-center justify-center"
+          >
+            <h1 className="glitch-wrapper glitch-p1 accent-ghost absolute font-display text-[15vw] leading-none tracking-tighter" data-text="KIKA">
+              KIKA
+            </h1>
+          </motion.div>
+
+          <motion.div style={{ y: yText }} className="section-copy accent-text-soft relative z-10 mt-20 flex max-w-3xl flex-1 flex-col justify-center gap-2 text-sm leading-relaxed md:text-base">
+            <motion.p variants={item} className="accent-text mb-4">
+              kika@portfolio:~$ cat i_exist.txt
+            </motion.p>
+
+            <motion.p variants={item}>
+              <strong className="font-bold text-gray-100">Not a developer.</strong>
+            </motion.p>
+            <motion.p variants={item} className="mt-2">
+              Twenty years, 35 countries, 1000+ shows.
+            </motion.p>
+            <motion.p variants={item} className="mt-2">
+              Retired from music.
+              <br />
+              Not a DJ.
+              <br />
+              i make things.
+            </motion.p>
+            <motion.p variants={item} className="mt-4">
+              nica, still nica. some veronica. aka kika.
+              <br />
+              (the girl who chose midi over a driver's license)
+            </motion.p>
+
+            <motion.p variants={item} className="mt-6">
+              - <strong className="font-bold text-gray-100">Kika</strong>
+              <br />
+              <em className="opacity-80">*Age 36, Year 1 of the Second Act*</em>
+            </motion.p>
+
+            <motion.blockquote variants={item} className="accent-border-left mt-6 pl-4 italic opacity-70">
+              *With permission to drive since 2021*
+            </motion.blockquote>
+
+            <motion.p variants={item} className="accent-text mt-8">
+              kika@portfolio:~$
+            </motion.p>
+          </motion.div>
+        </div>
+
+        <div className="project-stage relative z-10 mx-auto flex min-h-screen max-w-5xl flex-col justify-center gap-32 p-6 md:p-12">
+        <div className="project-intro mb-12 grid gap-6 md:grid-cols-[180px_minmax(0,1fr)] md:items-end">
+          <div className="project-kicker accent-text text-[10px] tracking-[0.35em] md:text-xs">
+            <p>selected work</p>
+            <p className="mt-2 text-gray-500">things that escaped the notebook</p>
           </div>
-          <div className="flex gap-6 tracking-widest text-gray-100">
-            <span>[WORK]</span>
-            <BlogNavLink path="/blog" className="hover-accent-text cursor-pointer transition-colors">
-              [BLOG]
-            </BlogNavLink>
-            <a href="#about" className="hover-accent-text cursor-pointer transition-colors">
-              [ABOUT]
-            </a>
-          </div>
-        </motion.div>
-
-        <motion.div style={{ y: yText }} className="accent-text-soft mt-20 flex flex-1 flex-col justify-center gap-2 max-w-3xl text-sm leading-relaxed md:text-base">
-          <motion.p variants={item} className="accent-text mb-4">
-            kika@portfolio:~$ cat message_to_future_self.md
-          </motion.p>
-
-          <motion.h1 variants={item} className="mt-4 mb-2 font-display text-2xl text-gray-100 md:text-4xl">
-            # Hey Future Me
-          </motion.h1>
-          <motion.p variants={item}>
-            If you're reading this, you made it through. Right now, it's 7:23 AM. Saturday. Quiet. The kind of morning where the world hasn't decided what it wants to be yet. I'm sitting here with my MacBook, thinking about how much has changed and how much hasn't.
-          </motion.p>
-
-          <motion.h2 variants={item} className="mt-6 mb-2 font-display text-xl text-gray-100 md:text-2xl">
-            ## Where I Am
-          </motion.h2>
-          <motion.p variants={item}>Retired from music. Twenty years, 35 countries, 1000+ shows. Tomorrowland, EDC Vegas, Dreamstate. Tracks played by Armin. Signed to Vini Vici's label.</motion.p>
-          <motion.p variants={item} className="mt-2">
-            And then - done. No drama, no big finale. Just... ready.
-          </motion.p>
-          <motion.p variants={item} className="mt-2">
-            Now I build things. Not because I have to. Because I can't not.
-          </motion.p>
-
-          <motion.p variants={item} className="mt-4">
-            <strong className="font-bold text-gray-100">Not a DJ. Not a developer.</strong>
-            <br />
-            Just... someone who makes things because they should exist.
-          </motion.p>
-
-          <motion.p variants={item} className="mt-4">
-            nica, still nica. some veronica. aka kika.
-            <br />
-            the girl who chose midi over a driver's license.
-          </motion.p>
-
-          <motion.h2 variants={item} className="mt-6 mb-2 font-display text-xl text-gray-100 md:text-2xl">
-            ## For You, Later
-          </motion.h2>
-          <motion.p variants={item}>Remember this feeling. The uncertainty. The excitement. The not-knowing-but-building-anyway.</motion.p>
-
-          <motion.p variants={item} className="mt-6">
-            - <strong className="font-bold text-gray-100">Kika</strong>
-            <br />
-            <em className="opacity-80">*Age 36, Year 1 of the Second Act*</em>
-          </motion.p>
-
-          <motion.blockquote variants={item} className="accent-border-left mt-6 pl-4 italic opacity-70">
-            *With permission to drive since 2021*
-          </motion.blockquote>
-
-          <motion.p variants={item} className="accent-text mt-8">
-            kika@portfolio:~$ <span className="blink accent-bg inline-block h-4 w-2 align-middle" />
-          </motion.p>
-        </motion.div>
-      </div>
-
-      <div className="relative z-10 mx-auto flex min-h-screen max-w-5xl flex-col justify-center gap-32 p-6 md:p-12">
-        <div className="mb-12">
-          <h2 className="mb-2 font-display text-4xl tracking-tighter text-gray-100 md:text-6xl">things i made.</h2>
-          <p className="glitch-wrapper glitch-p0 accent-text w-fit font-display text-xl tracking-widest md:text-2xl" data-text="things that made me...">
-            things that made me...
-          </p>
+          <motion.div
+            style={{
+              x: projectTitleX,
+              opacity: projectTitleOpacity,
+              skewX: projectTitleSkew,
+              filter: projectTitleFilter,
+            }}
+            className="project-title-block"
+          >
+            <h2 className="mb-2 font-display text-4xl tracking-tighter text-gray-100 md:text-7xl">things i made.</h2>
+            <p className="glitch-wrapper glitch-p0 accent-text w-fit font-display text-xl tracking-widest md:text-2xl" data-text="things that made me...">
+              things that made me...
+            </p>
+          </motion.div>
         </div>
 
         <a href="https://akakika.com/mochi/" target="_blank" rel="noopener noreferrer" className="block">
           <motion.div
-            style={{ y: yCard1 }}
-            className="accent-panel group relative p-8 backdrop-blur-sm transition-all duration-300 hover:scale-[1.02] accent-panel-hover"
+            style={{ y: yCard1, scale: card1Scale, opacity: card1Opacity, rotateZ: card1Rotate }}
+            className="accent-panel project-card group relative p-8 backdrop-blur-sm transition-all duration-300 hover:scale-[1.02] accent-panel-hover"
           >
             <div className="accent-text absolute -top-3 -left-3 bg-[#0a0a0a] px-2 text-xs">FILE_01</div>
-            <h2 className="mb-4 font-display text-3xl tracking-tighter text-gray-100 md:text-5xl">MOCHI'S DAILY QUEST</h2>
+            <h2 className="project-title mb-4 font-display text-3xl tracking-tighter text-gray-100 md:text-5xl">MOCHI'S DAILY QUEST</h2>
             <p className="mb-6 max-w-2xl text-sm text-gray-200 md:text-base">
               A retro Tamagotchi-style to-do companion who grows happier - and older - every time you get things done. Pixel productivity pal.
             </p>
@@ -503,11 +630,11 @@ const Phase1: React.FC<{ onPrev: () => void; onMaxScrollChange: (max: number) =>
 
         <a href="https://akakika.com/resq/" target="_blank" rel="noopener noreferrer" className="block md:ml-auto md:w-3/4">
           <motion.div
-            style={{ y: yCard2 }}
-            className="accent-panel resq-theme-card group relative p-8 backdrop-blur-sm transition-all duration-500 hover:scale-[1.02]"
+            style={{ y: yCard2, scale: card2Scale, opacity: card2Opacity, rotateZ: card2Rotate }}
+            className="accent-panel project-card resq-theme-card group relative p-8 backdrop-blur-sm transition-all duration-500 hover:scale-[1.02]"
           >
             <div className="accent-text absolute -top-3 -left-3 bg-[#0a0a0a] px-2 text-xs transition-colors duration-500 group-hover:text-inherit">FILE_02</div>
-            <h2 className="mb-4 font-display text-3xl tracking-tighter text-gray-100 md:text-5xl">RESQ</h2>
+            <h2 className="project-title mb-4 font-display text-3xl tracking-tighter text-gray-100 md:text-5xl">RESQ</h2>
             <p className="mb-6 max-w-2xl text-sm text-gray-200 md:text-base">
               Rescue messy text into clean Markdown. Turn OCR scraps, rough notes, and semi-structured text into clean Markdown with a local-first workflow.
             </p>
@@ -520,11 +647,11 @@ const Phase1: React.FC<{ onPrev: () => void; onMaxScrollChange: (max: number) =>
         </a>
 
         <motion.div
-          style={{ y: yCard3 }}
-          className="accent-panel group relative p-8 backdrop-blur-sm transition-all duration-300 hover:scale-[1.02] accent-panel-hover md:ml-24 md:w-2/3"
+          style={{ y: yCard3, scale: card3Scale, opacity: card3Opacity, rotateZ: card3Rotate }}
+          className="accent-panel project-card group relative p-8 backdrop-blur-sm transition-all duration-300 hover:scale-[1.02] accent-panel-hover md:ml-24 md:w-2/3"
         >
           <div className="accent-text absolute -top-3 -left-3 bg-[#0a0a0a] px-2 text-xs">FILE_03</div>
-          <h2 className="mb-4 font-display text-3xl tracking-tighter text-gray-100 md:text-5xl">BREAKPOINT</h2>
+          <h2 className="project-title mb-4 font-display text-3xl tracking-tighter text-gray-100 md:text-5xl">BREAKPOINT</h2>
           <p className="mb-6 max-w-2xl text-sm text-gray-200 md:text-base">
             One trigger. Full context. Ready to walk away. Single-click context capture. Snapshots your entire computer state. AI-powered action plan instantly.
           </p>
@@ -534,22 +661,39 @@ const Phase1: React.FC<{ onPrev: () => void; onMaxScrollChange: (max: number) =>
             <span>[CONTEXT-CAPTURE]</span>
           </div>
         </motion.div>
-      </div>
+        </div>
 
-      <div id="about" className="accent-top-border relative z-10 mt-32 flex min-h-screen flex-col p-6 pt-12 pb-12 md:p-12">
-        <h2 className="glitch-wrapper glitch-p0 mb-12 w-fit font-display text-4xl tracking-tighter text-gray-100 md:text-6xl" data-text="ABOUT_ME">
-          ABOUT_ME
-        </h2>
+        <div id="about" className="accent-top-border relative z-10 mt-32 flex min-h-screen flex-col p-6 pt-12 pb-12 md:p-12">
+        <div className="about-header mb-12 grid gap-4 md:grid-cols-[180px_minmax(0,1fr)] md:items-end">
+          <div className="accent-text text-[10px] tracking-[0.35em] md:text-xs">
+            <p>about</p>
+            <p className="mt-2 text-gray-500">act two</p>
+          </div>
+          <h2 className="glitch-wrapper glitch-p0 w-fit font-display text-4xl tracking-tighter text-gray-100 md:text-7xl" data-text="AKA KIKA">
+            AKA KIKA
+          </h2>
+        </div>
 
-        <div className="max-w-3xl space-y-6 text-sm leading-relaxed text-gray-200 md:text-base">
-          <p>with ai i learned to actually code - the "i ship macos apps and mean it" kind. i study things before there are tutorials on youtube. i figure it out.</p>
-          <p>I never meant to build products. I built tools for myself because nothing on the market fit the way my brain works.</p>
+        <div className="about-layout">
+        <div className="section-copy max-w-3xl space-y-6 text-sm leading-relaxed text-gray-200 md:text-base">
+          <p>I'm still figuring out what to say here.</p>
+          <p>I build things. I care about the details.</p>
+          <p>my tools were built to help me build tools. some just because I could — no reason, no brand, no big words.</p>
+          <p>Late nights I mess with local models, second brains, and workflow automation — not as a project, just because it's fun.</p>
           <p>
-            i've built the ghost - the complex, agentic intelligence of the Echosystem. the backend that thinks, remembers, and acts. now i'm building the skin - the beautiful, glassmorphic, local-first macOS shell that lets me feel that intelligence. not just use it. feel it.
+            nica,
+            <br />
+            aka kika
+          </p>
+          <p className="accent-text-soft">designed by someone who actually uses it.</p>
+          <p className="-mt-4 accent-text-soft">
+            build for people who think in systems,
+            <br />
+            like me
           </p>
         </div>
 
-        <div className="accent-panel mt-12 w-full max-w-md self-end p-8 backdrop-blur-sm md:mt-auto">
+        <div className="accent-panel about-side mt-12 w-full max-w-md self-end p-8 backdrop-blur-sm md:mt-auto">
           <h3 className="mb-4 text-xl font-bold tracking-widest text-gray-100">[SKILLS_&_TECH]</h3>
           <ul className="accent-text space-y-2 font-mono text-sm">
             <li>&gt; AI & Agentic Systems</li>
@@ -560,36 +704,32 @@ const Phase1: React.FC<{ onPrev: () => void; onMaxScrollChange: (max: number) =>
             <li>&gt; Rapid Prototyping</li>
           </ul>
         </div>
-      </div>
+        </div>
+        </div>
 
-      <div className="flex h-40 items-center justify-center text-xs text-gray-400">EOF</div>
+        <div className="flex h-40 items-center justify-center text-xs text-gray-400">EOF</div>
+      </div>
     </motion.div>
   );
 };
 
-const BlogShell: React.FC<{ children: React.ReactNode }> = ({ children }) => (
-  <div className="blog-shell relative h-screen overflow-y-auto bg-[#0a0a0a] font-mono text-gray-100 dotted-bg">
-    <div className="crt-overlay" />
-    <div className="relative z-10 p-6 md:p-12">{children}</div>
-  </div>
-);
+const BlogShell: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const wrapperRef = useRef<HTMLDivElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
+
+  useSmoothScroll(wrapperRef, contentRef);
+
+  return (
+    <div ref={wrapperRef} className="blog-shell relative h-screen overflow-y-auto bg-[#0a0a0a] font-mono text-gray-100 dotted-bg">
+      <div className="crt-overlay" />
+      <div ref={contentRef} className="relative z-10 p-6 md:p-12">{children}</div>
+    </div>
+  );
+};
 
 const BlogIndex: React.FC<{ theme: ThemeName; onToggleTheme: () => void }> = ({ theme, onToggleTheme }) => (
   <BlogShell>
-    <div className="accent-bottom-border sticky top-0 z-50 mb-12 flex items-center justify-between gap-6 bg-[#0a0a0a]/88 py-4 backdrop-blur-sm">
-      <BlogNavLink path="/" className="hover-accent-text-soft text-lg tracking-widest text-gray-100 transition-colors">
-        aka kika
-      </BlogNavLink>
-      <div className="flex items-center gap-3 md:gap-6">
-        <div className="flex items-center gap-6 text-xs tracking-[0.3em] text-gray-300">
-          <BlogNavLink path="/" className="transition-colors hover:text-white">
-            about
-          </BlogNavLink>
-          <span className="text-white">blog</span>
-        </div>
-        <ThemeToggle theme={theme} onToggle={onToggleTheme} />
-      </div>
-    </div>
+    <HomeStickyHeader theme={theme} onToggleTheme={onToggleTheme} workHref="/" aboutHref="/" />
 
     <div className="w-full blog-index">
       <p className="accent-text-soft mb-4">kika@portfolio:~$ ls blog/</p>
@@ -615,22 +755,7 @@ const BlogIndex: React.FC<{ theme: ThemeName; onToggleTheme: () => void }> = ({ 
 
 const BlogPostThreeTools: React.FC<{ theme: ThemeName; onToggleTheme: () => void }> = ({ theme, onToggleTheme }) => (
   <BlogShell>
-    <div className="accent-bottom-border sticky top-0 z-50 mb-10 flex items-center justify-between gap-6 bg-[#0a0a0a]/88 py-4 backdrop-blur-sm">
-      <BlogNavLink path="/" className="hover-accent-text-soft text-lg tracking-widest text-gray-100 transition-colors">
-        aka kika
-      </BlogNavLink>
-      <div className="flex items-center gap-3 md:gap-6">
-        <div className="flex items-center gap-6 text-xs tracking-[0.3em] text-gray-300">
-          <BlogNavLink path="/" className="transition-colors hover:text-white">
-            about
-          </BlogNavLink>
-          <BlogNavLink path="/blog" className="text-white transition-colors hover:text-white">
-            blog
-          </BlogNavLink>
-        </div>
-        <ThemeToggle theme={theme} onToggle={onToggleTheme} />
-      </div>
-    </div>
+    <HomeStickyHeader theme={theme} onToggleTheme={onToggleTheme} workHref="/" aboutHref="/" />
 
     <article className="blog-article w-full">
       <nav className="mb-8">
@@ -725,6 +850,7 @@ const BlogPostThreeTools: React.FC<{ theme: ThemeName; onToggleTheme: () => void
 
 const HomeExperience: React.FC<{ theme: ThemeName; onToggleTheme: () => void }> = ({ theme, onToggleTheme }) => {
   const [phase, setPhase] = useState(0);
+  const [phaseDirection, setPhaseDirection] = useState<1 | -1>(1);
   const [isScriptRunning, setIsScriptRunning] = useState(false);
   const [isStarting, setIsStarting] = useState(false);
   const [hasBooted, setHasBooted] = useState(false);
@@ -770,7 +896,8 @@ const HomeExperience: React.FC<{ theme: ThemeName; onToggleTheme: () => void }> 
     };
   }, []);
 
-  const handleNextPhase = (next: number) => {
+  const handlePhaseChange = (next: number, direction: 1 | -1) => {
+    setPhaseDirection(direction);
     setIsTransitioning(true);
     setPhase(next);
     setTimeout(() => setIsTransitioning(false), 800);
@@ -806,7 +933,7 @@ const HomeExperience: React.FC<{ theme: ThemeName; onToggleTheme: () => void }> 
         }
 
         if (scrollAccumulatorRef.current > threshold) {
-          handleNextPhase(1);
+          handlePhaseChange(1, 1);
           scrollAccumulatorRef.current = 0;
           setScrollProgress(1);
           setTimeout(() => setScrollProgress(0), 800);
@@ -835,7 +962,7 @@ const HomeExperience: React.FC<{ theme: ThemeName; onToggleTheme: () => void }> 
         }
 
         if (scrollAccumulatorRef.current > threshold) {
-          handleNextPhase(1);
+          handlePhaseChange(1, 1);
           scrollAccumulatorRef.current = 0;
           setScrollProgress(1);
           setTimeout(() => setScrollProgress(0), 800);
@@ -893,9 +1020,23 @@ const HomeExperience: React.FC<{ theme: ThemeName; onToggleTheme: () => void }> 
             theme={theme}
             onToggleTheme={onToggleTheme}
             mousePos={mousePos}
+            transitionDirection={phaseDirection}
           />
         )}
-        {phase === 1 && <Phase1 key="p1" onPrev={() => { setPhase(0); setIsScriptRunning(true); }} onMaxScrollChange={setPhase1MaxScroll} />}
+        {phase === 1 && (
+          <Phase1
+            key="p1"
+            onPrev={() => {
+              handlePhaseChange(0, -1);
+              setIsScriptRunning(true);
+              setScrollProgress(0);
+            }}
+            onMaxScrollChange={setPhase1MaxScroll}
+            theme={theme}
+            onToggleTheme={onToggleTheme}
+            transitionDirection={phaseDirection}
+          />
+        )}
       </AnimatePresence>
     </div>
   );
@@ -931,9 +1072,92 @@ export default function App() {
         <BlogIndex theme={theme} onToggleTheme={cycleTheme} />
       ) : path === '/blog/three-tools-that-run-my-life' ? (
         <BlogPostThreeTools theme={theme} onToggleTheme={cycleTheme} />
+      ) : path === '/apps' ? (
+        <AppsPage theme={theme} onToggleTheme={cycleTheme} />
       ) : (
         <HomeExperience theme={theme} onToggleTheme={cycleTheme} />
       )}
     </div>
   );
 }
+const AppsPage: React.FC<{ theme: ThemeName; onToggleTheme: () => void }> = ({ theme, onToggleTheme }) => {
+  const apps = [
+    {
+      name: "Mochi's Daily Quest",
+      url: 'https://akakika.com/mochi/',
+      image: 'https://akakika.com/mochi/assets/egg_idle.gif',
+      imageAlt: 'Mochi idle sprite',
+      blurb: 'A retro Tamagotchi-style to-do companion who grows happier — and older — every time you get things done.',
+    },
+    {
+      name: 'ClipboardSanitizer',
+      url: 'https://akakika.com/cbs',
+      image: '',
+      imageAlt: '',
+      blurb: 'cleans your clipboard automatically. free macos. $ sanitize --clipboard. tracking params stripped. rich text → plain text.',
+    },
+    {
+      name: 'Focus',
+      url: 'https://focus.akakika.com/',
+      image: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663256363840/GDPZte63zCE86rkXPDBcHE/focus-icon_423ff11b.png',
+      imageAlt: 'Focus app icon',
+      blurb: 'Focus is a lightweight native Mac utility — fast to open, compact, keyboard-friendly, and visually calm.',
+    },
+    {
+      name: 'FolderWardrobe',
+      url: 'https://akakika.com/folderwardrobe/',
+      image: 'https://akakika.com/folderwardrobe/folderwardrobe-icon.png',
+      imageAlt: 'FolderWardrobe app icon',
+      blurb: 'Dress up your folders. Customize Finder folders with colors, icons, and metadata presets.',
+    },
+    {
+      name: 'RESQ',
+      url: 'https://akakika.com/resq/',
+      image: 'https://akakika.com/resq/resq-icon.png',
+      imageAlt: 'RESQ app icon',
+      blurb: 'Rescue messy text into clean Markdown. Turn OCR scraps, rough notes, and semi-structured text into clean Markdown with a local-first workflow. No cloud. No friction.',
+    },
+  ];
+
+  return (
+    <BlogShell>
+      <HomeStickyHeader theme={theme} onToggleTheme={onToggleTheme} />
+
+      <div className="w-full">
+        <p className="accent-text-soft mb-4">kika@portfolio:~$ ls apps/</p>
+        <h1 className="mb-4 font-display text-5xl tracking-tighter text-gray-100 md:text-7xl">apps.</h1>
+        <p className="mb-12 max-w-3xl text-base leading-relaxed text-gray-200 md:text-lg">
+          real apps. free. because i wanted them to exist.
+        </p>
+
+        <div className="grid gap-6 md:grid-cols-2">
+          {apps.map((app) => (
+            <a
+              key={app.name}
+              href={app.url || undefined}
+              target={app.url ? '_blank' : undefined}
+              rel={app.url ? 'noopener noreferrer' : undefined}
+              className={`group accent-panel project-card block overflow-hidden p-8 transition-all duration-300 hover:scale-[1.01] hover-accent-border-strong ${app.url ? '' : 'pointer-events-none opacity-70'}`}
+            >
+              <div className="mb-6 flex items-center gap-4">
+                <div className="accent-panel flex h-14 w-14 items-center justify-center overflow-hidden rounded-2xl md:h-16 md:w-16">
+                  {app.image ? (
+                    <img src={app.image} alt={app.imageAlt} className="h-full w-full object-cover" loading="lazy" />
+                  ) : (
+                    <span className="text-[10px] tracking-[0.2em] text-gray-200">APP</span>
+                  )}
+                </div>
+                <div>
+                  <p className="text-[10px] uppercase tracking-[0.35em] text-gray-300">macOS</p>
+                  <h2 className="font-display text-2xl tracking-tighter text-gray-100 md:text-3xl">{app.name}</h2>
+                </div>
+              </div>
+              <p className="leading-relaxed text-gray-100">{app.blurb}</p>
+              <p className="accent-text-soft mt-6 text-sm transition-colors group-hover:text-white">{app.url ? 'open landing →' : 'landing link needed'}</p>
+            </a>
+          ))}
+        </div>
+      </div>
+    </BlogShell>
+  );
+};
