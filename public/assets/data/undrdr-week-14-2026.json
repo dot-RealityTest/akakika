@@ -1,0 +1,262 @@
+{
+  "week": 14,
+  "year": 2026,
+  "generated_at": "2026-04-05T08:01:46.946049",
+  "repos": {
+    "boss": {
+      "org": "0xPugal",
+      "name": "fuzz4bounty",
+      "url": "https://github.com/0xPugal/fuzz4bounty",
+      "stars": 941,
+      "description": "1337 Wordlists for Bug Bounty Hunting",
+      "language": "Go",
+      "topics": [
+        "bruteforce",
+        "bugbounty",
+        "dirsearch",
+        "ffuf",
+        "fuzz",
+        "fuzz4bounty",
+        "wordlist"
+      ],
+      "why": "does one thing. does it. doesn't get in the way.",
+      "tags": [
+        "tools"
+      ],
+      "lang": "go",
+      "temp": "hot"
+    },
+    "hot": [
+      {
+        "org": "appshubcc",
+        "name": "Bettbox",
+        "url": "https://github.com/appshubcc/Bettbox",
+        "stars": 636,
+        "description": "Another Better Mihomo Client",
+        "language": "Go",
+        "topics": [],
+        "why": "stops you from opening another browser tab.",
+        "tags": [
+          "terminal"
+        ],
+        "lang": "go",
+        "temp": "hot"
+      },
+      {
+        "org": "python-cmd2",
+        "name": "cmd2",
+        "url": "https://github.com/python-cmd2/cmd2",
+        "stars": 684,
+        "description": "cmd2 - quickly build feature-rich and user-friendly interactive command line applications in Python",
+        "language": "Python",
+        "topics": [
+          "auto-completion",
+          "cli",
+          "command-line",
+          "developer-tools",
+          "python",
+          "scripting",
+          "shell",
+          "subcommands",
+          "tab-completion",
+          "terminal",
+          "unicode"
+        ],
+        "why": "exists quietly. works consistently. that's the point.",
+        "tags": [
+          "terminal",
+          "tools"
+        ],
+        "lang": "python",
+        "temp": "hot"
+      }
+    ],
+    "warm": [
+      {
+        "org": "rezible",
+        "name": "rezible",
+        "url": "https://github.com/rezible/rezible",
+        "stars": 127,
+        "description": "Mission Control for Your Operations",
+        "language": "Go",
+        "topics": [
+          "alerting",
+          "devops",
+          "golang",
+          "incident-analysis",
+          "incident-response",
+          "oncall",
+          "platform",
+          "platform-engineering",
+          "svelte",
+          "sveltekit"
+        ],
+        "why": "does one thing. does it. doesn't get in the way.",
+        "tags": [
+          "tools"
+        ],
+        "lang": "go",
+        "temp": "warm"
+      },
+      {
+        "org": "redongreen",
+        "name": "uSpec",
+        "url": "https://github.com/redongreen/uSpec",
+        "stars": 122,
+        "description": "AIKit for generating design system documentation in Figma. Works with Cursor, Claude Code, and Codex via Figma MCPs.",
+        "language": "JavaScript",
+        "topics": [
+          "aikit",
+          "design-system",
+          "figma",
+          "mcp",
+          "specs"
+        ],
+        "why": "does one thing. does it. doesn't get in the way.",
+        "tags": [
+          "ai"
+        ],
+        "lang": "javascript",
+        "temp": "warm"
+      },
+      {
+        "org": "vkhanhqui",
+        "name": "figma-mcp-go",
+        "url": "https://github.com/vkhanhqui/figma-mcp-go",
+        "stars": 343,
+        "description": "Figma MCP for free users \u2014 no rate limits, full read/write, text to designs, designs to code",
+        "language": "Go",
+        "topics": [
+          "agent",
+          "ai",
+          "automation",
+          "design",
+          "figma",
+          "figma-plugin",
+          "mcp"
+        ],
+        "why": "exists quietly. works consistently. that's the point.",
+        "tags": [
+          "ai",
+          "agents",
+          "tools"
+        ],
+        "lang": "go",
+        "temp": "warm"
+      }
+    ],
+    "cold": [
+      {
+        "org": "marichu-kt",
+        "name": "marichu-kt",
+        "url": "https://github.com/marichu-kt/marichu-kt",
+        "stars": 36,
+        "description": "README for the GitHub  Profile Overview",
+        "language": null,
+        "topics": [
+          "ascii-art",
+          "automation",
+          "bash",
+          "cli-tools",
+          "cplusplus",
+          "cybersecurity",
+          "data-analysis",
+          "developer",
+          "ethical-hacking",
+          "github-api",
+          "javascript",
+          "linux",
+          "opensource",
+          "portfolio",
+          "python",
+          "security-tools",
+          "terminal"
+        ],
+        "why": "this exists and barely anyone knows about it. exactly why we care.",
+        "tags": [
+          "terminal",
+          "tools"
+        ],
+        "lang": "various",
+        "temp": "cold"
+      },
+      {
+        "org": "rezmoss",
+        "name": "go-is-disposable-email",
+        "url": "https://github.com/rezmoss/go-is-disposable-email",
+        "stars": 19,
+        "description": "A high-performance Go package for detecting disposable/temporary email addresses",
+        "language": "Go",
+        "topics": [
+          "antispam",
+          "disposable-domains",
+          "disposable-email",
+          "disposable-emails",
+          "go",
+          "golang",
+          "golang-library",
+          "golang-package"
+        ],
+        "why": "19 stars. basically unknown. probably should have more.",
+        "tags": [
+          "ai"
+        ],
+        "lang": "go",
+        "temp": "cold"
+      },
+      {
+        "org": "cyborgsalamanca",
+        "name": "codex-agent",
+        "url": "https://github.com/cyborgsalamanca/codex-agent",
+        "stars": 7,
+        "description": "Automate Codex CLI tasks using OpenClaw to write prompts, approve commands, check results, and interact via terminal or Telegram.",
+        "language": "Shell",
+        "topics": [
+          "agent",
+          "agentic-engineering",
+          "agentic-framework",
+          "agentic-workflow",
+          "ai-assistant",
+          "ai-tools",
+          "claude",
+          "claude-code-skills",
+          "cli",
+          "cursor-agent",
+          "management",
+          "mcp",
+          "model-context-protocol",
+          "opencode",
+          "parallel-agents",
+          "swarm",
+          "terminal",
+          "tui"
+        ],
+        "why": "stops you from opening another browser tab.",
+        "tags": [
+          "ai",
+          "agents",
+          "terminal"
+        ],
+        "lang": "shell",
+        "temp": "cold"
+      },
+      {
+        "org": "ProjectBarks",
+        "name": "gopher-code",
+        "url": "https://github.com/ProjectBarks/gopher-code",
+        "stars": 19,
+        "description": "Claude Code, rewritten from scratch in Go. Zero Node.js. Zero Electron. One binary.",
+        "language": "Go",
+        "topics": [
+          "go"
+        ],
+        "why": "this exists and barely anyone knows about it. exactly why we care.",
+        "tags": [
+          "ai"
+        ],
+        "lang": "go",
+        "temp": "cold"
+      }
+    ]
+  }
+}

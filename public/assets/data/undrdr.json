@@ -1,0 +1,272 @@
+{
+  "week": 15,
+  "year": 2026,
+  "generated_at": "2026-04-09T08:51:33.527744",
+  "repos": {
+    "boss": {
+      "org": "jaywcjlove",
+      "name": "quick-rss",
+      "url": "https://github.com/jaywcjlove/quick-rss",
+      "stars": 455,
+      "description": "A powerful and intuitive macOS desktop RSS reader that helps you manage and read your favorite RSS feeds with ease.",
+      "language": "Swift",
+      "topics": [
+        "feed",
+        "feeds",
+        "jaywcjlove",
+        "macos",
+        "macos-app",
+        "macos-swift",
+        "news",
+        "quick-rss",
+        "rss",
+        "rss-feed",
+        "rss-feed-manager",
+        "rss-feed-reader",
+        "rss-reader",
+        "swift-app",
+        "swift-application",
+        "swiftui",
+        "swiftui-app",
+        "swiftui-application"
+      ],
+      "why": "the tool your mac wanted to ship with.",
+      "tags": [
+        "macos"
+      ],
+      "lang": "swift",
+      "temp": "hot"
+    },
+    "hot": [
+      {
+        "org": "clawwork-ai",
+        "name": "ClawWork",
+        "url": "https://github.com/clawwork-ai/ClawWork",
+        "stars": 443,
+        "description": "Client for OpenClaw \u2014 Connect ClawWork to your own OpenClaw and unlock 10x multi-session productivity.",
+        "language": "TypeScript",
+        "topics": [
+          "ai-agent",
+          "ai-tools",
+          "desktop-app",
+          "developer-tools",
+          "electron",
+          "git",
+          "llm",
+          "macos",
+          "openclaw",
+          "openclaw-alternative",
+          "react",
+          "sqlite",
+          "tailwindcss",
+          "task-management",
+          "typescript",
+          "zustand"
+        ],
+        "why": "stops you from opening another browser tab.",
+        "tags": [
+          "ai",
+          "agents",
+          "macos"
+        ],
+        "lang": "typescript",
+        "temp": "hot"
+      }
+    ],
+    "warm": [
+      {
+        "org": "Leading-AI-IO",
+        "name": "palantir-ontology-strategy",
+        "url": "https://github.com/Leading-AI-IO/palantir-ontology-strategy",
+        "stars": 102,
+        "description": "A comprehensive guide to Palantir Foundry's Ontology strategy. / \u4e16\u754c\u6700\u5f37\u306e\u30c7\u30fc\u30bf\u30d7\u30e9\u30c3\u30c8\u30d5\u30a9\u30fc\u30e0\u300c\u30d1\u30e9\u30f3\u30c6\u30a3\u30a2\u300d\u306e\u4e2d\u6838\u6982\u5ff5\u3067\u3042\u308b\u300e\u30aa\u30f3\u30c8\u30ed\u30b8\u30fc\u300f\u306e\u6226\u7565\u3068\u5b9f\u88c5\u3092\u89e3\u304d\u660e\u304b\u3059OSS\u66f8\u7c4d\u30d7\u30ed\u30b8\u30a7\u30af\u30c8\u3002",
+        "language": null,
+        "topics": [
+          "book",
+          "data-integration",
+          "data-platform",
+          "data-strategy",
+          "enterprise-ai",
+          "foundry",
+          "governance",
+          "ontology",
+          "open-source",
+          "palantir",
+          "palantir-foundry"
+        ],
+        "why": "exists quietly. works consistently. that's the point.",
+        "tags": [
+          "ai"
+        ],
+        "lang": "various",
+        "temp": "warm"
+      },
+      {
+        "org": "cocopuff2u",
+        "name": "MOFA",
+        "url": "https://github.com/cocopuff2u/MOFA",
+        "stars": 262,
+        "description": "A collection of tools, scripts, and resources for macAdmins to manage and deploy Microsoft updates on macOS, including patches for Office, Teams, and other Microsoft software",
+        "language": "Shell",
+        "topics": [
+          "jamf-pro",
+          "macadmin",
+          "macadmins",
+          "macos",
+          "office-365",
+          "office365",
+          "pkg"
+        ],
+        "why": "exists quietly. works consistently. that's the point.",
+        "tags": [
+          "macos"
+        ],
+        "lang": "shell",
+        "temp": "warm"
+      },
+      {
+        "org": "LucasLarson",
+        "name": "dotfiles",
+        "url": "https://github.com/LucasLarson/dotfiles",
+        "stars": 133,
+        "description": "This is where the \u2665\ufe0f\u00a0is \u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0at.",
+        "language": "Shell",
+        "topics": [
+          "dotfiles",
+          "dotfiles-macos",
+          "git-plugins",
+          "hacktoberfest",
+          "lucaslarson",
+          "mac-dotfiles",
+          "mackup",
+          "macos",
+          "macos-dotfiles",
+          "oh-my-zsh",
+          "rice",
+          "shell",
+          "zsh",
+          "zsh-plugins",
+          "zshrc"
+        ],
+        "why": "does one thing. does it. doesn't get in the way.",
+        "tags": [
+          "macos",
+          "terminal"
+        ],
+        "lang": "shell",
+        "temp": "warm"
+      }
+    ],
+    "cold": [
+      {
+        "org": "textlint-ja",
+        "name": "technological-book-corpus-ja",
+        "url": "https://github.com/textlint-ja/technological-book-corpus-ja",
+        "stars": 26,
+        "description": "\u65e5\u672c\u8a9e\u3067\u66f8\u304b\u308c\u305f\u6280\u8853\u66f8\u3092\u53ce\u96c6\u3057\u305f\u751f\u30b3\u30fc\u30d1\u30b9/\u30c4\u30fc\u30eb",
+        "language": "JavaScript",
+        "topics": [
+          "book",
+          "corpus",
+          "japanese",
+          "natural-language",
+          "textlint"
+        ],
+        "why": "found at 26 stars. the definition of under the radar.",
+        "tags": [
+          "tools"
+        ],
+        "lang": "javascript",
+        "temp": "cold"
+      },
+      {
+        "org": "piazzai",
+        "name": "piazzai.github.io",
+        "url": "https://github.com/piazzai/piazzai.github.io",
+        "stars": 5,
+        "description": "Source files of my personal website",
+        "language": "HTML",
+        "topics": [
+          "academia",
+          "academic-website",
+          "bootstrap",
+          "bootstrap-cover",
+          "css",
+          "cv",
+          "cv-website",
+          "fira-sans",
+          "html",
+          "javascript",
+          "jekyll",
+          "jekyll-site",
+          "open-color",
+          "personal-site",
+          "personal-webpage",
+          "personal-website",
+          "resume",
+          "resume-website",
+          "sass",
+          "simple-icons"
+        ],
+        "why": "found at 5 stars. the definition of under the radar.",
+        "tags": [
+          "tools"
+        ],
+        "lang": "html",
+        "temp": "cold"
+      },
+      {
+        "org": "TheDataMine",
+        "name": "the-examples-book",
+        "url": "https://github.com/TheDataMine/the-examples-book",
+        "stars": 27,
+        "description": "Supplementary material for solving projects assigned in The Data Mine.",
+        "language": "PLpgSQL",
+        "topics": [
+          "book",
+          "data-science",
+          "database",
+          "purdue-university",
+          "python3",
+          "r",
+          "sql"
+        ],
+        "why": "this exists and barely anyone knows about it. exactly why we care.",
+        "tags": [
+          "tools"
+        ],
+        "lang": "plpgsql",
+        "temp": "cold"
+      },
+      {
+        "org": "Shubh2-0",
+        "name": "Shubh2-0.github.io",
+        "url": "https://github.com/Shubh2-0/Shubh2-0.github.io",
+        "stars": 27,
+        "description": "This personal portfolio website, built using HTML, CSS, and JavaScript, includes home, projects, about, and contact sections. Projects are presented with descriptions to highlight the creator's work.",
+        "language": "HTML",
+        "topics": [
+          "backgroundvideo",
+          "css",
+          "css3",
+          "font-awesome",
+          "github",
+          "html",
+          "javascript",
+          "portfolio",
+          "portfolio-website",
+          "responsive-layout",
+          "responsive-web-design",
+          "resume",
+          "vscode"
+        ],
+        "why": "found at 27 stars. the definition of under the radar.",
+        "tags": [
+          "tools"
+        ],
+        "lang": "html",
+        "temp": "cold"
+      }
+    ]
+  }
+}

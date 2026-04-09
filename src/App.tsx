@@ -225,6 +225,9 @@ const HomeStickyHeader: React.FC<{
       <BlogNavLink path="/apps" className="hover-accent-text cursor-pointer transition-colors">
         APPS
       </BlogNavLink>
+      <BlogNavLink path="/undrdr" className="hover-accent-text cursor-pointer transition-colors">
+        UNDRDR
+      </BlogNavLink>
       <BlogNavLink path="/blog" className="hover-accent-text cursor-pointer transition-colors">
         BLOG
       </BlogNavLink>
@@ -296,6 +299,9 @@ const Phase0: React.FC<{
         <span>WORK</span>
         <BlogNavLink path="/apps" className="hover-accent-text cursor-pointer transition-colors">
           APPS
+        </BlogNavLink>
+        <BlogNavLink path="/undrdr" className="hover-accent-text cursor-pointer transition-colors">
+          UNDRDR
         </BlogNavLink>
         <BlogNavLink path="/blog" className="hover-accent-text cursor-pointer transition-colors">
           BLOG
@@ -720,7 +726,7 @@ const BlogShell: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   useSmoothScroll(wrapperRef, contentRef);
 
   return (
-    <div ref={wrapperRef} className="blog-shell relative h-screen overflow-y-auto bg-[#0a0a0a] font-mono text-gray-100 dotted-bg">
+    <div ref={wrapperRef} className="blog-shell relative min-h-[100dvh] overflow-y-auto bg-[#0a0a0a] font-mono text-gray-100 dotted-bg">
       <div className="crt-overlay" />
       <div ref={contentRef} className="relative z-10 p-6 md:p-12">{children}</div>
     </div>
@@ -749,7 +755,110 @@ const BlogIndex: React.FC<{ theme: ThemeName; onToggleTheme: () => void }> = ({ 
         </p>
         <p className="accent-text-soft mt-6 text-sm transition-colors group-hover:text-white">open post →</p>
       </BlogNavLink>
+
+      <BlogNavLink
+        path="/blog/5-github-tools-that-ship"
+        className="group blog-index-entry accent-border block bg-transparent p-8 transition-all duration-300 hover-accent-border-strong"
+      >
+        <p className="mb-3 text-xs uppercase tracking-[0.35em] text-gray-300">Thursday, April 3, 2026</p>
+        <h2 className="mb-3 font-display text-3xl tracking-tighter text-gray-100 md:text-5xl">5 GitHub tools that actually ship</h2>
+        <p className="max-w-3xl leading-relaxed text-gray-100">
+          Five open-source projects that caught my eye this week — from AI dev tools to workflow automations. No fluff.
+        </p>
+        <p className="accent-text-soft mt-6 text-sm transition-colors group-hover:text-white">open post →</p>
+      </BlogNavLink>
     </div>
+  </BlogShell>
+);
+
+const BlogPostGithubTools: React.FC<{ theme: ThemeName; onToggleTheme: () => void }> = ({ theme, onToggleTheme }) => (
+  <BlogShell>
+    <HomeStickyHeader theme={theme} onToggleTheme={onToggleTheme} workHref="/" aboutHref="/" />
+
+    <article className="blog-article w-full">
+      <nav className="mb-8">
+        <BlogNavLink path="/blog" className="accent-text-soft transition-colors hover:text-white">
+          ← back to blog
+        </BlogNavLink>
+      </nav>
+      <div className="blog-hero mb-12 flex flex-col items-center text-center">
+        <p className="mb-4 text-sm text-gray-300">Thursday, April 3, 2026</p>
+        <div className="mb-6 flex flex-wrap justify-center gap-2 text-xs uppercase tracking-[0.3em] text-gray-300">
+          <span>github</span>
+          <span>tools</span>
+          <span>dev</span>
+          <span>macos</span>
+          <span>ai</span>
+        </div>
+        <h1 className="mb-6 font-display text-4xl leading-none tracking-tighter text-gray-100 md:text-7xl">5 GitHub tools that actually ship</h1>
+        <p className="max-w-4xl text-lg leading-relaxed text-gray-100 md:text-xl">
+          five open-source projects that caught my eye this week — from AI dev tools to workflow automations. no fluff.
+        </p>
+      </div>
+
+      <div className="max-w-4xl space-y-10 text-base leading-8 text-gray-100">
+        <p>These landed in my feed this week. Real projects, worth your time.</p>
+
+        <section className="blog-section">
+          <div className="mb-4 flex flex-wrap items-center gap-3">
+            <h2 className="font-display text-3xl tracking-tighter text-gray-100">1. Pearcleaner</h2>
+            <a href="https://github.com/alienator88/Pearcleaner" target="_blank" rel="noopener noreferrer" className="accent-chip px-2 py-1 text-xs transition-colors">
+              [OPEN]
+            </a>
+          </div>
+          <p>A free, source-available macOS app cleaner built in Swift. 12K+ stars for a reason — it actually works.</p>
+          <p className="mt-4"><strong className="font-bold text-gray-100">Why it matters:</strong> App cleaners on macOS are usually sketchy, paid, or both. This one's open-source, actively maintained, and doesn't try to upsell you every three clicks.</p>
+        </section>
+
+        <section className="blog-section">
+          <div className="mb-4 flex flex-wrap items-center gap-3">
+            <h2 className="font-display text-3xl tracking-tighter text-gray-100">2. scarf</h2>
+            <a href="https://github.com/awizemann/scarf" target="_blank" rel="noopener noreferrer" className="accent-chip px-2 py-1 text-xs transition-colors">
+              [OPEN]
+            </a>
+          </div>
+          <p>Native macOS GUI companion for the Hermes AI agent — dashboard, session browser, activity feed, embedded terminal chat, memory editor, and more.</p>
+          <p className="mt-4"><strong className="font-bold text-gray-100">Why it matters:</strong> Most AI tools live in the browser. This one's native SwiftUI, purpose-built for Hermes, and respects your system. The kind of tool that makes you rethink how you interact with AI agents.</p>
+        </section>
+
+        <section className="blog-section">
+          <div className="mb-4 flex flex-wrap items-center gap-3">
+            <h2 className="font-display text-3xl tracking-tighter text-gray-100">3. CodexMonitor</h2>
+            <a href="https://github.com/Dimillian/CodexMonitor" target="_blank" rel="noopener noreferrer" className="accent-chip px-2 py-1 text-xs transition-colors">
+              [OPEN]
+            </a>
+          </div>
+          <p>An app to monitor the (Codex) situation. Built with TypeScript and Tauri, supports macOS and Linux.</p>
+          <p className="mt-4"><strong className="font-bold text-gray-100">Why it matters:</strong> 3.4K stars for a monitoring tool says something about OpenAI's Codex launch. This reads the situation so you don't have to. Clean UI, cross-platform, practical.</p>
+        </section>
+
+        <section className="blog-section">
+          <div className="mb-4 flex flex-wrap items-center gap-3">
+            <h2 className="font-display text-3xl tracking-tighter text-gray-100">4. fazm</h2>
+            <a href="https://github.com/mediar-ai/fazm" target="_blank" rel="noopener noreferrer" className="accent-chip px-2 py-1 text-xs transition-colors">
+              [OPEN]
+            </a>
+          </div>
+          <p>Fazm Desktop for macOS. Swift-based, coming from the mediar-ai team.</p>
+          <p className="mt-4"><strong className="font-bold text-gray-100">Why it matters:</strong> Early days (114 stars) but the focus is right — a desktop-native AI experience that doesn't feel like a web wrapper. Worth watching.</p>
+        </section>
+
+        <section className="blog-section">
+          <div className="mb-4 flex flex-wrap items-center gap-3">
+            <h2 className="font-display text-3xl tracking-tighter text-gray-100">5. vibetunnel</h2>
+            <a href="https://github.com/amantus-ai/vibetunnel" target="_blank" rel="noopener noreferrer" className="accent-chip px-2 py-1 text-xs transition-colors">
+              [OPEN]
+            </a>
+          </div>
+          <p>Turn any browser into your terminal & command your agents on the go. 4.3K stars, TypeScript-based.</p>
+          <p className="mt-4"><strong className="font-bold text-gray-100">Why it matters:</strong> The "vibe coding" movement is real, and this tool nails the workflow — browser-as-terminal, remote control, agent management from anywhere. Clean site at vt.sh too.</p>
+        </section>
+
+        <section className="blog-section">
+          <p className="italic opacity-70">More where this came from. Follow the repo.</p>
+        </section>
+      </div>
+    </article>
   </BlogShell>
 );
 
@@ -995,7 +1104,7 @@ const HomeExperience: React.FC<{ theme: ThemeName; onToggleTheme: () => void }> 
 
   return (
     <div
-      className="relative h-screen w-full overflow-hidden bg-black selection:bg-indigo-500/30"
+      className="relative h-[100dvh] w-full overflow-hidden bg-black selection:bg-indigo-500/30"
       style={{
         '--mouse-x': mousePos.x,
         '--mouse-y': mousePos.y,
@@ -1072,14 +1181,200 @@ export default function App() {
         <BlogIndex theme={theme} onToggleTheme={cycleTheme} />
       ) : path === '/blog/three-tools-that-run-my-life' ? (
         <BlogPostThreeTools theme={theme} onToggleTheme={cycleTheme} />
+      ) : path === '/blog/5-github-tools-that-ship' ? (
+        <BlogPostGithubTools theme={theme} onToggleTheme={cycleTheme} />
       ) : path === '/apps' ? (
         <AppsPage theme={theme} onToggleTheme={cycleTheme} />
+      ) : path === '/undrdr' ? (
+        <UndrdrPage theme={theme} onToggleTheme={cycleTheme} />
       ) : (
         <HomeExperience theme={theme} onToggleTheme={cycleTheme} />
       )}
     </div>
   );
 }
+type UndrdrRepo = {
+  org: string;
+  name: string;
+  url: string;
+  stars: number;
+  description: string;
+  language: string | null;
+  topics: string[];
+  why: string;
+  tags: string[];
+  lang: string;
+  temp: string;
+};
+
+type UndrdrData = {
+  week: number;
+  year: number;
+  generated_at: string;
+  repos: {
+    boss: UndrdrRepo;
+    hot: UndrdrRepo[];
+    warm: UndrdrRepo[];
+    cold: UndrdrRepo[];
+  };
+};
+
+const TEMP_META: Record<string, { label: string; border: string; bg: string; text: string; glow: string }> = {
+  boss: { label: 'BOSS', border: 'var(--accent-border-strong)', bg: 'var(--accent-900)', text: 'var(--accent-300)', glow: 'var(--accent-shadow)' },
+  hot: { label: 'HOT', border: 'rgba(239, 68, 68, 0.50)', bg: 'rgba(127, 29, 29, 0.18)', text: '#fca5a5', glow: 'rgba(239, 68, 68, 0.22)' },
+  warm: { label: 'WARM', border: 'rgba(245, 158, 11, 0.40)', bg: 'rgba(120, 53, 15, 0.15)', text: '#fcd34d', glow: 'rgba(245, 158, 11, 0.18)' },
+  cold: { label: 'COLD', border: 'rgba(56, 189, 248, 0.35)', bg: 'rgba(12, 74, 110, 0.15)', text: '#7dd3fc', glow: 'rgba(56, 189, 248, 0.15)' },
+};
+
+const LANG_COLORS: Record<string, string> = {
+  typescript: '#3178c6', javascript: '#f1e05a', python: '#3572a5', rust: '#dea584',
+  swift: '#f05138', go: '#00add8', ruby: '#701516', java: '#b07219', c: '#555555',
+  'c++': '#f34b7d', 'c#': '#178600', kotlin: '#a97bff', dart: '#00b4ab', html: '#e34c26',
+  css: '#563d7c', shell: '#89e051', zig: '#ec915c', scala: '#c22d40', elixir: '#6e4a7e',
+  haskell: '#5e5086', lua: '#000080', r: '#198ce7', vue: '#41b883', svelte: '#ff3e00',
+};
+
+const UndrdrRepoCard: React.FC<{ repo: UndrdrRepo; temp: string }> = ({ repo, temp }) => {
+  const meta = TEMP_META[temp] || TEMP_META.cold;
+  const langColor = LANG_COLORS[repo.lang] || '#8b949e';
+
+  return (
+    <a
+      href={repo.url}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="block rounded-md bg-[#141419] px-3.5 py-3 transition-colors duration-150 hover:bg-[#1a1a22]"
+    >
+      <div className="mb-1 flex items-center gap-2">
+        <span
+          className="text-[8px] font-bold tracking-widest uppercase"
+          style={{ color: meta.text }}
+        >
+          {meta.label}
+        </span>
+        <span className="text-[9px] text-[#777]">★{repo.stars}</span>
+        <span className="ml-auto flex items-center gap-1 text-[9px] text-[#777]">
+          <span className="inline-block h-1.5 w-1.5 rounded-full" style={{ background: langColor }} />
+          {repo.lang || '—'}
+        </span>
+      </div>
+      <h3 className="font-display text-sm tracking-tight text-[#eee] leading-snug">
+        {repo.name}
+      </h3>
+      <p className="mt-1 text-[10px] text-[#999] leading-relaxed line-clamp-2">
+        {repo.description}
+      </p>
+      <p className="mt-1 text-[10px] text-[#666] italic">
+        {repo.why}
+      </p>
+    </a>
+  );
+};
+
+const UndrdrPage: React.FC<{ theme: ThemeName; onToggleTheme: () => void }> = ({ theme, onToggleTheme }) => {
+  const [data, setData] = useState<UndrdrData | null>(null);
+  const [history, setHistory] = useState<UndrdrData[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [showArchive, setShowArchive] = useState(false);
+
+  useEffect(() => {
+    fetch('/assets/data/undrdr.json')
+      .then((r) => r.json())
+      .then((d) => { setData(d); setLoading(false); })
+      .catch(() => setLoading(false));
+    fetch('/assets/data/undrdr-history.json')
+      .then((r) => r.json())
+      .then((h) => setHistory(h.map((w: any) => w.repos ? w : { week: w.week, year: w.year, repos: { boss: w.boss, hot: w.hot, warm: w.warm, cold: w.cold } })))
+      .catch(() => {});
+  }, []);
+
+  const allRepos = data ? [
+    ...(data.repos.boss ? [{ repo: data.repos.boss, temp: 'boss' as string }] : []),
+    ...data.repos.hot.map((r) => ({ repo: r, temp: 'hot' as string })),
+    ...data.repos.warm.map((r) => ({ repo: r, temp: 'warm' as string })),
+    ...data.repos.cold.map((r) => ({ repo: r, temp: 'cold' as string })),
+  ] : [];
+
+  return (
+    <BlogShell>
+      <HomeStickyHeader theme={theme} onToggleTheme={onToggleTheme} workHref="/" aboutHref="/" />
+
+      <div className="w-full">
+        <div className="mb-6 flex items-center gap-5">
+          <img
+            src="/undrdr-icon.png"
+            alt="UNDRDR"
+            className="h-14 w-14 rounded-xl object-contain md:h-16 md:w-16"
+          />
+          <div>
+            <p className="accent-text-soft mb-1 text-[10px]">kika@portfolio:~$ ls undrdr/</p>
+            <h1 className="glitch-wrapper glitch-p0 font-display text-5xl tracking-tighter text-gray-100 md:text-7xl" data-text="undrdr.">
+              undrdr.
+            </h1>
+          </div>
+        </div>
+        <p className="mb-3 max-w-3xl text-base leading-relaxed text-gray-200 md:text-lg">
+          under the radar. github repos under 1k stars that deserve more eyes. curated weekly.
+        </p>
+        {data && (
+          <p className="accent-text mb-8 text-xs tracking-[0.2em]">
+            week {data.week} — {data.year} · {allRepos.length} repos
+          </p>
+        )}
+
+        {loading ? (
+          <div className="flex items-center gap-3 py-20 text-sm text-gray-400">
+            <span className="blink h-4 w-3 accent-bg" /> scanning repos...
+          </div>
+        ) : data ? (
+          <div className="grid grid-cols-2 gap-2 md:grid-cols-3 lg:grid-cols-4">
+            {allRepos.map(({ repo, temp }) => (
+              <UndrdrRepoCard key={repo.url} repo={repo} temp={temp} />
+            ))}
+          </div>
+        ) : (
+          <p className="text-gray-400">no data available. check back soon.</p>
+        )}
+
+        {history.length > 1 && (
+          <div className="mt-12">
+            <button
+              type="button"
+              onClick={() => setShowArchive(!showArchive)}
+              className="accent-text text-xs tracking-[0.2em] transition-opacity hover:opacity-70"
+            >
+              {showArchive ? '↑ less' : '↓ show more'}
+            </button>
+
+            {showArchive && history.slice(1).map((week) => {
+              const weekRepos = [
+                ...(week.repos.boss ? [{ repo: week.repos.boss, temp: 'boss' as string }] : []),
+                ...week.repos.hot.map((r) => ({ repo: r, temp: 'hot' as string })),
+                ...week.repos.warm.map((r) => ({ repo: r, temp: 'warm' as string })),
+                ...week.repos.cold.map((r) => ({ repo: r, temp: 'cold' as string })),
+              ];
+              return (
+                <div key={`w${week.week}`} className="mt-10">
+                  <p className="mb-3 text-[10px] tracking-[0.2em] text-[#555]">
+                    week {week.week} — {week.year} · {weekRepos.length} repos
+                  </p>
+                  <div className="grid grid-cols-2 gap-2 md:grid-cols-3 lg:grid-cols-4">
+                    {weekRepos.map(({ repo, temp }) => (
+                      <UndrdrRepoCard key={repo.url} repo={repo} temp={temp} />
+                    ))}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        )}
+
+        <div className="flex h-20 items-center justify-center text-xs text-gray-500">EOF</div>
+      </div>
+    </BlogShell>
+  );
+};
+
 const AppsPage: React.FC<{ theme: ThemeName; onToggleTheme: () => void }> = ({ theme, onToggleTheme }) => {
   const apps = [
     {

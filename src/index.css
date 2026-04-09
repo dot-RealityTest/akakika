@@ -20,7 +20,11 @@
 body {
   background-color: #050505;
   color: #ffffff;
-  overflow: hidden;
+  overflow-x: hidden;
+}
+
+html {
+  height: -webkit-fill-available;
 }
 
 .accent-text { color: var(--accent-300); }
