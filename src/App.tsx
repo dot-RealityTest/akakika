@@ -1283,13 +1283,19 @@ const UndrdrRepoCard: React.FC<{ repo: UndrdrRepo; temp: string }> = ({ repo, te
 
 const UndrdrPage: React.FC<{ theme: ThemeName; onToggleTheme: () => void }> = ({ theme, onToggleTheme }) => {
   const [data, setData] = useState<UndrdrData | null>(null);
+  const [history, setHistory] = useState<UndrdrData[]>([]);
   const [loading, setLoading] = useState(true);
+  const [showArchive, setShowArchive] = useState(false);
 
   useEffect(() => {
     fetch('/assets/data/undrdr.json')
       .then((r) => r.json())
       .then((d) => { setData(d); setLoading(false); })
       .catch(() => setLoading(false));
+    fetch('/assets/data/undrdr-history.json')
+      .then((r) => r.json())
+      .then((h) => setHistory(h.map((w: any) => w.repos ? w : { week: w.week, year: w.year, repos: { boss: w.boss, hot: w.hot, warm: w.warm, cold: w.cold } })))
+      .catch(() => {});
   }, []);
 
   const allRepos = data ? [
@@ -1338,6 +1344,39 @@ const UndrdrPage: React.FC<{ theme: ThemeName; onToggleTheme: () => void }> = ({
           </div>
         ) : (
           <p className="text-gray-400">no data available. check back soon.</p>
+        )}
+
+        {history.length > 0 && (
+          <div className="mt-12">
+            <button
+              type="button"
+              onClick={() => setShowArchive(!showArchive)}
+              className="accent-text text-xs tracking-[0.2em] transition-opacity hover:opacity-70"
+            >
+              {showArchive ? '↑ less' : '↓ show more'}
+            </button>
+
+            {showArchive && history.map((week) => {
+              const weekRepos = [
+                ...(week.repos.boss ? [{ repo: week.repos.boss, temp: 'boss' as string }] : []),
+                ...week.repos.hot.map((r) => ({ repo: r, temp: 'hot' as string })),
+                ...week.repos.warm.map((r) => ({ repo: r, temp: 'warm' as string })),
+                ...week.repos.cold.map((r) => ({ repo: r, temp: 'cold' as string })),
+              ];
+              return (
+                <div key={`w${week.week}`} className="mt-10">
+                  <p className="mb-3 text-[10px] tracking-[0.2em] text-[#555]">
+                    week {week.week} — {week.year} · {weekRepos.length} repos
+                  </p>
+                  <div className="grid grid-cols-2 gap-2 md:grid-cols-3 lg:grid-cols-4">
+                    {weekRepos.map(({ repo, temp }) => (
+                      <UndrdrRepoCard key={repo.url} repo={repo} temp={temp} />
+                    ))}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
         )}
 
         <div className="flex h-20 items-center justify-center text-xs text-gray-500">EOF</div>

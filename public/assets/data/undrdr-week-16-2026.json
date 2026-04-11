@@ -1,0 +1,312 @@
+{
+  "week": 16,
+  "year": 2026,
+  "repos": {
+    "boss": {
+      "org": "mediar-ai",
+      "name": "fazm",
+      "description": "Fazm Desktop for macOS. Desktop-native AI experience that doesn't feel like a web wrapper.",
+      "url": "https://github.com/mediar-ai/fazm",
+      "stars": 114,
+      "temp": "hot",
+      "lang": "swift",
+      "tags": [
+        "macos",
+        "ai",
+        "desktop"
+      ],
+      "why": "early days. worth watching. could be something."
+    },
+    "hot": [
+      {
+        "org": "awizemann",
+        "name": "scarf",
+        "description": "Native macOS GUI companion for the Hermes AI agent \u2014 dashboard, session browser, activity feed, embedded terminal.",
+        "url": "https://github.com/awizemann/scarf",
+        "stars": 42,
+        "temp": "hot",
+        "lang": "swift",
+        "tags": [
+          "macos",
+          "ai",
+          "agents"
+        ],
+        "why": "respects your system. built for hermes. native swiftui."
+      },
+      {
+        "org": "Dimillian",
+        "name": "CodexMonitor",
+        "description": "Monitor the (Codex) situation. Clean Tauri app, cross-platform.",
+        "url": "https://github.com/Dimillian/CodexMonitor",
+        "stars": 3441,
+        "temp": "hot",
+        "lang": "typescript",
+        "tags": [
+          "ai",
+          "codex",
+          "tools"
+        ],
+        "why": "reads the situation so you don't have to."
+      },
+      {
+        "org": "sxyazi",
+        "name": "yazi",
+        "description": "Blazing fast terminal file manager written in Rust. Async I/O, image previews, code syntax.",
+        "url": "https://github.com/sxyazi/yazi",
+        "stars": 912,
+        "temp": "hot",
+        "lang": "rust",
+        "tags": [
+          "terminal",
+          "files",
+          "rust"
+        ],
+        "why": "rust+async+terminals. what did you expect except fast?"
+      },
+      {
+        "org": "777genius",
+        "name": "claude-notifications-go",
+        "description": "Cross-platform smart notifications plugin for Claude Code. 6 types. Click-to-focus.",
+        "url": "https://github.com/777genius/claude-notifications-go",
+        "stars": 458,
+        "temp": "hot",
+        "lang": "go",
+        "tags": [
+          "ai",
+          "macos",
+          "tools"
+        ],
+        "why": "stops you from opening another browser tab."
+      }
+    ],
+    "warm": [
+      {
+        "org": "alienator88",
+        "name": "Pearcleaner",
+        "description": "A free, source-available macOS app cleaner. Actually works.",
+        "url": "https://github.com/alienator88/Pearcleaner",
+        "stars": 12136,
+        "temp": "warm",
+        "lang": "swift",
+        "tags": [
+          "macos",
+          "tools",
+          "maintenance"
+        ],
+        "why": "app cleaners are usually sketchy. this one's open-source."
+      },
+      {
+        "org": "vaayne",
+        "name": "mori",
+        "description": "Native macOS workspace terminal organized around Projects and Worktrees, powered by tmux and libghostty.",
+        "url": "https://github.com/vaayne/mori",
+        "stars": 164,
+        "temp": "warm",
+        "lang": "swift",
+        "tags": [
+          "macos",
+          "terminal",
+          "swift"
+        ],
+        "why": "no electron. no webview. just swift."
+      },
+      {
+        "org": "maneatingape",
+        "name": "advent-of-code-rust",
+        "description": "Blazing fast Rust solutions for every Advent of Code puzzle from 2015 to 2025.",
+        "url": "https://github.com/maneatingape/advent-of-code-rust",
+        "stars": 529,
+        "temp": "warm",
+        "lang": "rust",
+        "tags": [
+          "rust",
+          "algorithms",
+          "competitive"
+        ],
+        "why": "rust. you know what that means. fast."
+      },
+      {
+        "org": "ad-si",
+        "name": "Transity",
+        "description": "Keep track of your \ud83d\udcb5, \ud83d\udd58, \ud83d\udc16, \ud83d\udc04, \ud83c\udf7b on your command line.",
+        "url": "https://github.com/ad-si/Transity",
+        "stars": 651,
+        "temp": "warm",
+        "lang": "rust",
+        "tags": [
+          "terminal",
+          "accounting",
+          "tools"
+        ],
+        "why": "written in rust. probably correct and probably fast."
+      },
+      {
+        "org": "muesli",
+        "name": "duf",
+        "description": "Disk Usage/Free Utility. Modern, pretty, with graphs. Finally.",
+        "url": "https://github.com/muesli/duf",
+        "stars": 678,
+        "temp": "warm",
+        "lang": "go",
+        "tags": [
+          "terminal",
+          "system",
+          "tools"
+        ],
+        "why": "df -h is fine. this is actually useful."
+      },
+      {
+        "org": "zsh-users",
+        "name": "zsh-syntax-highlighting",
+        "description": "Fish-like syntax highlighting for zsh. See your mistakes before you execute them.",
+        "url": "https://github.com/zsh-users/zsh-syntax-highlighting",
+        "stars": 890,
+        "temp": "warm",
+        "lang": "shell",
+        "tags": [
+          "shell",
+          "zsh",
+          "terminal"
+        ],
+        "why": "redirection mistakes are history. literally."
+      }
+    ],
+    "cold": [
+      {
+        "org": "hashicorp",
+        "name": "terraform-provider-google-beta",
+        "description": "Terraform Provider for Google Cloud Platform (Beta)",
+        "url": "https://github.com/hashicorp/terraform-provider-google-beta",
+        "stars": 306,
+        "temp": "cold",
+        "lang": "go",
+        "tags": [
+          "terraform",
+          "gcp",
+          "tools"
+        ],
+        "why": "does one thing. does it. doesn't get in the way."
+      },
+      {
+        "org": "mr-tron",
+        "name": "base58",
+        "description": "Fast implementation of base58 encoding on golang.",
+        "url": "https://github.com/mr-tron/base58",
+        "stars": 175,
+        "temp": "cold",
+        "lang": "go",
+        "tags": [
+          "crypto",
+          "encoding",
+          "tools"
+        ],
+        "why": "exists quietly. works consistently. that's the point."
+      },
+      {
+        "org": "Nish16-py",
+        "name": "Tmx-theme",
+        "description": "Powerlevel10k Zsh prompt \u26a1 Astronvim IDE configuration \ud83d\udda5\ufe0f Custom Nerd Fonts integration \ud83c\udfa8",
+        "url": "https://github.com/Nish16-py/Tmx-theme",
+        "stars": 11,
+        "temp": "cold",
+        "lang": "shell",
+        "tags": [
+          "terminal",
+          "neovim",
+          "config"
+        ],
+        "why": "neovim setup that doesn't require a lua config degree."
+      },
+      {
+        "org": "FLAK-ZOSO",
+        "name": "Sista",
+        "description": "Object-oriented library for making terminal videogames and animations.",
+        "url": "https://github.com/FLAK-ZOSO/Sista",
+        "stars": 6,
+        "temp": "cold",
+        "lang": "c++",
+        "tags": [
+          "terminal",
+          "games",
+          "c++"
+        ],
+        "why": "terminal games are back. this is how."
+      },
+      {
+        "org": "GiGurra",
+        "name": "boa",
+        "description": "Opinionated declarative CLI args, ENV vars and config files.",
+        "url": "https://github.com/GiGurra/boa",
+        "stars": 12,
+        "temp": "cold",
+        "lang": "go",
+        "tags": [
+          "cli",
+          "config",
+          "go"
+        ],
+        "why": "cli-first. no web interface. respects your terminal."
+      },
+      {
+        "org": "charmbracelet",
+        "name": "melt",
+        "description": "Backup and restore your Charm Cloud data.",
+        "url": "https://github.com/charmbracelet/melt",
+        "stars": 78,
+        "temp": "cold",
+        "lang": "go",
+        "tags": [
+          "backup",
+          "tools",
+          "cli"
+        ],
+        "why": "small tool. solves backup anxiety. that's it."
+      },
+      {
+        "org": "rs",
+        "name": "curlie",
+        "description": "The power of curl, the ease of use of httpie. Best of both worlds.",
+        "url": "https://github.com/rs/curlie",
+        "stars": 234,
+        "temp": "cold",
+        "lang": "go",
+        "tags": [
+          "http",
+          "cli",
+          "api"
+        ],
+        "why": "curl syntax is a memory test. this is human-readable."
+      },
+      {
+        "org": "astral-sh",
+        "name": "uv",
+        "description": "An extremely fast Python package installer and resolver, written in Rust.",
+        "url": "https://github.com/astral-sh/uv",
+        "stars": 4567,
+        "temp": "cold",
+        "lang": "rust",
+        "tags": [
+          "python",
+          "packaging",
+          "rust"
+        ],
+        "why": "pip install is archaeology. uv is the present."
+      },
+      {
+        "org": "sharkdp",
+        "name": "fd",
+        "description": "A simple, fast and user-friendly alternative to 'find'.",
+        "url": "https://github.com/sharkdp/fd",
+        "stars": 3456,
+        "temp": "cold",
+        "lang": "rust",
+        "tags": [
+          "terminal",
+          "search",
+          "tools"
+        ],
+        "why": "find is a regex exam. this is a tool."
+      }
+    ]
+  }
+}
