@@ -1482,6 +1482,20 @@ const GoodNewsPage: React.FC<{ theme: ThemeName; onToggleTheme: () => void }> = 
 const AppsPage: React.FC<{ theme: ThemeName; onToggleTheme: () => void }> = ({ theme, onToggleTheme }) => {
   const apps = [
     {
+      name: 'BreakPoint',
+      url: 'https://akakika.com/breakpoint/',
+      image: 'https://akakika.com/breakpoint/macos_app_icon.png',
+      imageAlt: 'BreakPoint app icon',
+      blurb: "One key press captures your entire computer state — running apps, clipboard, screen context — and turns it into a structured Doom's Moment you can pick up later.",
+    },
+    {
+      name: 'LocalhostWatcher',
+      url: 'https://akakika.com/localhostwatcher/',
+      image: 'https://akakika.com/localhostwatcher/assets/app-icon.png',
+      imageAlt: 'LocalhostWatcher app icon',
+      blurb: 'Stop guessing which localhost process just silently failed. Swift-built macOS menu bar utility that detects, monitors, and restores your local services.',
+    },
+    {
       name: "Mochi's Daily Quest",
       url: 'https://akakika.com/mochi/',
       image: 'https://akakika.com/mochi/assets/egg_idle.gif',
@@ -1515,20 +1529,6 @@ const AppsPage: React.FC<{ theme: ThemeName; onToggleTheme: () => void }> = ({ t
       image: 'https://akakika.com/resq/resq-icon.png',
       imageAlt: 'RESQ app icon',
       blurb: 'Rescue messy text into clean Markdown. Turn OCR scraps, rough notes, and semi-structured text into clean Markdown with a local-first workflow. No cloud. No friction.',
-    },
-    {
-      name: 'LocalhostWatcher',
-      url: 'https://akakika.com/localhostwatcher/',
-      image: 'https://akakika.com/localhostwatcher/assets/app-icon.png',
-      imageAlt: 'LocalhostWatcher app icon',
-      blurb: 'Stop guessing which localhost process just silently failed. Swift-built macOS menu bar utility that detects, monitors, and restores your local services.',
-    },
-    {
-      name: 'BreakPoint',
-      url: 'https://akakika.com/breakpoint/',
-      image: 'https://akakika.com/breakpoint/macos_app_icon.png',
-      imageAlt: 'BreakPoint app icon',
-      blurb: "One key press captures your entire computer state — running apps, clipboard, screen context — and turns it into a structured Doom's Moment you can pick up later.",
     },
   ];
 
