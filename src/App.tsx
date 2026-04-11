@@ -1496,6 +1496,13 @@ const AppsPage: React.FC<{ theme: ThemeName; onToggleTheme: () => void }> = ({ t
       blurb: 'Stop guessing which localhost process just silently failed. Swift-built macOS menu bar utility that detects, monitors, and restores your local services.',
     },
     {
+      name: 'DGMD',
+      url: 'https://akakika.com/dgmd/',
+      image: 'https://akakika.com/dgmd/assets/app-icon.png',
+      imageAlt: 'DGMD app icon',
+      blurb: 'Drop the interface. Get the system. Turns screenshots into build-ready design.md files and style prompts so AI coding tools can rebuild interfaces with structure and fidelity.',
+    },
+    {
       name: "Mochi's Daily Quest",
       url: 'https://akakika.com/mochi/',
       image: 'https://akakika.com/mochi/assets/egg_idle.gif',

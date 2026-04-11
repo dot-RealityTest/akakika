@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark light">
+  <title>DGMD — Drop the Interface. Get the System.</title>
+  <meta
+    name="description"
+    content="DGMD turns screenshots into design.md files and style prompts so AI coding tools can rebuild interfaces with structure, speed, and fidelity."
+  >
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap"
+  >
+  <link rel="stylesheet" href="landing.css">
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <div class="page-shell">
+    <header class="site-header">
+      <div class="container nav-row">
+        <a class="brand" href="#top" aria-label="DGMD home">
+          <img
+            src="assets/app-icon.png"
+            alt="DGMD app icon"
+            class="brand-mark"
+            width="1550"
+            height="1561"
+            fetchpriority="high"
+          >
+          <span class="brand-copy">
+            <span class="brand-name">DGMD</span>
+            <span class="brand-tag">Design.md Generator</span>
+          </span>
+        </a>
+
+        <nav class="site-nav" aria-label="Primary">
+          <a href="#workflow">Workflow</a>
+          <a href="#outputs">Outputs</a>
+          <a href="#providers">Providers</a>
+        </nav>
+
+        <div class="header-links">
+          <a
+            class="header-link"
+            href="https://github.com/dot-RealityTest/dgmd"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            GitHub
+          </a>
+          <a
+            class="button button-primary button-download"
+            href="https://github.com/dot-RealityTest/dgmd/releases/latest/download/DGMD-1.0.0-arm64.dmg"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Download for macOS
+          </a>
+        </div>
+
+      </div>
+    </header>
+
+    <main id="main-content">
+      <section class="hero-section" id="top">
+        <div class="container hero-layout">
+          <div class="hero-copy" data-reveal>
+            <p class="eyebrow">Screenshot in. System out.</p>
+            <h1>
+              Turn UI shots into
+              <span class="headline-contrast">design.md + prompt.</span>
+            </h1>
+            <p class="hero-lede">
+              DGMD turns a screenshot into a structured <code>design.md</code>, a style prompt,
+              and a combined markdown reference.
+            </p>
+
+            <div class="hero-actions">
+              <a
+                class="button button-primary"
+                href="https://github.com/dot-RealityTest/dgmd/releases/latest/download/DGMD-1.0.0-arm64.dmg"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Download for macOS
+              </a>
+              <a
+                class="button button-secondary"
+                href="https://github.com/dot-RealityTest/dgmd"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                View GitHub
+              </a>
+            </div>
+
+            <ul class="hero-points" aria-label="Product highlights">
+              <li>Drop or paste any screenshot</li>
+              <li>Use it with Codex, Claude, Cursor, Gemini, or Ollama</li>
+            </ul>
+          </div>
+
+          <div class="hero-stage" aria-label="DGMD product preview" data-reveal>
+            <div class="stage-card">
+              <div class="stage-header">
+                <span class="stage-pill">camera-to-code</span>
+                <span class="stage-status">menubar utility</span>
+              </div>
+
+              <div class="stage-visual">
+                <div class="camera-core">
+                  <img src="assets/app-icon.png" alt="DGMD app icon" class="stage-icon" width="1550" height="1561">
+                </div>
+
+                <div class="stage-summary">
+                  <article class="summary-block">
+                    <p class="floating-label">design.md</p>
+                    <ul>
+                      <li><span>Colors</span><strong>tokens</strong></li>
+                      <li><span>Type</span><strong>hierarchy</strong></li>
+                      <li><span>UI</span><strong>components</strong></li>
+                      <li><span>Export</span><strong>combined md</strong></li>
+                    </ul>
+                  </article>
+
+                  <article class="summary-block">
+                    <p class="floating-label">Style Prompt</p>
+                    <p>
+                      Short rebuild direction for AI coding tools, ready to copy or save.
+                    </p>
+                  </article>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section-light" id="workflow">
+        <div class="container">
+          <div class="section-intro" data-reveal>
+            <p class="eyebrow eyebrow-dark">Workflow</p>
+            <h2>Three steps. No extra ceremony.</h2>
+            <p>
+              Capture. Analyze. Export.
+            </p>
+          </div>
+
+          <div class="steps-grid">
+            <article class="step-card" data-reveal>
+              <span class="step-index">01</span>
+              <h3>Drop the shot</h3>
+              <p>
+                Drag, browse, or paste from clipboard.
+              </p>
+            </article>
+
+            <article class="step-card" data-reveal>
+              <span class="step-index">02</span>
+              <h3>Set the rules</h3>
+              <p>
+                Choose provider, use shell-only if needed, and lock semantic colors before generation.
+              </p>
+            </article>
+
+            <article class="step-card" data-reveal>
+              <span class="step-index">03</span>
+              <h3>Ship the handoff</h3>
+              <p>
+                Copy or save <code>design.md</code>, Style Prompt, or the Combined markdown file.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section-dark" id="outputs">
+        <div class="container outputs-layout">
+          <div class="section-intro section-intro-narrow" data-reveal>
+            <p class="eyebrow">Outputs</p>
+            <h2>Three files. Ready to use.</h2>
+            <p>
+              Structure, prompt, and one merged handoff.
+            </p>
+          </div>
+
+          <div class="outputs-grid">
+            <article class="output-panel" data-reveal>
+              <header>
+                <p class="panel-kicker">Structured artifact</p>
+                <h3><code>design.md</code></h3>
+              </header>
+              <pre aria-label="Example design.md output"><code>colors:
+  primary: "#133B54"
+  background: "#F4EFE4"
+  accent: "#D3FF5F"
+
+typography:
+  display:
+    family: "Space Grotesk"
+    weight: 700
+  body:
+    family: "Space Grotesk"
+    size: 16
+
+components:
+  - glass_toolbar
+  - drop_zone
+  - result_tabs</code></pre>
+            </article>
+
+            <article class="output-panel output-panel-accent" data-reveal>
+              <header>
+                <p class="panel-kicker">Rebuild narrative</p>
+                <h3>Style Prompt</h3>
+              </header>
+              <p class="prompt-copy">
+                “Build a compact macOS menubar panel with a bold CTA, calm spacing, and a camera-led focal point.”
+              </p>
+              <ul class="prompt-list">
+                <li>Fast to paste into any coding tool</li>
+                <li>Clear enough to rebuild from</li>
+              </ul>
+            </article>
+
+            <article class="output-panel output-panel-accent" data-reveal>
+              <header>
+                <p class="panel-kicker">Merged reference</p>
+                <h3>Combined</h3>
+              </header>
+              <p class="prompt-copy">
+                One markdown export with the token file and prompt together.
+              </p>
+              <ul class="prompt-list">
+                <li>Good for docs and async review</li>
+                <li>Uses design-derived filenames</li>
+              </ul>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section-light" id="providers">
+        <div class="container">
+          <div class="section-intro" data-reveal>
+            <p class="eyebrow eyebrow-dark">Providers</p>
+            <h2>Use the model stack you already trust.</h2>
+            <p>
+              Hosted or local. Same flow.
+            </p>
+          </div>
+
+          <div class="providers-grid">
+            <article class="provider-card" data-reveal>
+              <h3>OpenAI</h3>
+              <p>Fast default.</p>
+            </article>
+            <article class="provider-card" data-reveal>
+              <h3>Anthropic</h3>
+              <p>Claude-ready.</p>
+            </article>
+            <article class="provider-card" data-reveal>
+              <h3>Gemini</h3>
+              <p>Lean setup.</p>
+            </article>
+            <article class="provider-card" data-reveal>
+              <h3>Ollama</h3>
+              <p>Local models.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-row">
+        <p>DGMD turns reference into direction.</p>
+        <p class="footer-meta">Codex, Cursor, Claude, Stitch, or Ollama.</p>
+        <div class="footer-links">
+          <a href="https://github.com/dot-RealityTest/dgmd" target="_blank" rel="noopener noreferrer">GitHub</a>
+          <a href="https://github.com/dot-RealityTest/dgmd/releases/latest/download/DGMD-1.0.0-arm64.dmg" target="_blank" rel="noopener noreferrer">Download</a>
+          <a href="#top">Back to top</a>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+</body>
+</html>
