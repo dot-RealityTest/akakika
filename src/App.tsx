@@ -658,21 +658,23 @@ const Phase1: React.FC<{
           </motion.div>
         </a>
 
-        <motion.div
-          style={{ y: yCard3, scale: card3Scale, opacity: card3Opacity, rotateZ: card3Rotate }}
-          className="accent-panel project-card group relative p-8 backdrop-blur-sm transition-all duration-300 hover:scale-[1.02] accent-panel-hover md:ml-24 md:w-2/3"
-        >
-          <div className="accent-text absolute -top-3 -left-3 bg-[#0a0a0a] px-2 text-xs">FILE_03</div>
-          <h2 className="project-title mb-4 font-display text-3xl tracking-tighter text-gray-100 md:text-5xl">BREAKPOINT</h2>
-          <p className="mb-6 max-w-2xl text-sm text-gray-200 md:text-base">
-            One trigger. Full context. Ready to walk away. Single-click context capture. Snapshots your entire computer state. AI-powered action plan instantly.
-          </p>
-          <div className="accent-text flex gap-4 text-xs">
-            <span>[MACOS]</span>
-            <span>[AI-ENGINE]</span>
-            <span>[CONTEXT-CAPTURE]</span>
-          </div>
-        </motion.div>
+        <a href="https://akakika.com/localhostwatcher/" target="_blank" rel="noopener noreferrer" className="block md:ml-24 md:w-2/3">
+          <motion.div
+            style={{ y: yCard3, scale: card3Scale, opacity: card3Opacity, rotateZ: card3Rotate }}
+            className="accent-panel project-card group relative p-8 backdrop-blur-sm transition-all duration-300 hover:scale-[1.02] accent-panel-hover"
+          >
+            <div className="accent-text absolute -top-3 -left-3 bg-[#0a0a0a] px-2 text-xs">FILE_03</div>
+            <h2 className="project-title mb-4 font-display text-3xl tracking-tighter text-gray-100 md:text-5xl">LOCALHOSTWATCHER</h2>
+            <p className="mb-6 max-w-2xl text-sm text-gray-200 md:text-base">
+              Stop guessing which localhost process just silently failed. Detects, monitors, and restores your local services from the menu bar.
+            </p>
+            <div className="accent-text flex gap-4 text-xs">
+              <span>[MACOS]</span>
+              <span>[SWIFT]</span>
+              <span>[MENU BAR]</span>
+            </div>
+          </motion.div>
+        </a>
         </div>
 
         <div id="about" className="accent-top-border relative z-10 mt-32 flex min-h-screen flex-col p-6 pt-12 pb-12 md:p-12">
@@ -1281,19 +1283,13 @@ const UndrdrRepoCard: React.FC<{ repo: UndrdrRepo; temp: string }> = ({ repo, te
 
 const UndrdrPage: React.FC<{ theme: ThemeName; onToggleTheme: () => void }> = ({ theme, onToggleTheme }) => {
   const [data, setData] = useState<UndrdrData | null>(null);
-  const [history, setHistory] = useState<UndrdrData[]>([]);
   const [loading, setLoading] = useState(true);
-  const [showArchive, setShowArchive] = useState(false);
 
   useEffect(() => {
     fetch('/assets/data/undrdr.json')
       .then((r) => r.json())
       .then((d) => { setData(d); setLoading(false); })
       .catch(() => setLoading(false));
-    fetch('/assets/data/undrdr-history.json')
-      .then((r) => r.json())
-      .then((h) => setHistory(h.map((w: any) => w.repos ? w : { week: w.week, year: w.year, repos: { boss: w.boss, hot: w.hot, warm: w.warm, cold: w.cold } })))
-      .catch(() => {});
   }, []);
 
   const allRepos = data ? [
@@ -1322,11 +1318,11 @@ const UndrdrPage: React.FC<{ theme: ThemeName; onToggleTheme: () => void }> = ({
           </div>
         </div>
         <p className="mb-3 max-w-3xl text-base leading-relaxed text-gray-200 md:text-lg">
-          under the radar. github repos under 1k stars that deserve more eyes. curated weekly.
+          under the radar. github repos under 1k stars that deserve more eyes. curated daily.
         </p>
         {data && (
           <p className="accent-text mb-8 text-xs tracking-[0.2em]">
-            week {data.week} — {data.year} · {allRepos.length} repos
+            {data.repos ? new Date(data.generated_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) : ''} · {allRepos.length} repos
           </p>
         )}
 
@@ -1342,39 +1338,6 @@ const UndrdrPage: React.FC<{ theme: ThemeName; onToggleTheme: () => void }> = ({
           </div>
         ) : (
           <p className="text-gray-400">no data available. check back soon.</p>
-        )}
-
-        {history.length > 1 && (
-          <div className="mt-12">
-            <button
-              type="button"
-              onClick={() => setShowArchive(!showArchive)}
-              className="accent-text text-xs tracking-[0.2em] transition-opacity hover:opacity-70"
-            >
-              {showArchive ? '↑ less' : '↓ show more'}
-            </button>
-
-            {showArchive && history.slice(1).map((week) => {
-              const weekRepos = [
-                ...(week.repos.boss ? [{ repo: week.repos.boss, temp: 'boss' as string }] : []),
-                ...week.repos.hot.map((r) => ({ repo: r, temp: 'hot' as string })),
-                ...week.repos.warm.map((r) => ({ repo: r, temp: 'warm' as string })),
-                ...week.repos.cold.map((r) => ({ repo: r, temp: 'cold' as string })),
-              ];
-              return (
-                <div key={`w${week.week}`} className="mt-10">
-                  <p className="mb-3 text-[10px] tracking-[0.2em] text-[#555]">
-                    week {week.week} — {week.year} · {weekRepos.length} repos
-                  </p>
-                  <div className="grid grid-cols-2 gap-2 md:grid-cols-3 lg:grid-cols-4">
-                    {weekRepos.map(({ repo, temp }) => (
-                      <UndrdrRepoCard key={repo.url} repo={repo} temp={temp} />
-                    ))}
-                  </div>
-                </div>
-              );
-            })}
-          </div>
         )}
 
         <div className="flex h-20 items-center justify-center text-xs text-gray-500">EOF</div>
@@ -1552,6 +1515,13 @@ const AppsPage: React.FC<{ theme: ThemeName; onToggleTheme: () => void }> = ({ t
       image: 'https://akakika.com/resq/resq-icon.png',
       imageAlt: 'RESQ app icon',
       blurb: 'Rescue messy text into clean Markdown. Turn OCR scraps, rough notes, and semi-structured text into clean Markdown with a local-first workflow. No cloud. No friction.',
+    },
+    {
+      name: 'LocalhostWatcher',
+      url: 'https://akakika.com/localhostwatcher/',
+      image: 'https://akakika.com/localhostwatcher/assets/app-icon.png',
+      imageAlt: 'LocalhostWatcher app icon',
+      blurb: 'Stop guessing which localhost process just silently failed. Swift-built macOS menu bar utility that detects, monitors, and restores your local services.',
     },
   ];
 
