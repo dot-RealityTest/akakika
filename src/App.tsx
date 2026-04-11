@@ -231,6 +231,9 @@ const HomeStickyHeader: React.FC<{
       <BlogNavLink path="/blog" className="hover-accent-text cursor-pointer transition-colors">
         BLOG
       </BlogNavLink>
+      <BlogNavLink path="/goodnews" className="hover-accent-text cursor-pointer transition-colors">
+        GOOD NEWS ✦
+      </BlogNavLink>
       {aboutHref ? (
         <BlogNavLink path={aboutHref} className="hover-accent-text cursor-pointer transition-colors">
           ABOUT
@@ -305,6 +308,9 @@ const Phase0: React.FC<{
         </BlogNavLink>
         <BlogNavLink path="/blog" className="hover-accent-text cursor-pointer transition-colors">
           BLOG
+        </BlogNavLink>
+        <BlogNavLink path="/goodnews" className="hover-accent-text cursor-pointer transition-colors">
+          GOOD NEWS ✦
         </BlogNavLink>
         <span>ABOUT</span>
         <ThemeToggle theme={theme} onToggle={onToggleTheme} />
@@ -1187,6 +1193,8 @@ export default function App() {
         <AppsPage theme={theme} onToggleTheme={cycleTheme} />
       ) : path === '/undrdr' ? (
         <UndrdrPage theme={theme} onToggleTheme={cycleTheme} />
+      ) : path === '/goodnews' ? (
+        <GoodNewsPage theme={theme} onToggleTheme={cycleTheme} />
       ) : (
         <HomeExperience theme={theme} onToggleTheme={cycleTheme} />
       )}
@@ -1370,6 +1378,139 @@ const UndrdrPage: React.FC<{ theme: ThemeName; onToggleTheme: () => void }> = ({
         )}
 
         <div className="flex h-20 items-center justify-center text-xs text-gray-500">EOF</div>
+      </div>
+    </BlogShell>
+  );
+};
+
+type GoodNewsData = {
+  date: string;
+  headline: string;
+  summary: string;
+  category: string;
+  source: string;
+  sourceUrl: string;
+  image: string;
+  keywords: string;
+  location: string;
+};
+
+const GoodNewsPage: React.FC<{ theme: ThemeName; onToggleTheme: () => void }> = ({ theme, onToggleTheme }) => {
+  const [data, setData] = useState<GoodNewsData | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetch('/assets/data/goodnews.json')
+      .then((r) => r.json())
+      .then(setData)
+      .catch(() => setData(null))
+      .finally(() => setLoading(false));
+  }, []);
+
+  const formatDate = (dateStr: string) => {
+    const d = new Date(dateStr + 'T00:00:00');
+    return d.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }).toLowerCase();
+  };
+
+  return (
+    <BlogShell>
+      <HomeStickyHeader theme={theme} onToggleTheme={onToggleTheme} workHref="/" aboutHref="/" />
+
+      <div className="mx-auto w-full" style={{ maxWidth: '700px', paddingTop: '12rem', paddingBottom: '8rem' }}>
+        <p className="accent-text-soft mb-4 text-xs" style={{ letterSpacing: '0.35em' }}>
+          kika@portfolio:~$ cat goodnews/today.md
+        </p>
+
+        <h1 className="glitch-wrapper font-display text-5xl tracking-tighter text-gray-100 md:text-7xl" data-text="good news.">
+          good news.
+        </h1>
+
+        <p className="mt-4 mb-12 max-w-xl text-base leading-relaxed text-gray-200 md:text-lg" style={{ letterSpacing: '0.01em' }}>
+          one story. one day. only the ones worth remembering.
+        </p>
+
+        {loading ? (
+          <div className="flex items-center gap-3 py-20">
+            <span className="blink h-5 w-3 accent-bg" />
+            <span className="accent-text-soft text-xs tracking-widest">loading...</span>
+          </div>
+        ) : !data ? (
+          <div className="py-20">
+            <p className="text-gray-500 text-sm">no story today. check back tomorrow.</p>
+          </div>
+        ) : (
+          <motion.article
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+            className="w-full"
+            style={{ display: 'flex', flexDirection: 'column', gap: '6rem' }}
+          >
+            {/* date + category */}
+            <div>
+              <p className="text-xs tracking-[0.35em] text-gray-400 uppercase">{formatDate(data.date)}</p>
+              <p className="accent-text-soft mt-1 text-xs tracking-widest">{data.category}</p>
+              {data.location && (
+                <p className="mt-1 text-xs text-gray-500">{data.location.toLowerCase()}</p>
+              )}
+            </div>
+
+            {/* headline */}
+            <div>
+              <h2 className="font-display text-3xl tracking-tighter text-gray-100 md:text-5xl" style={{ lineHeight: 1.15, fontWeight: 600 }}>
+                {data.headline.toLowerCase()}
+              </h2>
+            </div>
+
+            {/* image */}
+            {data.image && (
+              <div className="overflow-hidden rounded-md" style={{ border: '1px solid var(--accent-border)', boxShadow: '0 0 40px var(--accent-shadow)' }}>
+                <img
+                  src={data.image}
+                  alt={data.headline}
+                  className="w-full object-cover"
+                  style={{ maxHeight: '420px', filter: 'brightness(0.9) contrast(1.05)' }}
+                  loading="lazy"
+                />
+              </div>
+            )}
+
+            {/* summary */}
+            <div>
+              <p className="text-base leading-relaxed text-gray-200 md:text-lg" style={{ letterSpacing: '0.01em' }}>
+                {data.summary}
+              </p>
+            </div>
+
+            {/* source */}
+            <div className="flex items-center justify-between border-t border-gray-800 pt-6" style={{ gap: '1rem' }}>
+              <div>
+                <p className="text-xs tracking-widest text-gray-500 uppercase">source</p>
+                <a
+                  href={data.sourceUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="accent-text mt-1 text-sm transition-colors hover:text-white"
+                >
+                  {data.source.toLowerCase()} →
+                </a>
+              </div>
+              {data.keywords && (
+                <div className="text-right">
+                  <p className="text-xs tracking-widest text-gray-500 uppercase">keywords</p>
+                  <p className="mt-1 text-xs text-gray-500">{data.keywords}</p>
+                </div>
+              )}
+            </div>
+
+            {/* back link */}
+            <div className="pt-8">
+              <BlogNavLink path="/" className="accent-text text-sm transition-colors hover:text-white">
+                ← back home
+              </BlogNavLink>
+            </div>
+          </motion.article>
+        )}
       </div>
     </BlogShell>
   );
