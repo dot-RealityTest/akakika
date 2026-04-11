@@ -1503,6 +1503,13 @@ const AppsPage: React.FC<{ theme: ThemeName; onToggleTheme: () => void }> = ({ t
       blurb: 'Drop the interface. Get the system. Turns screenshots into build-ready design.md files and style prompts so AI coding tools can rebuild interfaces with structure and fidelity.',
     },
     {
+      name: 'RESQ',
+      url: 'https://akakika.com/resq/',
+      image: 'https://akakika.com/resq/icon.png',
+      imageAlt: 'RESQ app icon',
+      blurb: 'Rescue messy text into clean Markdown. Turn OCR scraps, rough notes, and semi-structured text into clean Markdown with a local-first workflow. No cloud. No friction.',
+    },
+    {
       name: "Mochi's Daily Quest",
       url: 'https://akakika.com/mochi/',
       image: 'https://akakika.com/mochi/assets/egg_idle.gif',
@@ -1529,13 +1536,6 @@ const AppsPage: React.FC<{ theme: ThemeName; onToggleTheme: () => void }> = ({ t
       image: 'https://akakika.com/folderwardrobe/folderwardrobe-icon.png',
       imageAlt: 'FolderWardrobe app icon',
       blurb: 'Dress up your folders. Customize Finder folders with colors, icons, and metadata presets.',
-    },
-    {
-      name: 'RESQ',
-      url: 'https://akakika.com/resq/',
-      image: 'https://akakika.com/resq/resq-icon.png',
-      imageAlt: 'RESQ app icon',
-      blurb: 'Rescue messy text into clean Markdown. Turn OCR scraps, rough notes, and semi-structured text into clean Markdown with a local-first workflow. No cloud. No friction.',
     },
   ];
 
