@@ -1594,7 +1594,7 @@ const AppsPage: React.FC<{ theme: ThemeName; onToggleTheme: () => void }> = ({ t
     {
       name: 'FolderWardrobe',
       url: 'https://akakika.com/folderwardrobe/',
-      image: 'https://akakika.com/folderwardrobe/folderwardrobe-icon.png',
+      image: 'https://akakika.com/folderwardrobe/icons/Image.png',
       imageAlt: 'FolderWardrobe app icon',
       blurb: 'Dress up your folders. Customize Finder folders with colors, icons, and metadata presets.',
     },
