@@ -1415,106 +1415,128 @@ const GoodNewsPage: React.FC<{ theme: ThemeName; onToggleTheme: () => void }> = 
   };
 
   return (
-    <BlogShell>
-      <HomeStickyHeader theme={theme} onToggleTheme={onToggleTheme} workHref="/" aboutHref="/" />
+    <div className="relative min-h-[100dvh] bg-[#faf7f2]">
+      {/* warm grain overlay */}
+      <div className="pointer-events-none fixed inset-0 z-50 opacity-[0.025]" style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=\'0 0 256 256\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'n\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.7\' numOctaves=\'4\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23n)\'/%3E%3C/svg%3E")' }} />
 
-      <div className="mx-auto w-full" style={{ maxWidth: '700px', paddingTop: '12rem', paddingBottom: '8rem' }}>
-        <p className="accent-text-soft mb-4 text-xs" style={{ letterSpacing: '0.35em' }}>
-          kika@portfolio:~$ cat goodnews/today.md
-        </p>
+      {/* nav */}
+      <nav className="relative z-20 flex items-center justify-between px-6 py-5 md:px-12 md:py-6">
+        <BlogNavLink path="/" className="font-serif text-lg text-[#2a2018] hover:text-[#8b5e3c] transition-colors">
+          aka kika
+        </BlogNavLink>
+        <div className="flex items-center gap-6">
+          <BlogNavLink path="/apps" className="text-sm text-[#8b7b6b] hover:text-[#2a2018] transition-colors">apps</BlogNavLink>
+          <BlogNavLink path="/blog" className="text-sm text-[#8b7b6b] hover:text-[#2a2018] transition-colors">blog</BlogNavLink>
+          <BlogNavLink path="/" className="text-sm text-[#8b7b6b] hover:text-[#2a2018] transition-colors">home</BlogNavLink>
+        </div>
+      </nav>
 
-        <h1 className="glitch-wrapper font-display text-5xl tracking-tighter text-gray-100 md:text-7xl" data-text="good news.">
-          good news.
-        </h1>
-
-        <p className="mt-4 mb-12 max-w-xl text-base leading-relaxed text-gray-200 md:text-lg" style={{ letterSpacing: '0.01em' }}>
-          one story. one day. only the ones worth remembering.
-        </p>
+      <div className="mx-auto w-full px-6 md:px-12" style={{ maxWidth: '720px' }}>
+        {/* header */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+          className="pt-16 pb-20 md:pt-24 md:pb-28"
+        >
+          <p className="mb-6 text-[11px] uppercase tracking-[0.3em] text-[#b8a694]">
+            a daily reminder
+          </p>
+          <h1 className="font-serif text-[clamp(2.8rem,7vw,5rem)] leading-[1.05] text-[#2a2018] tracking-tight" style={{ fontWeight: 400 }}>
+            good news.
+          </h1>
+          <p className="mt-5 max-w-md text-[17px] leading-[1.7] text-[#7a6b5a]" style={{ letterSpacing: '0.01em' }}>
+            one story. one day. only the ones worth remembering.
+          </p>
+        </motion.div>
 
         {loading ? (
           <div className="flex items-center gap-3 py-20">
-            <span className="blink h-5 w-3 accent-bg" />
-            <span className="accent-text-soft text-xs tracking-widest">loading...</span>
+            <div className="h-[2px] w-8 bg-[#c4b09a] animate-pulse" />
+            <span className="text-sm text-[#b8a694]">finding today's story…</span>
           </div>
         ) : !data ? (
           <div className="py-20">
-            <p className="text-gray-500 text-sm">no story today. check back tomorrow.</p>
+            <p className="text-[#b8a694]">no story today. check back tomorrow.</p>
           </div>
         ) : (
           <motion.article
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-            className="w-full"
-            style={{ display: 'flex', flexDirection: 'column', gap: '6rem' }}
+            transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1], delay: 0.15 }}
+            className="pb-24 md:pb-32"
           >
-            {/* date + category */}
-            <div>
-              <p className="text-xs tracking-[0.35em] text-gray-400 uppercase">{formatDate(data.date)}</p>
-              <p className="accent-text-soft mt-1 text-xs tracking-widest">{data.category}</p>
+            {/* date + meta */}
+            <div className="mb-10 flex flex-wrap items-baseline gap-x-4 gap-y-1 border-b border-[#e4ddd4] pb-5">
+              <time className="text-[13px] text-[#9a8b7a]">{formatDate(data.date)}</time>
               {data.location && (
-                <p className="mt-1 text-xs text-gray-500">{data.location.toLowerCase()}</p>
+                <span className="text-[13px] text-[#b8a694]">· {data.location.toLowerCase()}</span>
               )}
             </div>
 
-            {/* headline */}
-            <div>
-              <h2 className="font-display text-3xl tracking-tighter text-gray-100 md:text-5xl" style={{ lineHeight: 1.15, fontWeight: 600 }}>
-                {data.headline.toLowerCase()}
-              </h2>
+            {/* category pill */}
+            <div className="mb-8">
+              <span className="inline-block rounded-full bg-[#efe6da] px-4 py-[6px] text-[12px] uppercase tracking-[0.18em] text-[#8b5e3c]">
+                {data.category}
+              </span>
             </div>
+
+            {/* headline */}
+            <h2 className="mb-10 font-serif text-[clamp(1.8rem,4.5vw,2.8rem)] leading-[1.15] text-[#2a2018]" style={{ fontWeight: 500, letterSpacing: '-0.01em' }}>
+              {data.headline.toLowerCase()}
+            </h2>
 
             {/* image */}
             {data.image && (
-              <div className="overflow-hidden rounded-md" style={{ border: '1px solid var(--accent-border)', boxShadow: '0 0 40px var(--accent-shadow)' }}>
+              <div className="mb-10 overflow-hidden rounded-[3px]" style={{ boxShadow: '0 12px 48px rgba(42,32,24,0.08)' }}>
                 <img
                   src={data.image}
                   alt={data.headline}
                   className="w-full object-cover"
-                  style={{ maxHeight: '420px', filter: 'brightness(0.9) contrast(1.05)' }}
+                  style={{ maxHeight: '440px' }}
                   loading="lazy"
                 />
               </div>
             )}
 
             {/* summary */}
-            <div>
-              <p className="text-base leading-relaxed text-gray-200 md:text-lg" style={{ letterSpacing: '0.01em' }}>
+            <div className="mb-14">
+              <p className="font-serif text-[18px] leading-[1.8] text-[#4a3d30]" style={{ letterSpacing: '0.01em' }}>
                 {data.summary}
               </p>
             </div>
 
             {/* source */}
-            <div className="flex items-center justify-between border-t border-gray-800 pt-6" style={{ gap: '1rem' }}>
+            <div className="flex items-center justify-between border-t border-[#e4ddd4] pt-6" style={{ gap: '1rem' }}>
               <div>
-                <p className="text-xs tracking-widest text-gray-500 uppercase">source</p>
+                <p className="mb-1 text-[10px] uppercase tracking-[0.25em] text-[#b8a694]">source</p>
                 <a
                   href={data.sourceUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="accent-text mt-1 text-sm transition-colors hover:text-white"
+                  className="text-[14px] text-[#8b5e3c] underline decoration-[#c4b09a] underline-offset-[3px] transition-colors hover:text-[#2a2018] hover:decoration-[#8b5e3c]"
                 >
-                  {data.source.toLowerCase()} →
+                  {data.source.toLowerCase()}
                 </a>
               </div>
               {data.keywords && (
                 <div className="text-right">
-                  <p className="text-xs tracking-widest text-gray-500 uppercase">keywords</p>
-                  <p className="mt-1 text-xs text-gray-500">{data.keywords}</p>
+                  <p className="mb-1 text-[10px] uppercase tracking-[0.25em] text-[#b8a694]">tags</p>
+                  <p className="text-[12px] text-[#9a8b7a]">{data.keywords}</p>
                 </div>
               )}
             </div>
 
-            {/* back link */}
-            <div className="pt-8">
-              <BlogNavLink path="/" className="accent-text text-sm transition-colors hover:text-white">
+            {/* back */}
+            <div className="pt-12">
+              <BlogNavLink path="/" className="text-[14px] text-[#8b5e3c] transition-colors hover:text-[#2a2018]">
                 ← back home
               </BlogNavLink>
             </div>
           </motion.article>
         )}
       </div>
-    </BlogShell>
+    </div>
   );
 };
 
