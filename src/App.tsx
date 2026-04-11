@@ -658,20 +658,20 @@ const Phase1: React.FC<{
           </motion.div>
         </a>
 
-        <a href="https://akakika.com/localhostwatcher/" target="_blank" rel="noopener noreferrer" className="block md:ml-24 md:w-2/3">
+        <a href="https://akakika.com/breakpoint/" target="_blank" rel="noopener noreferrer" className="block md:ml-24 md:w-2/3">
           <motion.div
             style={{ y: yCard3, scale: card3Scale, opacity: card3Opacity, rotateZ: card3Rotate }}
             className="accent-panel project-card group relative p-8 backdrop-blur-sm transition-all duration-300 hover:scale-[1.02] accent-panel-hover"
           >
             <div className="accent-text absolute -top-3 -left-3 bg-[#0a0a0a] px-2 text-xs">FILE_03</div>
-            <h2 className="project-title mb-4 font-display text-3xl tracking-tighter text-gray-100 md:text-5xl">LOCALHOSTWATCHER</h2>
+            <h2 className="project-title mb-4 font-display text-3xl tracking-tighter text-gray-100 md:text-5xl">BREAKPOINT</h2>
             <p className="mb-6 max-w-2xl text-sm text-gray-200 md:text-base">
-              Stop guessing which localhost process just silently failed. Detects, monitors, and restores your local services from the menu bar.
+              One key press. Full context. Ready to walk away. Captures your entire computer state and generates a structured Doom's Moment.
             </p>
             <div className="accent-text flex gap-4 text-xs">
               <span>[MACOS]</span>
-              <span>[SWIFT]</span>
-              <span>[MENU BAR]</span>
+              <span>[AI-ENGINE]</span>
+              <span>[CONTEXT-CAPTURE]</span>
             </div>
           </motion.div>
         </a>
@@ -1522,6 +1522,13 @@ const AppsPage: React.FC<{ theme: ThemeName; onToggleTheme: () => void }> = ({ t
       image: 'https://akakika.com/localhostwatcher/assets/app-icon.png',
       imageAlt: 'LocalhostWatcher app icon',
       blurb: 'Stop guessing which localhost process just silently failed. Swift-built macOS menu bar utility that detects, monitors, and restores your local services.',
+    },
+    {
+      name: 'BreakPoint',
+      url: 'https://akakika.com/breakpoint/',
+      image: 'https://akakika.com/breakpoint/macos_app_icon.png',
+      imageAlt: 'BreakPoint app icon',
+      blurb: "One key press captures your entire computer state — running apps, clipboard, screen context — and turns it into a structured Doom's Moment you can pick up later.",
     },
   ];
 
