@@ -1231,9 +1231,9 @@ type UndrdrData = {
 
 const TEMP_META: Record<string, { label: string; border: string; bg: string; text: string; glow: string }> = {
   boss: { label: 'BOSS', border: 'var(--accent-border-strong)', bg: 'var(--accent-900)', text: 'var(--accent-300)', glow: 'var(--accent-shadow)' },
-  hot: { label: 'HOT', border: 'rgba(239, 68, 68, 0.50)', bg: 'rgba(127, 29, 29, 0.18)', text: '#fca5a5', glow: 'rgba(239, 68, 68, 0.22)' },
-  warm: { label: 'WARM', border: 'rgba(245, 158, 11, 0.40)', bg: 'rgba(120, 53, 15, 0.15)', text: '#fcd34d', glow: 'rgba(245, 158, 11, 0.18)' },
-  cold: { label: 'COLD', border: 'rgba(56, 189, 248, 0.35)', bg: 'rgba(12, 74, 110, 0.15)', text: '#7dd3fc', glow: 'rgba(56, 189, 248, 0.15)' },
+  hot: { label: 'HOT', border: 'rgba(248, 113, 113, 0.45)', bg: 'rgba(153, 27, 27, 0.20)', text: '#fca5a5', glow: 'rgba(239, 68, 68, 0.22)' },
+  warm: { label: 'WARM', border: 'rgba(251, 191, 36, 0.35)', bg: 'rgba(146, 64, 14, 0.18)', text: '#fde68a', glow: 'rgba(245, 158, 11, 0.18)' },
+  cold: { label: 'COLD', border: 'rgba(125, 211, 252, 0.30)', bg: 'rgba(12, 74, 110, 0.18)', text: '#93c5fd', glow: 'rgba(56, 189, 248, 0.15)' },
 };
 
 const LANG_COLORS: Record<string, string> = {
@@ -1253,28 +1253,28 @@ const UndrdrRepoCard: React.FC<{ repo: UndrdrRepo; temp: string }> = ({ repo, te
       href={repo.url}
       target="_blank"
       rel="noopener noreferrer"
-      className="block rounded-md bg-[#141419] px-3.5 py-3 transition-colors duration-150 hover:bg-[#1a1a22]"
+      className="group block rounded-xl border border-white/[0.04] bg-white/[0.02] px-5 py-4 transition-all duration-200 hover:border-white/[0.08] hover:bg-white/[0.04] hover:scale-[1.01]"
     >
-      <div className="mb-1 flex items-center gap-2">
+      <div className="mb-2 flex items-center gap-2.5">
         <span
-          className="text-[8px] font-bold tracking-widest uppercase"
-          style={{ color: meta.text }}
+          className="rounded-full px-2 py-0.5 text-[10px] font-semibold tracking-wider uppercase"
+          style={{ color: meta.text, background: meta.bg, border: `1px solid ${meta.border}` }}
         >
           {meta.label}
         </span>
-        <span className="text-[9px] text-[#777]">★{repo.stars}</span>
-        <span className="ml-auto flex items-center gap-1 text-[9px] text-[#777]">
-          <span className="inline-block h-1.5 w-1.5 rounded-full" style={{ background: langColor }} />
+        <span className="text-xs text-gray-500">★ {repo.stars.toLocaleString()}</span>
+        <span className="ml-auto flex items-center gap-1.5 text-xs text-gray-500">
+          <span className="inline-block h-2 w-2 rounded-full" style={{ background: langColor }} />
           {repo.lang || '—'}
         </span>
       </div>
-      <h3 className="font-display text-sm tracking-tight text-[#eee] leading-snug">
+      <h3 className="font-display text-sm font-semibold tracking-tight text-gray-100 group-hover:text-white leading-snug">
         {repo.name}
       </h3>
-      <p className="mt-1 text-[10px] text-[#999] leading-relaxed line-clamp-2">
+      <p className="mt-1.5 text-xs text-gray-400 leading-relaxed line-clamp-2">
         {repo.description}
       </p>
-      <p className="mt-1 text-[10px] text-[#666] italic">
+      <p className="mt-2 text-[11px] text-gray-500 leading-relaxed italic line-clamp-2">
         {repo.why}
       </p>
     </a>
@@ -1310,24 +1310,24 @@ const UndrdrPage: React.FC<{ theme: ThemeName; onToggleTheme: () => void }> = ({
       <HomeStickyHeader theme={theme} onToggleTheme={onToggleTheme} workHref="/" aboutHref="/" />
 
       <div className="w-full">
-        <div className="mb-6 flex items-center gap-5">
+        <div className="mb-8 flex items-center gap-5">
           <img
             src="/undrdr-icon.png"
             alt="UNDRDR"
-            className="h-14 w-14 rounded-xl object-contain md:h-16 md:w-16"
+            className="h-16 w-16 rounded-2xl object-contain md:h-20 md:w-20 ring-1 ring-white/10"
           />
           <div>
-            <p className="accent-text-soft mb-1 text-[10px]">kika@portfolio:~$ ls undrdr/</p>
+            <p className="accent-text-soft mb-1 text-xs">kika@portfolio:~$ ls undrdr/</p>
             <h1 className="glitch-wrapper glitch-p0 font-display text-5xl tracking-tighter text-gray-100 md:text-7xl" data-text="undrdr.">
               undrdr.
             </h1>
           </div>
         </div>
-        <p className="mb-3 max-w-3xl text-base leading-relaxed text-gray-200 md:text-lg">
+        <p className="mb-4 max-w-3xl text-base leading-relaxed text-gray-300 md:text-lg">
           under the radar. github repos under 1k stars that deserve more eyes. curated daily.
         </p>
         {data && (
-          <p className="accent-text mb-8 text-xs tracking-[0.2em]">
+          <p className="accent-text mb-10 text-xs tracking-[0.2em]">
             {data.repos ? new Date(data.generated_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) : ''} · {allRepos.length} repos
           </p>
         )}
@@ -1337,7 +1337,7 @@ const UndrdrPage: React.FC<{ theme: ThemeName; onToggleTheme: () => void }> = ({
             <span className="blink h-4 w-3 accent-bg" /> scanning repos...
           </div>
         ) : data ? (
-          <div className="grid grid-cols-2 gap-2 md:grid-cols-3 lg:grid-cols-4">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
             {allRepos.map(({ repo, temp }) => (
               <UndrdrRepoCard key={repo.url} repo={repo} temp={temp} />
             ))}
@@ -1364,11 +1364,11 @@ const UndrdrPage: React.FC<{ theme: ThemeName; onToggleTheme: () => void }> = ({
                 ...week.repos.cold.map((r) => ({ repo: r, temp: 'cold' as string })),
               ];
               return (
-                <div key={`w${week.week}`} className="mt-10">
-                  <p className="mb-3 text-[10px] tracking-[0.2em] text-[#555]">
+                <div key={`w${week.week}`} className="mt-14">
+                  <p className="mb-4 text-xs tracking-[0.2em] text-gray-500">
                     week {week.week} — {week.year} · {weekRepos.length} repos
                   </p>
-                  <div className="grid grid-cols-2 gap-2 md:grid-cols-3 lg:grid-cols-4">
+                  <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
                     {weekRepos.map(({ repo, temp }) => (
                       <UndrdrRepoCard key={repo.url} repo={repo} temp={temp} />
                     ))}
