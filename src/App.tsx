@@ -1268,7 +1268,7 @@ const UndrdrRepoCard: React.FC<{ repo: UndrdrRepo; temp: string }> = ({ repo, te
           {repo.lang || '—'}
         </span>
       </div>
-      <h3 className="font-display text-sm font-semibold tracking-tight text-gray-100 group-hover:text-white leading-snug">
+      <h3 className="font-display text-sm font-bold tracking-tight text-white leading-snug">
         {repo.name}
       </h3>
       <p className="mt-1.5 text-xs text-gray-400 leading-relaxed line-clamp-2">
