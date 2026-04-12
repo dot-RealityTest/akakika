@@ -727,15 +727,15 @@ const Phase1: React.FC<{
   );
 };
 
-const BlogShell: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+const BlogShell: React.FC<{ children: React.ReactNode; noCrt?: boolean }> = ({ children, noCrt }) => {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
 
   useSmoothScroll(wrapperRef, contentRef);
 
   return (
-    <div ref={wrapperRef} className="blog-shell relative h-[100dvh] overflow-y-auto bg-[#0a0a0a] font-mono text-gray-100 dotted-bg">
-      <div className="crt-overlay" />
+    <div ref={wrapperRef} className={`blog-shell relative h-[100dvh] overflow-y-auto bg-[#0a0a0a] font-mono text-gray-100 ${noCrt ? '' : 'dotted-bg'}`}>
+      {!noCrt && <div className="crt-overlay" />}
       <div ref={contentRef} className="relative z-10 p-6 md:p-12">{children}</div>
     </div>
   );
@@ -1306,7 +1306,7 @@ const UndrdrPage: React.FC<{ theme: ThemeName; onToggleTheme: () => void }> = ({
   ] : [];
 
   return (
-    <BlogShell>
+    <BlogShell noCrt>
       <HomeStickyHeader theme={theme} onToggleTheme={onToggleTheme} workHref="/" aboutHref="/" />
 
       <div className="w-full">
