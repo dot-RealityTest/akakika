@@ -1253,28 +1253,28 @@ const UndrdrRepoCard: React.FC<{ repo: UndrdrRepo; temp: string }> = ({ repo, te
       href={repo.url}
       target="_blank"
       rel="noopener noreferrer"
-      className="group block rounded-xl border border-white/[0.06] bg-[#16161e] px-5 py-4 transition-all duration-200 hover:border-white/[0.10] hover:bg-[#1c1c28] hover:scale-[1.01]"
+      className="group block rounded-xl border border-white/[0.08] bg-[#1a1a24] px-5 py-5 transition-all duration-200 hover:border-white/[0.14] hover:bg-[#22222e]"
     >
-      <div className="mb-2 flex items-center gap-2.5">
+      <div className="mb-3 flex items-center gap-2.5">
         <span
-          className="rounded-full px-2 py-0.5 text-[10px] font-semibold tracking-wider uppercase"
+          className="rounded-full px-2.5 py-0.5 text-[11px] font-bold tracking-wider uppercase"
           style={{ color: meta.text, background: meta.bg, border: `1px solid ${meta.border}` }}
         >
           {meta.label}
         </span>
-        <span className="text-xs text-gray-500">★ {repo.stars.toLocaleString()}</span>
-        <span className="ml-auto flex items-center gap-1.5 text-xs text-gray-500">
+        <span className="text-sm text-gray-400 font-medium">★ {repo.stars.toLocaleString()}</span>
+        <span className="ml-auto flex items-center gap-1.5 text-sm text-gray-400 font-medium">
           <span className="inline-block h-2 w-2 rounded-full" style={{ background: langColor }} />
           {repo.lang || '—'}
         </span>
       </div>
-      <h3 className="font-display text-sm font-bold tracking-tight text-white leading-snug">
+      <h3 className="font-display text-base font-bold tracking-tight text-white leading-snug">
         {repo.name}
       </h3>
-      <p className="mt-1.5 text-xs text-gray-400 leading-relaxed line-clamp-2">
+      <p className="mt-2 text-sm text-gray-300 leading-relaxed line-clamp-3">
         {repo.description}
       </p>
-      <p className="mt-2 text-[11px] text-gray-500 leading-relaxed italic line-clamp-2">
+      <p className="mt-2.5 text-[13px] text-gray-500 leading-relaxed italic line-clamp-2">
         {repo.why}
       </p>
     </a>
@@ -1323,7 +1323,7 @@ const UndrdrPage: React.FC<{ theme: ThemeName; onToggleTheme: () => void }> = ({
             </h1>
           </div>
         </div>
-        <p className="mb-4 max-w-3xl text-base leading-relaxed text-gray-300 md:text-lg">
+        <p className="mb-4 max-w-3xl text-lg leading-relaxed text-gray-200 md:text-xl">
           under the radar. github repos under 1k stars that deserve more eyes. curated daily.
         </p>
         {data && (
