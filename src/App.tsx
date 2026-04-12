@@ -425,15 +425,23 @@ const Phase1: React.FC<{
   const yCard1 = useTransform(scrollYProgress, [0, 1], [0, -300]);
   const yCard2 = useTransform(scrollYProgress, [0, 1], [0, -150]);
   const yCard3 = useTransform(scrollYProgress, [0, 1], [0, -400]);
+  const yCard4 = useTransform(scrollYProgress, [0, 1], [0, -200]);
+  const yCard5 = useTransform(scrollYProgress, [0, 1], [0, -350]);
   const card1Scale = useTransform(scrollYProgress, [0, 0.2, 0.55], [1, 1.02, 0.96]);
   const card2Scale = useTransform(scrollYProgress, [0.08, 0.4, 0.78], [0.94, 1.01, 0.97]);
   const card3Scale = useTransform(scrollYProgress, [0.24, 0.62, 1], [0.92, 1, 0.98]);
+  const card4Scale = useTransform(scrollYProgress, [0.05, 0.35, 0.7], [0.95, 1.01, 0.96]);
+  const card5Scale = useTransform(scrollYProgress, [0.18, 0.55, 0.9], [0.93, 1, 0.97]);
   const card1Opacity = useTransform(scrollYProgress, [0, 0.16, 0.5], [0.82, 1, 0.62]);
   const card2Opacity = useTransform(scrollYProgress, [0.1, 0.38, 0.76], [0.42, 1, 0.72]);
   const card3Opacity = useTransform(scrollYProgress, [0.26, 0.64, 1], [0.3, 1, 1]);
+  const card4Opacity = useTransform(scrollYProgress, [0.08, 0.42, 0.8], [0.5, 1, 0.68]);
+  const card5Opacity = useTransform(scrollYProgress, [0.2, 0.58, 0.95], [0.35, 1, 0.9]);
   const card1Rotate = useTransform(scrollYProgress, [0, 0.45], [-1.5, 0.6]);
   const card2Rotate = useTransform(scrollYProgress, [0.08, 0.55], [1.8, -0.4]);
   const card3Rotate = useTransform(scrollYProgress, [0.22, 0.8], [-1.2, 0.3]);
+  const card4Rotate = useTransform(scrollYProgress, [0.06, 0.5], [2, -0.6]);
+  const card5Rotate = useTransform(scrollYProgress, [0.18, 0.65], [-1.8, 0.5]);
   const projectTitleX = useTransform(scrollYProgress, [0.1, 0.4, 0.72], [0, 420, 1400]);
   const projectTitleOpacity = useTransform(scrollYProgress, [0.1, 0.48, 0.76], [1, 0.42, 0]);
   const projectTitleSkew = useTransform(scrollYProgress, [0.12, 0.38, 0.68], [0, 10, 18]);
@@ -672,6 +680,42 @@ const Phase1: React.FC<{
               <span>[MACOS]</span>
               <span>[AI-ENGINE]</span>
               <span>[CONTEXT-CAPTURE]</span>
+            </div>
+          </motion.div>
+        </a>
+
+        <a href="https://akakika.com/dgmd/" target="_blank" rel="noopener noreferrer" className="block md:ml-auto md:w-3/4">
+          <motion.div
+            style={{ y: yCard4, scale: card4Scale, opacity: card4Opacity, rotateZ: card4Rotate }}
+            className="accent-panel project-card group relative p-8 backdrop-blur-sm transition-all duration-300 hover:scale-[1.02] accent-panel-hover"
+          >
+            <div className="accent-text absolute -top-3 -left-3 bg-[#0a0a0a] px-2 text-xs">FILE_04</div>
+            <h2 className="project-title mb-4 font-display text-3xl tracking-tighter text-gray-100 md:text-5xl">DGMD</h2>
+            <p className="mb-6 max-w-2xl text-sm text-gray-200 md:text-base">
+              Drop the interface. Get the system. Turns screenshots into build-ready design.md files and style prompts so AI coding tools can rebuild interfaces with structure and fidelity.
+            </p>
+            <div className="accent-text flex gap-4 text-xs">
+              <span>[MACOS]</span>
+              <span>[DESIGN-TO-CODE]</span>
+              <span>[AI-PIPELINE]</span>
+            </div>
+          </motion.div>
+        </a>
+
+        <a href="https://akakika.com/localhostwatcher/" target="_blank" rel="noopener noreferrer" className="block md:ml-24 md:w-2/3">
+          <motion.div
+            style={{ y: yCard5, scale: card5Scale, opacity: card5Opacity, rotateZ: card5Rotate }}
+            className="accent-panel project-card group relative p-8 backdrop-blur-sm transition-all duration-300 hover:scale-[1.02] accent-panel-hover"
+          >
+            <div className="accent-text absolute -top-3 -left-3 bg-[#0a0a0a] px-2 text-xs">FILE_05</div>
+            <h2 className="project-title mb-4 font-display text-3xl tracking-tighter text-gray-100 md:text-5xl">LOCALHOST WATCHER</h2>
+            <p className="mb-6 max-w-2xl text-sm text-gray-200 md:text-base">
+              Stop guessing which localhost process just silently failed. Swift-built macOS menu bar utility that detects, monitors, and restores your local services.
+            </p>
+            <div className="accent-text flex gap-4 text-xs">
+              <span>[MACOS]</span>
+              <span>[DEV-TOOL]</span>
+              <span>[MONITORING]</span>
             </div>
           </motion.div>
         </a>
