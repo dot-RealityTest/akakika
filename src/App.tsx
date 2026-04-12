@@ -780,7 +780,7 @@ const BlogIndex: React.FC<{ theme: ThemeName; onToggleTheme: () => void }> = ({ 
 );
 
 const BlogPostGithubTools: React.FC<{ theme: ThemeName; onToggleTheme: () => void }> = ({ theme, onToggleTheme }) => (
-  <BlogShell>
+  <BlogShell noCrt>
     <HomeStickyHeader theme={theme} onToggleTheme={onToggleTheme} workHref="/" aboutHref="/" />
 
     <article className="blog-article w-full">
@@ -799,67 +799,67 @@ const BlogPostGithubTools: React.FC<{ theme: ThemeName; onToggleTheme: () => voi
           <span>ai</span>
         </div>
         <h1 className="mb-6 font-display text-4xl leading-none tracking-tighter text-gray-100 md:text-7xl">5 GitHub tools that actually ship</h1>
-        <p className="max-w-4xl text-lg leading-relaxed text-gray-100 md:text-xl">
+        <p className="max-w-4xl text-lg leading-relaxed text-gray-200 md:text-xl">
           five open-source projects that caught my eye this week — from AI dev tools to workflow automations. no fluff.
         </p>
       </div>
 
-      <div className="max-w-4xl space-y-10 text-base leading-8 text-gray-100">
+      <div className="max-w-4xl space-y-10 text-lg leading-relaxed text-gray-200 font-sans">
         <p>These landed in my feed this week. Real projects, worth your time.</p>
 
         <section className="blog-section">
           <div className="mb-4 flex flex-wrap items-center gap-3">
-            <h2 className="font-display text-3xl tracking-tighter text-gray-100">1. Pearcleaner</h2>
+            <h2 className="font-display text-3xl tracking-tighter text-white">1. Pearcleaner</h2>
             <a href="https://github.com/alienator88/Pearcleaner" target="_blank" rel="noopener noreferrer" className="accent-chip px-2 py-1 text-xs transition-colors">
               [OPEN]
             </a>
           </div>
           <p>A free, source-available macOS app cleaner built in Swift. 12K+ stars for a reason — it actually works.</p>
-          <p className="mt-4"><strong className="font-bold text-gray-100">Why it matters:</strong> App cleaners on macOS are usually sketchy, paid, or both. This one's open-source, actively maintained, and doesn't try to upsell you every three clicks.</p>
+          <p className="mt-4"><strong className="font-bold text-white">Why it matters:</strong> App cleaners on macOS are usually sketchy, paid, or both. This one's open-source, actively maintained, and doesn't try to upsell you every three clicks.</p>
         </section>
 
         <section className="blog-section">
           <div className="mb-4 flex flex-wrap items-center gap-3">
-            <h2 className="font-display text-3xl tracking-tighter text-gray-100">2. scarf</h2>
+            <h2 className="font-display text-3xl tracking-tighter text-white">2. scarf</h2>
             <a href="https://github.com/awizemann/scarf" target="_blank" rel="noopener noreferrer" className="accent-chip px-2 py-1 text-xs transition-colors">
               [OPEN]
             </a>
           </div>
           <p>Native macOS GUI companion for the Hermes AI agent — dashboard, session browser, activity feed, embedded terminal chat, memory editor, and more.</p>
-          <p className="mt-4"><strong className="font-bold text-gray-100">Why it matters:</strong> Most AI tools live in the browser. This one's native SwiftUI, purpose-built for Hermes, and respects your system. The kind of tool that makes you rethink how you interact with AI agents.</p>
+          <p className="mt-4"><strong className="font-bold text-white">Why it matters:</strong> Most AI tools live in the browser. This one's native SwiftUI, purpose-built for Hermes, and respects your system. The kind of tool that makes you rethink how you interact with AI agents.</p>
         </section>
 
         <section className="blog-section">
           <div className="mb-4 flex flex-wrap items-center gap-3">
-            <h2 className="font-display text-3xl tracking-tighter text-gray-100">3. CodexMonitor</h2>
+            <h2 className="font-display text-3xl tracking-tighter text-white">3. CodexMonitor</h2>
             <a href="https://github.com/Dimillian/CodexMonitor" target="_blank" rel="noopener noreferrer" className="accent-chip px-2 py-1 text-xs transition-colors">
               [OPEN]
             </a>
           </div>
           <p>An app to monitor the (Codex) situation. Built with TypeScript and Tauri, supports macOS and Linux.</p>
-          <p className="mt-4"><strong className="font-bold text-gray-100">Why it matters:</strong> 3.4K stars for a monitoring tool says something about OpenAI's Codex launch. This reads the situation so you don't have to. Clean UI, cross-platform, practical.</p>
+          <p className="mt-4"><strong className="font-bold text-white">Why it matters:</strong> 3.4K stars for a monitoring tool says something about OpenAI's Codex launch. This reads the situation so you don't have to. Clean UI, cross-platform, practical.</p>
         </section>
 
         <section className="blog-section">
           <div className="mb-4 flex flex-wrap items-center gap-3">
-            <h2 className="font-display text-3xl tracking-tighter text-gray-100">4. fazm</h2>
+            <h2 className="font-display text-3xl tracking-tighter text-white">4. fazm</h2>
             <a href="https://github.com/mediar-ai/fazm" target="_blank" rel="noopener noreferrer" className="accent-chip px-2 py-1 text-xs transition-colors">
               [OPEN]
             </a>
           </div>
           <p>Fazm Desktop for macOS. Swift-based, coming from the mediar-ai team.</p>
-          <p className="mt-4"><strong className="font-bold text-gray-100">Why it matters:</strong> Early days (114 stars) but the focus is right — a desktop-native AI experience that doesn't feel like a web wrapper. Worth watching.</p>
+          <p className="mt-4"><strong className="font-bold text-white">Why it matters:</strong> Early days (114 stars) but the focus is right — a desktop-native AI experience that doesn't feel like a web wrapper. Worth watching.</p>
         </section>
 
         <section className="blog-section">
           <div className="mb-4 flex flex-wrap items-center gap-3">
-            <h2 className="font-display text-3xl tracking-tighter text-gray-100">5. vibetunnel</h2>
+            <h2 className="font-display text-3xl tracking-tighter text-white">5. vibetunnel</h2>
             <a href="https://github.com/amantus-ai/vibetunnel" target="_blank" rel="noopener noreferrer" className="accent-chip px-2 py-1 text-xs transition-colors">
               [OPEN]
             </a>
           </div>
           <p>Turn any browser into your terminal & command your agents on the go. 4.3K stars, TypeScript-based.</p>
-          <p className="mt-4"><strong className="font-bold text-gray-100">Why it matters:</strong> The "vibe coding" movement is real, and this tool nails the workflow — browser-as-terminal, remote control, agent management from anywhere. Clean site at vt.sh too.</p>
+          <p className="mt-4"><strong className="font-bold text-white">Why it matters:</strong> The "vibe coding" movement is real, and this tool nails the workflow — browser-as-terminal, remote control, agent management from anywhere. Clean site at vt.sh too.</p>
         </section>
 
         <section className="blog-section">
@@ -871,7 +871,7 @@ const BlogPostGithubTools: React.FC<{ theme: ThemeName; onToggleTheme: () => voi
 );
 
 const BlogPostThreeTools: React.FC<{ theme: ThemeName; onToggleTheme: () => void }> = ({ theme, onToggleTheme }) => (
-  <BlogShell>
+  <BlogShell noCrt>
     <HomeStickyHeader theme={theme} onToggleTheme={onToggleTheme} workHref="/" aboutHref="/" />
 
     <article className="blog-article w-full">
@@ -890,14 +890,14 @@ const BlogPostThreeTools: React.FC<{ theme: ThemeName; onToggleTheme: () => void
           <span>productivity</span>
         </div>
         <h1 className="mb-6 font-display text-4xl leading-none tracking-tighter text-gray-100 md:text-7xl">three tools that run my life</h1>
-        <p className="max-w-4xl text-lg leading-relaxed text-gray-100 md:text-xl">
+        <p className="max-w-4xl text-lg leading-relaxed text-gray-200 md:text-xl">
           pieces, maestri, hermes — the trinity that makes a non-technical person dangerous. how i turned my chaos into a workflow that actually works.
         </p>
       </div>
 
-      <div className="max-w-4xl space-y-10 text-base leading-8 text-gray-100">
+      <div className="max-w-4xl space-y-10 text-lg leading-relaxed text-gray-200 font-sans">
         <section className="blog-section">
-          <h2 className="mb-4 font-display text-3xl tracking-tighter text-gray-100">the ghost in my machine</h2>
+          <h2 className="mb-4 font-display text-3xl tracking-tighter text-white">the ghost in my machine</h2>
           <p>i didn't know what i was downloading at first.</p>
           <p className="mt-4">i was trying every cool mac tool when i got my m4 mac with 128gb ram — and honestly, i even forgot i had it. it was just living there… in my menubar… waiting.</p>
           <p className="mt-4">when i was cleaning my mess, i saw it, it saw me.</p>
@@ -906,7 +906,7 @@ const BlogPostThreeTools: React.FC<{ theme: ThemeName; onToggleTheme: () => void
 
         <section className="blog-section">
           <div className="mb-4 flex flex-wrap items-center gap-3">
-            <h2 className="font-display text-3xl tracking-tighter text-gray-100">pieces</h2>
+            <h2 className="font-display text-3xl tracking-tighter text-white">pieces</h2>
             <a href="https://pieces.app" target="_blank" rel="noopener noreferrer" className="accent-chip px-2 py-1 text-xs transition-colors">
               [OPEN]
             </a>
@@ -915,14 +915,14 @@ const BlogPostThreeTools: React.FC<{ theme: ThemeName; onToggleTheme: () => void
           <p className="mt-4">since then, a few others have tried to be what pieces os didn't even try to be.</p>
           <p className="mt-4">nothing is getting close.</p>
           <p className="mt-4">and did i say you can run it locally? for free?</p>
-          <h3 className="mt-8 mb-4 font-display text-2xl tracking-tighter text-gray-100">What It Does</h3>
+          <h3 className="mt-8 mb-4 font-display text-2xl tracking-tighter text-white">What It Does</h3>
           <p>captures anything from anywhere — screenshots, code, text, links ollama integration runs on my machine. my data never leaves. remembers context across conversations suggests related snippets before i even search turns chaos into searchable, quotable, reusable gold my entire site, my apps, my automations — they all start in pieces.</p>
           <p className="mt-4">it's not a snippet manager. it's a second brain that actually works.</p>
         </section>
 
         <section className="blog-section">
           <div className="mb-4 flex flex-wrap items-center gap-3">
-            <h2 className="font-display text-3xl tracking-tighter text-gray-100">maestri — when adhd meets infinite canvas</h2>
+            <h2 className="font-display text-3xl tracking-tighter text-white">maestri — when adhd meets infinite canvas</h2>
             <a href="https://www.themaestri.app/en" target="_blank" rel="noopener noreferrer" className="accent-chip px-2 py-1 text-xs transition-colors">
               [OPEN]
             </a>
@@ -932,14 +932,14 @@ const BlogPostThreeTools: React.FC<{ theme: ThemeName; onToggleTheme: () => void
           <p className="mt-4">i downloaded it today, so i keep you updated.</p>
           <p className="mt-4">but here's the thing: it's free forever for 1 mac. and i felt that the $18 for infinite macs with infinite canvas with the infinite agents that they offer… i would pay again and again.</p>
           <p className="mt-4">full support.</p>
-          <h3 className="mt-8 mb-4 font-display text-2xl tracking-tighter text-gray-100">What It Does</h3>
+          <h3 className="mt-8 mb-4 font-display text-2xl tracking-tighter text-white">What It Does</h3>
           <p>infinite canvas for thoughts, projects, research rabbit holes ai agents that actually understand context connects ideas across projects automatically visual knowledge mapping — finally, a way to see my brain native mac app that feels like thought, not software it's what i've been trying to build myself, but someone else built it better.</p>
           <p className="mt-4">that's rare.</p>
         </section>
 
         <section className="blog-section">
           <div className="mb-4 flex flex-wrap items-center gap-3">
-            <h2 className="font-display text-3xl tracking-tighter text-gray-100">hermes agent — he's the birthday boy, i'm the party pooper</h2>
+            <h2 className="font-display text-3xl tracking-tighter text-white">hermes agent — he's the birthday boy, i'm the party pooper</h2>
             <a href="https://hermes-agent.nousresearch.com/" target="_blank" rel="noopener noreferrer" className="accent-chip px-2 py-1 text-xs transition-colors">
               [OPEN]
             </a>
@@ -951,7 +951,7 @@ const BlogPostThreeTools: React.FC<{ theme: ThemeName; onToggleTheme: () => void
           <p className="mt-4">you know when you get frustrated mid-work and everything that made sense starts to lose it? when you rethink your life choices as you see 3 hours of work that looked like a mini startup start to behave like the drunk friend at the end who vomits on the birthday cake of his not-best friend who didn't even want to invite him…</p>
           <p className="mt-4">with hermes… hold my beer, i drank too much.</p>
           <p className="mt-4">i'm that friend… i'm the party pooper, he is the birthday boy cleaning after me.</p>
-          <h3 className="mt-8 mb-4 font-display text-2xl tracking-tighter text-gray-100">What It Does</h3>
+          <h3 className="mt-8 mb-4 font-display text-2xl tracking-tighter text-white">What It Does</h3>
           <p>self-evolving agent that improves with every interaction restores projects from messy states anticipates needs before i articulate them runs locally — my data stays mine actually delivers instead of just promising the trinity pieces catches everything. maestri connects everything. hermes builds everything.</p>
         </section>
 
