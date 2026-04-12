@@ -1579,8 +1579,8 @@ const AppsPage: React.FC<{ theme: ThemeName; onToggleTheme: () => void }> = ({ t
     },
     {
       name: 'ClipboardSanitizer',
-      url: 'https://akakika.com/cbs/',
-      image: 'https://akakika.com/cbs/assets/app-icon.png',
+      url: 'https://akakika.com/clipsan/',
+      image: 'https://akakika.com/clipsan/assets/app-icon.png',
       imageAlt: 'ClipboardSanitizer app icon',
       blurb: 'Strips formatting, tracking parameters, and whitespace junk from your clipboard before the paste lands. Free macOS menu bar utility.',
     },
