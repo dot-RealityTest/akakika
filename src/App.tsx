@@ -1573,8 +1573,8 @@ const AppsPage: React.FC<{ theme: ThemeName; onToggleTheme: () => void }> = ({ t
     {
       name: "Mochi's Daily Quest",
       url: 'https://akakika.com/mochi/',
-      image: 'https://akakika.com/mochi/assets/egg_idle.gif',
-      imageAlt: 'Mochi idle sprite',
+      image: 'https://akakika.com/mochi/assets/app_icon.png',
+      imageAlt: 'Mochi app icon',
       blurb: 'A retro Tamagotchi-style to-do companion who grows happier — and older — every time you get things done.',
     },
     {
