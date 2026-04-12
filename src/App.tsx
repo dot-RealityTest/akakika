@@ -1253,7 +1253,7 @@ const UndrdrRepoCard: React.FC<{ repo: UndrdrRepo; temp: string }> = ({ repo, te
       href={repo.url}
       target="_blank"
       rel="noopener noreferrer"
-      className="group block rounded-xl border border-white/[0.08] bg-[#1a1a24] px-5 py-5 transition-all duration-200 hover:border-white/[0.14] hover:bg-[#22222e]"
+      className="group block rounded-xl border border-white/[0.08] bg-[#1e1e2a] px-5 py-5 transition-all duration-200 hover:border-white/[0.14] hover:bg-[#262636]"
     >
       <div className="mb-3 flex items-center gap-2.5">
         <span
