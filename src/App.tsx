@@ -1286,6 +1286,9 @@ const UndrdrPage: React.FC<{ theme: ThemeName; onToggleTheme: () => void }> = ({
   const [history, setHistory] = useState<UndrdrData[]>([]);
   const [loading, setLoading] = useState(true);
   const [showArchive, setShowArchive] = useState(false);
+  const [maxStars, setMaxStars] = useState(1000);
+
+  const starOptions = [1000, 500, 100, 10] as const;
 
   useEffect(() => {
     fetch('/assets/data/undrdr.json')
@@ -1298,12 +1301,17 @@ const UndrdrPage: React.FC<{ theme: ThemeName; onToggleTheme: () => void }> = ({
       .catch(() => {});
   }, []);
 
-  const allRepos = data ? [
+  const filterRepos = (repos: { repo: UndrdrRepo; temp: string }[]) =>
+    repos.filter(({ repo }) => repo.stars <= maxStars);
+
+  const allReposUnfiltered = data ? [
     ...(data.repos.boss ? [{ repo: data.repos.boss, temp: 'boss' as string }] : []),
     ...data.repos.hot.map((r) => ({ repo: r, temp: 'hot' as string })),
     ...data.repos.warm.map((r) => ({ repo: r, temp: 'warm' as string })),
     ...data.repos.cold.map((r) => ({ repo: r, temp: 'cold' as string })),
   ] : [];
+
+  const allRepos = filterRepos(allReposUnfiltered);
 
   return (
     <BlogShell noCrt>
@@ -1324,8 +1332,25 @@ const UndrdrPage: React.FC<{ theme: ThemeName; onToggleTheme: () => void }> = ({
           </div>
         </div>
         <p className="mb-4 max-w-3xl text-lg leading-relaxed text-gray-200 md:text-xl">
-          under the radar. github repos under 1k stars that deserve more eyes. curated daily.
+          under the radar. github repos that deserve more eyes. curated daily.
         </p>
+        <div className="mb-4 flex flex-wrap items-center gap-2">
+          <span className="text-sm text-gray-500 mr-1">max stars:</span>
+          {starOptions.map((opt) => (
+            <button
+              key={opt}
+              type="button"
+              onClick={() => setMaxStars(opt)}
+              className={`rounded-full px-3 py-1 text-sm font-medium transition-all ${
+                maxStars === opt
+                  ? 'bg-white/15 text-white border border-white/20'
+                  : 'bg-white/[0.04] text-gray-500 border border-white/[0.06] hover:bg-white/[0.08] hover:text-gray-300'
+              }`}
+            >
+              ≤{opt.toLocaleString()}
+            </button>
+          ))}
+        </div>
         {data && (
           <p className="accent-text mb-10 text-xs tracking-[0.2em]">
             {data.repos ? new Date(data.generated_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) : ''} · {allRepos.length} repos
@@ -1357,12 +1382,14 @@ const UndrdrPage: React.FC<{ theme: ThemeName; onToggleTheme: () => void }> = ({
             </button>
 
             {showArchive && history.map((week) => {
-              const weekRepos = [
+              const weekReposUnfiltered = [
                 ...(week.repos.boss ? [{ repo: week.repos.boss, temp: 'boss' as string }] : []),
                 ...week.repos.hot.map((r) => ({ repo: r, temp: 'hot' as string })),
                 ...week.repos.warm.map((r) => ({ repo: r, temp: 'warm' as string })),
                 ...week.repos.cold.map((r) => ({ repo: r, temp: 'cold' as string })),
               ];
+              const weekRepos = filterRepos(weekReposUnfiltered);
+              if (weekRepos.length === 0) return null;
               return (
                 <div key={`w${week.week}`} className="mt-14">
                   <p className="mb-4 text-xs tracking-[0.2em] text-gray-500">
