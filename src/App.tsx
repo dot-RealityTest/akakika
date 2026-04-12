@@ -1318,7 +1318,7 @@ const UndrdrPage: React.FC<{ theme: ThemeName; onToggleTheme: () => void }> = ({
           />
           <div>
             <p className="accent-text-soft mb-1 text-xs">kika@portfolio:~$ ls undrdr/</p>
-            <h1 className="glitch-wrapper glitch-p0 font-display text-5xl tracking-tighter text-gray-100 md:text-7xl" data-text="undrdr.">
+            <h1 className="font-display text-5xl tracking-tighter text-gray-100 md:text-7xl">
               undrdr.
             </h1>
           </div>
