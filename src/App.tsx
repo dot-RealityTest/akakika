@@ -1318,19 +1318,12 @@ const UndrdrPage: React.FC<{ theme: ThemeName; onToggleTheme: () => void }> = ({
       <HomeStickyHeader theme={theme} onToggleTheme={onToggleTheme} workHref="/" aboutHref="/" />
 
       <div className="w-full">
-        <div className="mb-8 flex items-center gap-5">
-          <img
-            src="/undrdr-icon.png"
-            alt="UNDRDR"
-            className="h-16 w-16 rounded-2xl object-contain md:h-20 md:w-20 ring-1 ring-white/10"
-          />
           <div>
             <p className="accent-text-soft mb-1 text-xs">kika@portfolio:~$ ls undrdr/</p>
-            <h1 className="font-display text-5xl tracking-tighter text-gray-100 md:text-7xl">
-              undrdr.
+            <h1 className="font-display text-5xl tracking-tighter text-white md:text-7xl">
+              UNDRDR.
             </h1>
           </div>
-        </div>
         <p className="mb-4 max-w-3xl text-lg leading-relaxed text-gray-200 md:text-xl">
           under the radar. github repos that deserve more eyes. curated daily.
         </p>
