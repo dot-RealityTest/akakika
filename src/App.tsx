@@ -636,9 +636,12 @@ const Phase1: React.FC<{
             className="accent-panel project-card group relative p-8 backdrop-blur-sm transition-all duration-300 hover:scale-[1.02] accent-panel-hover"
           >
             <div className="accent-text absolute -top-3 -left-3 bg-[#0a0a0a] px-2 text-xs">FILE_01</div>
-            <h2 className="project-title mb-4 font-display text-3xl tracking-tighter text-gray-100 md:text-5xl">MOCHI'S DAILY QUEST</h2>
+            <div className="mb-4 flex items-center gap-4">
+              <img src="https://akakika.com/mochi/assets/app_icon.png" alt="Mochi" className="h-12 w-12 rounded-xl object-contain" />
+              <h2 className="project-title font-display text-3xl tracking-tighter text-gray-100 md:text-5xl">MOCHI'S DAILY QUEST</h2>
+            </div>
             <p className="mb-6 max-w-2xl text-sm text-gray-200 md:text-base">
-              A retro Tamagotchi-style to-do companion who grows happier - and older - every time you get things done. Pixel productivity pal.
+              A retro Tamagotchi-style to-do companion who grows happier — and older — every time you get things done. Pixel productivity pal.
             </p>
             <div className="accent-text flex gap-4 text-xs">
               <span>[MACOS]</span>
@@ -654,9 +657,12 @@ const Phase1: React.FC<{
             className="accent-panel project-card resq-theme-card group relative p-8 backdrop-blur-sm transition-all duration-500 hover:scale-[1.02]"
           >
             <div className="accent-text absolute -top-3 -left-3 bg-[#0a0a0a] px-2 text-xs transition-colors duration-500 group-hover:text-inherit">FILE_02</div>
-            <h2 className="project-title mb-4 font-display text-3xl tracking-tighter text-gray-100 md:text-5xl">RESQ</h2>
+            <div className="mb-4 flex items-center gap-4">
+              <img src="https://akakika.com/resq/icon.png" alt="RESQ" className="h-12 w-12 rounded-xl object-contain" />
+              <h2 className="project-title font-display text-3xl tracking-tighter text-gray-100 md:text-5xl">RESQ</h2>
+            </div>
             <p className="mb-6 max-w-2xl text-sm text-gray-200 md:text-base">
-              Rescue messy text into clean Markdown. Turn OCR scraps, rough notes, and semi-structured text into clean Markdown with a local-first workflow.
+              Rescue messy text into clean Markdown. Turn OCR scraps, rough notes, and semi-structured text into clean Markdown with a local-first workflow. No cloud. No friction.
             </p>
             <div className="accent-text flex gap-4 text-xs transition-colors duration-500 group-hover:text-inherit">
               <span>[MACOS]</span>
@@ -672,9 +678,12 @@ const Phase1: React.FC<{
             className="accent-panel project-card group relative p-8 backdrop-blur-sm transition-all duration-300 hover:scale-[1.02] accent-panel-hover"
           >
             <div className="accent-text absolute -top-3 -left-3 bg-[#0a0a0a] px-2 text-xs">FILE_03</div>
-            <h2 className="project-title mb-4 font-display text-3xl tracking-tighter text-gray-100 md:text-5xl">BREAKPOINT</h2>
+            <div className="mb-4 flex items-center gap-4">
+              <img src="https://akakika.com/breakpoint/macos_app_icon.png" alt="BreakPoint" className="h-12 w-12 rounded-xl object-contain" />
+              <h2 className="project-title font-display text-3xl tracking-tighter text-gray-100 md:text-5xl">BREAKPOINT</h2>
+            </div>
             <p className="mb-6 max-w-2xl text-sm text-gray-200 md:text-base">
-              One key press. Full context. Ready to walk away. Captures your entire computer state and generates a structured Doom's Moment.
+              One key press. Full context. Ready to walk away. Captures your entire computer state and generates a structured Doom's Moment you can pick up later.
             </p>
             <div className="accent-text flex gap-4 text-xs">
               <span>[MACOS]</span>
@@ -690,7 +699,10 @@ const Phase1: React.FC<{
             className="accent-panel project-card group relative p-8 backdrop-blur-sm transition-all duration-300 hover:scale-[1.02] accent-panel-hover"
           >
             <div className="accent-text absolute -top-3 -left-3 bg-[#0a0a0a] px-2 text-xs">FILE_04</div>
-            <h2 className="project-title mb-4 font-display text-3xl tracking-tighter text-gray-100 md:text-5xl">DGMD</h2>
+            <div className="mb-4 flex items-center gap-4">
+              <img src="https://akakika.com/dgmd/assets/app-icon.png" alt="DGMD" className="h-12 w-12 rounded-xl object-contain" />
+              <h2 className="project-title font-display text-3xl tracking-tighter text-gray-100 md:text-5xl">DGMD</h2>
+            </div>
             <p className="mb-6 max-w-2xl text-sm text-gray-200 md:text-base">
               Drop the interface. Get the system. Turns screenshots into build-ready design.md files and style prompts so AI coding tools can rebuild interfaces with structure and fidelity.
             </p>
@@ -708,7 +720,10 @@ const Phase1: React.FC<{
             className="accent-panel project-card group relative p-8 backdrop-blur-sm transition-all duration-300 hover:scale-[1.02] accent-panel-hover"
           >
             <div className="accent-text absolute -top-3 -left-3 bg-[#0a0a0a] px-2 text-xs">FILE_05</div>
-            <h2 className="project-title mb-4 font-display text-3xl tracking-tighter text-gray-100 md:text-5xl">LOCALHOST WATCHER</h2>
+            <div className="mb-4 flex items-center gap-4">
+              <img src="https://akakika.com/localhostwatcher/assets/app-icon.png" alt="LocalhostWatcher" className="h-12 w-12 rounded-xl object-contain" />
+              <h2 className="project-title font-display text-3xl tracking-tighter text-gray-100 md:text-5xl">LOCALHOST WATCHER</h2>
+            </div>
             <p className="mb-6 max-w-2xl text-sm text-gray-200 md:text-base">
               Stop guessing which localhost process just silently failed. Swift-built macOS menu bar utility that detects, monitors, and restores your local services.
             </p>
