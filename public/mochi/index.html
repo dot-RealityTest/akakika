@@ -1,65 +1,1699 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mochi's Daily Quest — aka kika</title>
-  <meta name="description" content="A retro Tamagotchi-style to-do companion who grows happier — and older — every time you get things done. Free macOS app.">
-  <meta name="robots" content="index, follow">
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-  <meta property="og:title" content="Mochi's Daily Quest — aka kika">
-  <meta property="og:description" content="A retro Tamagotchi-style to-do companion. Free macOS app.">
-  <meta property="og:url" content="https://www.akakika.com/mochi/">
-  <meta property="og:type" content="website">
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:site" content="@kika_hub">
-  <meta name="twitter:creator" content="@kika_hub">
-  <meta name="twitter:title" content="Mochi's Daily Quest — aka kika">
-  <meta name="twitter:description" content="A retro Tamagotchi-style to-do companion. Free macOS app.">
-  <link rel="canonical" href="https://www.akakika.com/mochi/">
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    "name": "Mochi's Daily Quest",
-    "alternateName": "Mochi",
-    "url": "https://www.akakika.com/mochi/",
-    "description": "A retro Tamagotchi-style to-do companion who grows happier — and older — every time you get things done. Free macOS menu bar app.",
-    "applicationCategory": "ProductivityApplication",
-    "operatingSystem": "macOS",
-    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
-    "author": { "@type": "Person", "name": "aka kika", "url": "https://www.akakika.com" }
-  }
-  </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mochi's Daily Quest — Grow a tiny world with every task</title>
+  <meta
+    name="description"
+    content="A cinematic landing page for Mochi's Daily Quest, a kawaii desktop companion that turns daily tasks into evolution, rooms, rewards, and ritual."
+  />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;700;800&family=Space+Grotesk:wght@400;500;700&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="icon" type="image/png" href="./assets/app_icon.png" />
   <style>
-    *{margin:0;padding:0;box-sizing:border-box}
-    body{background:#0a0a0a;color:#eee;font-family:'IBM Plex Mono','Fira Code',monospace;min-height:100dvh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2rem}
-    .container{max-width:600px;text-align:center}
-    h1{font-family:'Arial Black','Impact',sans-serif;font-size:clamp(2rem,8vw,4rem);letter-spacing:-0.03em;margin-bottom:0.5rem;color:#a5b4fc}
-    .tag{font-size:0.75rem;letter-spacing:0.2em;text-transform:uppercase;color:#818cf8;margin-bottom:2rem}
-    p{font-size:1rem;line-height:1.8;color:#aaa;margin-bottom:1.5rem}
-    .back{display:inline-block;margin-top:2rem;color:#818cf8;text-decoration:none;font-size:0.85rem;letter-spacing:0.1em;border:1px solid rgba(99,102,241,0.3);padding:0.5rem 1.5rem;border-radius:4px;transition:all 0.2s}
-    .back:hover{background:rgba(99,102,241,0.15);border-color:rgba(129,140,248,0.5)}
-    .features{display:grid;gap:0.5rem;margin:2rem 0;text-align:left}
-    .features span{font-size:0.85rem;color:#999;display:flex;align-items:center;gap:0.5rem}
-    .features span::before{content:'♥';color:#f472b6}
-    .egg{font-size:3rem;margin-bottom:1rem}
+    :root {
+      --bg: #100716;
+      --bg-soft: #1b0d27;
+      --ink: #fff7fd;
+      --muted: #dbc8e6;
+      --line: rgba(255, 255, 255, 0.12);
+      --pink: #ff8ac2;
+      --rose: #ffb6db;
+      --violet: #8b6cff;
+      --peach: #ffc48a;
+      --mint: #9df0d5;
+      --panel: rgba(255, 255, 255, 0.08);
+      --panel-strong: rgba(255, 255, 255, 0.12);
+      --shadow: 0 30px 80px rgba(0, 0, 0, 0.28);
+      --radius: 28px;
+      --max: 1280px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 15% 20%, rgba(255, 138, 194, 0.24), transparent 28%),
+        radial-gradient(circle at 85% 18%, rgba(139, 108, 255, 0.18), transparent 24%),
+        radial-gradient(circle at 50% 78%, rgba(157, 240, 213, 0.14), transparent 24%),
+        linear-gradient(180deg, #0f0615 0%, #180a21 35%, #120915 100%);
+      font-family: "Space Grotesk", sans-serif;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.06;
+      background-image:
+        linear-gradient(rgba(255, 255, 255, 0.28) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.18) 1px, transparent 1px);
+      background-size: 80px 80px;
+      mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.9), transparent 86%);
+      z-index: 1;
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.12;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.1' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+      mix-blend-mode: soft-light;
+      z-index: 1;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    .shell {
+      position: relative;
+      z-index: 2;
+    }
+
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      width: min(calc(100% - 32px), var(--max));
+      margin: 18px auto 0;
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      background: rgba(17, 8, 24, 0.58);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      backdrop-filter: blur(18px);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.18);
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--ink);
+      font-family: "Syne", sans-serif;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
+    .brand-mark {
+      width: 44px;
+      height: 44px;
+      border-radius: 16px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, rgba(255, 138, 194, 0.35), rgba(139, 108, 255, 0.3));
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18);
+      overflow: hidden;
+    }
+
+    .brand-mark img {
+      width: 34px;
+      height: 34px;
+      object-fit: contain;
+    }
+
+    .nav-actions {
+      display: inline-flex;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .chip,
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      text-decoration: none;
+      border: 1px solid transparent;
+      border-radius: 999px;
+      transition: transform 220ms ease, border-color 220ms ease, background 220ms ease, box-shadow 220ms ease;
+    }
+
+    .chip {
+      padding: 10px 14px;
+      color: var(--muted);
+      background: rgba(255, 255, 255, 0.06);
+      border-color: var(--line);
+      font-size: 0.92rem;
+    }
+
+    .button {
+      padding: 15px 22px;
+      color: #180a21;
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--rose), var(--peach));
+      box-shadow: 0 12px 34px rgba(255, 182, 219, 0.28);
+    }
+
+    .button.secondary {
+      color: var(--ink);
+      background: rgba(255, 255, 255, 0.08);
+      border-color: var(--line);
+      box-shadow: none;
+    }
+
+    .button:hover,
+    .chip:hover {
+      transform: translateY(-2px);
+    }
+
+    .hero {
+      position: relative;
+      width: min(calc(100% - 32px), var(--max));
+      margin: 28px auto 0;
+      min-height: calc(100vh - 110px);
+      display: grid;
+      grid-template-columns: 0.72fr 1.28fr;
+      gap: 24px;
+      align-items: center;
+      padding: 34px 0 80px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 22px;
+      color: var(--muted);
+      font-size: 0.92rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 46px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.8));
+    }
+
+    .hero h1,
+    .section h2 {
+      font-family: "Syne", sans-serif;
+      line-height: 0.92;
+      letter-spacing: -0.05em;
+      margin: 0;
+    }
+
+    .hero h1 {
+      font-size: clamp(3.8rem, 11vw, 9rem);
+      max-width: 6.2ch;
+      text-wrap: balance;
+    }
+
+    .hero h1 .dim {
+      display: inline-block;
+      color: rgba(255, 247, 253, 0.45);
+    }
+
+    .accent-word {
+      color: var(--rose);
+    }
+
+    .accent-word.soft {
+      color: #ff9fd1;
+    }
+
+    .lede {
+      max-width: 420px;
+      margin: 20px 0 0;
+      color: var(--muted);
+      font-size: clamp(1rem, 1.25vw, 1.08rem);
+      line-height: 1.5;
+    }
+
+    .hero-actions {
+      margin-top: 22px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .hero-stage {
+      position: relative;
+      min-height: 700px;
+      display: grid;
+      place-items: center;
+    }
+
+    .showcase-shell {
+      position: relative;
+      width: min(760px, 100%);
+      display: grid;
+      place-items: center;
+    }
+
+    .glow-stack {
+      position: absolute;
+      inset: 8% 2% 8%;
+      border-radius: 50px;
+      background:
+        radial-gradient(circle at 50% 22%, rgba(255, 196, 138, 0.35), transparent 30%),
+        radial-gradient(circle at 28% 62%, rgba(255, 138, 194, 0.24), transparent 38%),
+        radial-gradient(circle at 78% 68%, rgba(139, 108, 255, 0.26), transparent 28%);
+      filter: blur(20px);
+      opacity: 0.92;
+    }
+
+    .hero-orbit {
+      position: absolute;
+      inset: 8% 8%;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 50%;
+      animation: spin 22s linear infinite;
+    }
+
+    .hero-orbit::before,
+    .hero-orbit::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.62);
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.22);
+    }
+
+    .hero-orbit::before {
+      width: 14px;
+      height: 14px;
+      top: 10%;
+      left: 14%;
+    }
+
+    .hero-orbit::after {
+      width: 8px;
+      height: 8px;
+      bottom: 14%;
+      right: 16%;
+    }
+
+    .showcase {
+      position: relative;
+      width: min(740px, 100%);
+      aspect-ratio: 0.78;
+      border-radius: 42px;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.06)),
+        linear-gradient(160deg, rgba(31, 13, 40, 0.88), rgba(14, 7, 17, 0.88));
+      overflow: hidden;
+      box-shadow: 0 40px 100px rgba(0, 0, 0, 0.38);
+      backdrop-filter: blur(18px);
+      transform: perspective(1600px) rotateY(-10deg) rotateX(4deg) rotateZ(-2deg);
+      transform-origin: center center;
+    }
+
+    .showcase::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+      background-size: 44px 44px;
+      mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.75), transparent 88%);
+    }
+
+    .showcase-room {
+      position: absolute;
+      inset: 5%;
+      border-radius: 30px;
+      overflow: hidden;
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.14);
+    }
+
+    .showcase-room img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transform: scale(1.08);
+    }
+
+    .sprite {
+      position: absolute;
+      object-fit: contain;
+      image-rendering: pixelated;
+      filter: drop-shadow(0 14px 30px rgba(0, 0, 0, 0.28));
+    }
+
+    .sprite-main {
+      width: clamp(280px, 48vw, 470px);
+      right: 14%;
+      top: 7%;
+      animation: float 6s ease-in-out infinite;
+    }
+
+    .sprite-alt {
+      width: clamp(54px, 8vw, 92px);
+      left: 8%;
+      top: 22%;
+      opacity: 0.8;
+      animation: float 5.8s ease-in-out infinite reverse;
+    }
+
+    .sprite-mini {
+      width: clamp(60px, 9vw, 96px);
+      left: 12%;
+      bottom: 29%;
+      opacity: 0.78;
+      animation: bob 5s ease-in-out infinite;
+    }
+
+    .scroll-note {
+      position: absolute;
+      left: 0;
+      bottom: 16px;
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-size: 0.8rem;
+    }
+
+    .scroll-note::after {
+      content: "";
+      width: 76px;
+      height: 1px;
+      background: linear-gradient(90deg, rgba(255, 255, 255, 0.8), transparent);
+    }
+
+    .section {
+      width: min(calc(100% - 32px), var(--max));
+      margin: 0 auto;
+      padding: 68px 0;
+    }
+
+    .section-head {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 24px;
+      align-items: end;
+      margin-bottom: 24px;
+    }
+
+    .world-head {
+      display: grid;
+      grid-template-columns: 0.86fr 1.14fr;
+      gap: 24px;
+      align-items: end;
+      margin-bottom: 24px;
+    }
+
+    .story-head {
+      display: grid;
+      grid-template-columns: 0.86fr 1.14fr;
+      gap: 24px;
+      align-items: end;
+      margin-bottom: 24px;
+    }
+
+    .story-accent {
+      position: relative;
+      min-height: 320px;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+    }
+
+    .story-accent::before {
+      content: "";
+      position: absolute;
+      inset: 4% 8%;
+      border-radius: 999px;
+      background:
+        radial-gradient(circle at 30% 35%, rgba(255, 182, 219, 0.14), transparent 26%),
+        radial-gradient(circle at 72% 34%, rgba(255, 196, 138, 0.12), transparent 24%),
+        radial-gradient(circle at 52% 72%, rgba(139, 108, 255, 0.18), transparent 30%);
+      filter: blur(22px);
+    }
+
+    .story-accent-track {
+      position: relative;
+      z-index: 1;
+      width: min(620px, 48vw);
+      height: min(320px, 25vw);
+    }
+
+    .story-accent-item {
+      position: absolute;
+      image-rendering: pixelated;
+      filter: drop-shadow(0 16px 26px rgba(0, 0, 0, 0.16));
+      opacity: 0.5;
+      animation: float 5.4s ease-in-out infinite;
+    }
+
+    .story-accent-item.one {
+      width: 150px;
+      left: 8px;
+      top: 132px;
+    }
+
+    .story-accent-item.two {
+      width: 176px;
+      left: 150px;
+      top: 26px;
+      animation-delay: 0.5s;
+    }
+
+    .story-accent-item.three {
+      width: 190px;
+      right: 112px;
+      top: 118px;
+      animation-delay: 0.9s;
+    }
+
+    .story-accent-item.four {
+      width: 168px;
+      right: 0;
+      top: 18px;
+      animation-delay: 1.3s;
+    }
+
+    .world-accent {
+      position: relative;
+      min-height: 340px;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+    }
+
+    .world-accent::before {
+      content: "";
+      position: absolute;
+      inset: 6% 10% 4%;
+      border-radius: 999px;
+      background:
+        radial-gradient(circle at 28% 32%, rgba(255, 182, 219, 0.2), transparent 26%),
+        radial-gradient(circle at 72% 28%, rgba(255, 196, 138, 0.18), transparent 24%),
+        radial-gradient(circle at 52% 70%, rgba(139, 108, 255, 0.22), transparent 32%);
+      filter: blur(24px);
+    }
+
+    .world-accent-hearts {
+      position: relative;
+      z-index: 1;
+      width: min(680px, 52vw);
+      height: min(360px, 28vw);
+      display: grid;
+      place-items: center;
+    }
+
+    .pixel-heart {
+      position: absolute;
+      image-rendering: pixelated;
+      filter: drop-shadow(0 14px 22px rgba(0, 0, 0, 0.14));
+      opacity: 0.5;
+      animation: float 5.6s ease-in-out infinite;
+    }
+
+    .pixel-heart.one {
+      width: 230px;
+      top: 4px;
+      left: 10px;
+    }
+
+    .pixel-heart.two {
+      width: 172px;
+      top: 130px;
+      right: 46px;
+      animation-delay: 0.7s;
+    }
+
+    .pixel-heart.three {
+      width: 126px;
+      bottom: 8px;
+      left: 240px;
+      animation-delay: 1.1s;
+    }
+
+    .feature-layout {
+      display: grid;
+      grid-template-columns: 0.72fr 1.28fr;
+      gap: 28px;
+      align-items: start;
+    }
+
+    .feature-intro {
+      position: sticky;
+      top: 104px;
+      display: grid;
+      gap: 14px;
+      align-content: start;
+      padding-top: 6px;
+    }
+
+    .feature-intro h2 {
+      margin: 0;
+    }
+
+    .feature-intro .section-copy {
+      margin: 0;
+      font-size: 1.08rem;
+      line-height: 1.65;
+      max-width: 24ch;
+    }
+
+    .section h2 {
+      font-size: clamp(2.5rem, 7vw, 5.6rem);
+      max-width: 13ch;
+    }
+
+    .section-copy {
+      color: var(--muted);
+      font-size: 0.98rem;
+      line-height: 1.55;
+      max-width: 42ch;
+    }
+
+    .story-grid {
+      display: block;
+    }
+
+    .story-list {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .story-card {
+      position: relative;
+      min-height: 320px;
+      padding: 20px 18px;
+      display: grid;
+      grid-template-rows: auto auto 1fr;
+      align-content: start;
+      border-radius: 26px;
+      border: 1px solid var(--line);
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.03)),
+        rgba(255, 255, 255, 0.03);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transform: translateY(40px);
+      opacity: 0;
+      transition: transform 900ms cubic-bezier(0.2, 1, 0.2, 1), opacity 900ms ease;
+    }
+
+    .story-card.is-visible,
+    .feature-card.is-visible,
+    .room-card.is-visible,
+    .cta-panel.is-visible {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .story-card::before {
+      content: attr(data-index);
+      position: absolute;
+      right: 16px;
+      top: 14px;
+      font-family: "Syne", sans-serif;
+      font-size: clamp(2rem, 3vw, 3.4rem);
+      color: rgba(255, 255, 255, 0.06);
+      letter-spacing: -0.08em;
+    }
+
+    .story-card > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .story-kicker {
+      margin: 0 0 8px;
+      color: rgba(255, 247, 253, 0.72);
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .story-card img {
+      position: absolute;
+      right: -20px;
+      bottom: -8px;
+      z-index: 0;
+      width: min(220px, 18vw);
+      image-rendering: pixelated;
+      filter: drop-shadow(0 18px 34px rgba(0, 0, 0, 0.34));
+      mix-blend-mode: normal;
+      pointer-events: none;
+    }
+
+    .story-card h3 {
+      margin: 0;
+      font-family: "Syne", sans-serif;
+      font-size: clamp(1.1rem, 1.4vw, 1.35rem);
+      letter-spacing: -0.04em;
+      max-width: 11ch;
+    }
+
+    .feature-grid,
+    .rooms-grid {
+      display: grid;
+      gap: 18px;
+    }
+
+    .feature-grid {
+      grid-template-columns: 1fr;
+      gap: 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    .rooms-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .feature-card,
+    .room-card {
+      position: relative;
+      padding: 18px;
+      border-radius: 28px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.06);
+      backdrop-filter: blur(18px);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      transform: translateY(40px);
+      opacity: 0;
+      transition: transform 900ms cubic-bezier(0.2, 1, 0.2, 1), opacity 900ms ease;
+    }
+
+    .feature-card::after,
+    .room-card::after {
+      content: "";
+      position: absolute;
+      inset: auto -10% -40% auto;
+      width: 220px;
+      height: 220px;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.16), transparent 62%);
+      pointer-events: none;
+    }
+
+    .feature-card h3,
+    .room-card h3 {
+      margin: 14px 0 8px;
+      font-family: "Syne", sans-serif;
+      font-size: 1.28rem;
+      letter-spacing: -0.04em;
+    }
+
+    .feature-card p,
+    .room-card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.5;
+      font-size: 0.92rem;
+    }
+
+    .feature-card {
+      min-height: 230px;
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      align-items: stretch;
+      gap: 0;
+      padding: 26px 0;
+      border-radius: 0;
+      border: 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+      background: transparent;
+      backdrop-filter: none;
+      box-shadow: none;
+    }
+
+    .feature-card img {
+      width: min(360px, 31vw);
+      justify-self: end;
+      align-self: center;
+      image-rendering: pixelated;
+      filter: drop-shadow(0 18px 34px rgba(0, 0, 0, 0.28));
+      margin: 0;
+      order: 2;
+    }
+
+    .feature-card-copy {
+      display: grid;
+      gap: 12px;
+      align-content: center;
+      order: 1;
+      max-width: 15ch;
+      padding-right: 20px;
+    }
+
+    .feature-card h3 {
+      margin: 0;
+      font-size: clamp(1.5rem, 2vw, 2rem);
+      max-width: 7ch;
+    }
+
+    .feature-card p {
+      margin: 0;
+      max-width: 16ch;
+      font-size: 0.88rem;
+      line-height: 1.45;
+    }
+
+    .room-card {
+      min-height: 340px;
+      display: grid;
+      align-content: end;
+    }
+
+    .room-card img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.62;
+      transition: transform 900ms ease;
+    }
+
+    .room-card:hover img {
+      transform: scale(1.05);
+    }
+
+    .room-card .overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 20%, rgba(16, 7, 22, 0.36) 56%, rgba(16, 7, 22, 0.94) 100%);
+    }
+
+    .room-card .content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .room-card.is-selected {
+      border-color: rgba(255, 255, 255, 0.34);
+      transform: translateY(-6px);
+      box-shadow: 0 36px 90px rgba(0, 0, 0, 0.32);
+    }
+
+    .room-card.is-selected .overlay {
+      background: linear-gradient(180deg, transparent 10%, rgba(16, 7, 22, 0.26) 48%, rgba(16, 7, 22, 0.92) 100%);
+    }
+
+    .room-card .select-note {
+      margin-top: 16px;
+      color: rgba(255, 247, 253, 0.7);
+      font-size: 0.84rem;
+    }
+
+    .burst-layer {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 80;
+      overflow: hidden;
+    }
+
+    .burst-token {
+      position: absolute;
+      width: 24px;
+      height: 24px;
+      display: grid;
+      place-items: center;
+      font-size: 18px;
+      animation: token-rise 1100ms cubic-bezier(0.2, 1, 0.2, 1) forwards;
+      filter: drop-shadow(0 8px 18px rgba(0, 0, 0, 0.22));
+    }
+
+    .quote-band {
+      overflow: hidden;
+      padding: 34px 0;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .quote-track {
+      display: flex;
+      gap: 26px;
+      width: max-content;
+      animation: marquee 28s linear infinite;
+      will-change: transform;
+    }
+
+    .quote-track span {
+      font-family: "Syne", sans-serif;
+      font-size: clamp(1.4rem, 3vw, 2.4rem);
+      color: rgba(255, 247, 253, 0.78);
+      letter-spacing: -0.03em;
+      white-space: nowrap;
+    }
+
+    .cta-panel {
+      position: relative;
+      padding: clamp(28px, 5vw, 52px);
+      border-radius: 38px;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      background:
+        radial-gradient(circle at 18% 18%, rgba(255, 196, 138, 0.24), transparent 28%),
+        radial-gradient(circle at 82% 18%, rgba(255, 138, 194, 0.24), transparent 26%),
+        linear-gradient(145deg, rgba(255, 255, 255, 0.11), rgba(255, 255, 255, 0.05));
+      box-shadow: var(--shadow);
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 24px;
+      align-items: center;
+      transform: translateY(40px);
+      opacity: 0;
+      transition: transform 900ms cubic-bezier(0.2, 1, 0.2, 1), opacity 900ms ease;
+    }
+
+    .cta-panel h2 {
+      font-size: clamp(2.8rem, 7vw, 5rem);
+      max-width: 9ch;
+    }
+
+    .cta-panel p {
+      margin: 18px 0 0;
+      max-width: 34ch;
+      color: var(--muted);
+      line-height: 1.55;
+      font-size: 0.96rem;
+    }
+
+    .cta-panel .stack {
+      display: grid;
+      gap: 14px;
+      justify-items: start;
+    }
+
+    .cta-ritual {
+      position: relative;
+      min-height: 360px;
+      border-radius: 30px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02)),
+        rgba(255, 255, 255, 0.03);
+      box-shadow: 0 26px 60px rgba(0, 0, 0, 0.24);
+    }
+
+    .cta-ritual-room {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.92;
+    }
+
+    .cta-ritual-overlay {
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg, rgba(17, 8, 24, 0.08), rgba(17, 8, 24, 0.42)),
+        linear-gradient(0deg, rgba(17, 8, 24, 0.7), transparent 34%);
+    }
+
+    .cta-ritual-stage {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      pointer-events: none;
+    }
+
+    .cta-ritual-stage img {
+      width: min(260px, 72%);
+      image-rendering: pixelated;
+      filter: drop-shadow(0 24px 42px rgba(0, 0, 0, 0.28));
+      transform: translateY(-8px);
+    }
+
+    .cta-ritual-ui {
+      position: absolute;
+      left: 16px;
+      right: 16px;
+      bottom: 16px;
+      display: grid;
+      gap: 12px;
+      z-index: 2;
+    }
+
+    .cta-ritual-bar {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: end;
+      gap: 16px;
+      color: var(--ink);
+    }
+
+    .cta-ritual-copy {
+      display: grid;
+      gap: 4px;
+      align-content: end;
+      text-shadow: 0 4px 18px rgba(16, 8, 24, 0.48);
+    }
+
+    .cta-ritual-copy strong {
+      font-family: "Syne", sans-serif;
+      font-size: 1.1rem;
+    }
+
+    .cta-ritual-copy span {
+      color: rgba(255, 247, 253, 0.82);
+      font-size: 0.84rem;
+    }
+
+    .cta-ritual-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .cta-stage-btn {
+      appearance: none;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      background: rgba(20, 10, 29, 0.58);
+      color: var(--ink);
+      padding: 10px 12px;
+      border-radius: 999px;
+      font: inherit;
+      font-size: 0.82rem;
+      backdrop-filter: blur(14px);
+      transition: transform 180ms ease, background 180ms ease, border-color 180ms ease;
+    }
+
+    .cta-stage-btn.is-selected {
+      background: linear-gradient(135deg, rgba(255, 182, 219, 0.24), rgba(255, 196, 138, 0.18));
+      border-color: rgba(255, 255, 255, 0.22);
+    }
+
+    .download-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 22px;
+    }
+
+    .footer {
+      width: min(calc(100% - 32px), var(--max));
+      margin: 0 auto;
+      padding: 28px 0 54px;
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      flex-wrap: wrap;
+      color: rgba(219, 200, 230, 0.8);
+      font-size: 0.94rem;
+    }
+
+    .footer a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .footer a:hover {
+      color: var(--ink);
+    }
+
+    [data-parallax] {
+      transition: transform 120ms linear;
+      will-change: transform;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0px);
+      }
+      50% {
+        transform: translateY(-18px);
+      }
+    }
+
+    @keyframes bob {
+      0%, 100% {
+        transform: translateY(0px) rotate(0deg);
+      }
+      50% {
+        transform: translateY(-10px) rotate(-2deg);
+      }
+    }
+
+    @keyframes pulse-bar {
+      0%, 100% {
+        width: 76%;
+      }
+      50% {
+        width: 92%;
+      }
+    }
+
+    @keyframes marquee {
+      from {
+        transform: translateX(0);
+      }
+      to {
+        transform: translateX(-50%);
+      }
+    }
+
+    @keyframes token-rise {
+      0% {
+        opacity: 0;
+        transform: translate3d(0, 0, 0) scale(0.6) rotate(0deg);
+      }
+      12% {
+        opacity: 1;
+      }
+      100% {
+        opacity: 0;
+        transform: translate3d(var(--drift-x, 0px), -120px, 0) scale(1.15) rotate(var(--spin, 0deg));
+      }
+    }
+
+    @media (max-width: 1100px) {
+      .hero,
+      .section-head,
+      .feature-layout,
+      .cta-panel {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        min-height: auto;
+        padding-top: 18px;
+      }
+
+      .scroll-note {
+        position: static;
+        margin-top: 20px;
+      }
+
+      .story-list {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .feature-intro {
+        position: static;
+      }
+
+      .feature-grid,
+      .rooms-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 760px) {
+      .nav {
+        width: calc(100% - 20px);
+        margin-top: 10px;
+        border-radius: 28px;
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .nav-actions {
+        width: 100%;
+      }
+
+      .nav-actions {
+        justify-content: stretch;
+        flex-direction: column;
+      }
+
+      .nav-actions .chip,
+      .nav-actions .button {
+        width: 100%;
+      }
+
+      .hero,
+      .section,
+      .footer {
+        width: calc(100% - 20px);
+      }
+
+      .story-list,
+      .feature-grid,
+      .rooms-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .feature-card {
+        grid-template-columns: 1fr;
+      }
+
+      .feature-card img {
+        justify-self: center;
+      }
+
+      .hero-stage {
+        min-height: 540px;
+      }
+
+      .showcase {
+        aspect-ratio: 0.9;
+        border-radius: 30px;
+        transform: none;
+      }
+
+      .showcase-shell {
+        width: 100%;
+      }
+
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+
+      [data-parallax] {
+        transform: none !important;
+      }
+    }
   </style>
 </head>
 <body>
-  <div class="container">
-    <div class="egg">🥚</div>
-    <p class="tag">macos · free · kawaii · menu bar</p>
-    <h1>Mochi's Daily Quest</h1>
-    <p>A retro Tamagotchi-style to-do companion who grows happier — and older — every time you get things done. Pixel productivity pal.</p>
-    <div class="features">
-      <span>check off tasks → mochi levels up</span>
-      <span>ignore tasks → mochi gets sad</span>
-      <span>lives in your menu bar</span>
-      <span>xp system with kawaii evolution</span>
-      <span>free. always.</span>
-    </div>
-    <a href="/" class="back">← back to aka kika</a>
+  <div class="burst-layer" aria-hidden="true"></div>
+
+  <div class="shell">
+    <nav class="nav">
+      <a class="brand magnetic" href="#top" aria-label="Mochi home">
+        <span class="brand-mark">
+          <img src="./assets/app_icon.png" alt="" />
+        </span>
+        <span>Mochi's Daily Quest</span>
+      </a>
+
+      <div class="nav-actions">
+        <a class="button magnetic" href="https://github.com/dot-RealityTest/mochi/releases/download/v1.0.0/Mochi.s.Daily.Quest-1.0.0-arm64.dmg">Get the app</a>
+      </div>
+    </nav>
+
+    <header class="hero" id="top">
+      <div>
+        <div class="eyebrow">Tiny tasks. Big attachment.</div>
+        <h1>
+          Give your
+          <span class="dim">to-do list a <span class="accent-word soft">heartbeat.</span></span>
+        </h1>
+        <p class="lede">
+          A desktop companion that makes progress feel alive.
+        </p>
+
+        <div class="hero-actions">
+          <a class="button magnetic" href="https://github.com/dot-RealityTest/mochi/releases/download/v1.0.0/Mochi.s.Daily.Quest-1.0.0-arm64.dmg">Download for macOS</a>
+          <a class="button secondary magnetic" href="#story">See the evolution arc</a>
+        </div>
+
+        <div class="scroll-note">Scroll for the quest</div>
+      </div>
+
+      <div class="hero-stage">
+        <div class="showcase-shell">
+        <div class="glow-stack" data-parallax data-depth="18"></div>
+        <div class="hero-orbit"></div>
+        <div class="showcase" data-parallax data-depth="8">
+          <div class="showcase-room">
+            <img id="showcase-room-image" src="./assets/room_tokyo_night.png" alt="Mochi world preview" />
+          </div>
+
+          <img
+            class="sprite sprite-main"
+            id="showcase-main-sprite"
+            src="./assets/mochi_love Background Removed.png"
+            alt="Celebrating Mochi character"
+          />
+          <img
+            class="sprite sprite-alt"
+            id="showcase-alt-sprite"
+            src="./assets/egg_hatching Background Removed.png"
+            alt="Egg stage preview"
+          />
+          <img
+            class="sprite sprite-mini"
+            id="showcase-mini-sprite"
+            src="./assets/teen_excited Background Removed.png"
+            alt="Teen Mochi preview"
+          />
+        </div>
+        </div>
+      </div>
+    </header>
+
+    <section class="quote-band" aria-label="Mood statements">
+      <div class="quote-track">
+        <span>Productivity should feel emotional, not administrative.</span>
+        <span>Grow a companion while you grow your habits.</span>
+        <span>Pixel softness meets ritual design.</span>
+        <span>Your to-do list can become a tiny world.</span>
+        <span>Productivity should feel emotional, not administrative.</span>
+        <span>Grow a companion while you grow your habits.</span>
+        <span>Pixel softness meets ritual design.</span>
+        <span>Your to-do list can become a tiny world.</span>
+      </div>
+    </section>
+
+    <section class="section" id="story">
+      <div class="story-head">
+        <h2>Every scroll is a stage. Every stage changes the tone.</h2>
+        <div class="story-accent">
+          <div class="story-accent-track" aria-hidden="true">
+            <img class="story-accent-item one" src="./assets/egg_hatching Background Removed.png" alt="" />
+            <img class="story-accent-item two" src="./assets/baby_happy Background Removed.png" alt="" />
+            <img class="story-accent-item three" src="./assets/teen_excited Background Removed.png" alt="" />
+            <img class="story-accent-item four" src="./assets/elder_legacy Background Removed.png" alt="" />
+          </div>
+        </div>
+      </div>
+
+      <div class="story-grid">
+        <div class="story-list">
+          <article class="story-card reveal" data-index="01">
+            <div class="story-kicker">Beginning</div>
+            <h3>Start small.</h3>
+            <img src="./assets/egg_hatch.gif" alt="Egg evolution art" />
+          </article>
+
+          <article class="story-card reveal" data-index="02">
+            <div class="story-kicker">Momentum</div>
+            <h3>Build attachment.</h3>
+            <img src="./assets/baby_happy.gif" alt="Baby Mochi art" />
+          </article>
+
+          <article class="story-card reveal" data-index="03">
+            <div class="story-kicker">Energy</div>
+            <h3>Get some spark.</h3>
+            <img src="./assets/teen_excited.gif" alt="Teen Mochi art" />
+          </article>
+
+          <article class="story-card reveal" data-index="04">
+            <div class="story-kicker">Mastery</div>
+            <h3>Stay with it.</h3>
+            <img src="./assets/elder_legacy.gif" alt="Elder Mochi art" />
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="features">
+      <div class="feature-layout">
+        <div class="feature-intro">
+          <h2>Built like a <span class="accent-word">toy.</span> Structured like a system.</h2>
+          <p class="section-copy">
+            Mochi keeps the loop simple: clear a task, see a reaction, unlock a little more world, come back tomorrow.
+          </p>
+        </div>
+
+        <div class="feature-grid">
+          <article class="feature-card reveal">
+            <div class="feature-card-copy">
+              <h3>Task flow with <span class="accent-word">payoff</span></h3>
+              <p>Clear a task and Mochi reacts right away.</p>
+            </div>
+            <img src="./assets/mochi_checkoff Background Removed.png" alt="Task completion art" />
+          </article>
+
+          <article class="feature-card reveal">
+            <div class="feature-card-copy">
+              <h3><span class="accent-word">Rewards</span> that feel collectible</h3>
+              <p>Progress lands as gifts, streaks, and small surprises.</p>
+            </div>
+            <img src="./assets/gift_treasure_chest Background Removed.png" alt="Reward art" />
+          </article>
+
+          <article class="feature-card reveal">
+            <div class="feature-card-copy">
+              <h3>Desktop-first <span class="accent-word">ritual</span> design</h3>
+              <p>Close at hand. Fast to open. Easy to revisit.</p>
+            </div>
+            <img src="./assets/mochi_writing Background Removed.png" alt="Writing Mochi art" />
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="world">
+      <div class="world-head">
+        <h2>The world widens as your consistency deepens.</h2>
+        <div class="world-accent">
+          <div class="world-accent-hearts" aria-hidden="true">
+            <img class="pixel-heart one" src="./assets/mochi_love Background Removed.png" alt="" />
+            <img class="pixel-heart two" src="./assets/mochi_love Background Removed.png" alt="" />
+            <img class="pixel-heart three" src="./assets/mochi_love Background Removed.png" alt="" />
+          </div>
+        </div>
+      </div>
+
+      <div class="rooms-grid">
+        <article class="room-card reveal magnetic" data-room-card="study">
+          <img src="./assets/room_study.png" alt="Study room" />
+          <div class="overlay"></div>
+          <div class="content">
+            <span class="chip">Base camp</span>
+            <h3>Study Room</h3>
+            <p>Cozy, focused, familiar.</p>
+            <div class="select-note">Click to load this room into the live preview.</div>
+          </div>
+        </article>
+
+        <article class="room-card reveal magnetic" data-room-card="tokyo-day">
+          <img src="./assets/room_tokyo_day.png" alt="Tokyo day room" />
+          <div class="overlay"></div>
+          <div class="content">
+            <span class="chip">Unlock at level 5</span>
+            <h3>Tokyo Day</h3>
+            <p>Bright skyline energy.</p>
+            <div class="select-note">Click to load this room into the live preview.</div>
+          </div>
+        </article>
+
+        <article class="room-card reveal magnetic" data-room-card="thailand-beach">
+          <img src="./assets/room_thailand_beach.png" alt="Thailand beach room" />
+          <div class="overlay"></div>
+          <div class="content">
+            <span class="chip">Unlock at level 12</span>
+            <h3>Thailand Beach</h3>
+            <p>Calm light, open air.</p>
+            <div class="select-note">Click to load this room into the live preview.</div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="download">
+      <div class="cta-panel reveal">
+        <div>
+          <h2>Ready to try your ritual?</h2>
+          <p>
+            Download the macOS build and start growing Mochi.
+          </p>
+          <div class="download-meta">
+            <span class="chip">Electron 41</span>
+            <span class="chip">Apple Silicon + Intel</span>
+            <span class="chip">Kawaii pixel atmosphere</span>
+          </div>
+        </div>
+
+        <div class="cta-ritual">
+          <img class="cta-ritual-room" id="cta-ritual-room" src="./assets/room_tokyo_night.png" alt="Mochi ritual preview" />
+          <div class="cta-ritual-overlay"></div>
+          <div class="cta-ritual-stage">
+            <img id="cta-ritual-mochi" src="./assets/mochi_love Background Removed.png" alt="Mochi ritual companion" />
+          </div>
+          <div class="cta-ritual-ui">
+            <div class="cta-ritual-pills">
+              <button class="cta-stage-btn magnetic is-selected" data-cta-stage="egg" type="button">Egg</button>
+              <button class="cta-stage-btn magnetic" data-cta-stage="baby" type="button">Baby</button>
+              <button class="cta-stage-btn magnetic" data-cta-stage="teen" type="button">Teen</button>
+              <button class="cta-stage-btn magnetic" data-cta-stage="mochi" type="button">Mochi</button>
+              <button class="cta-stage-btn magnetic" data-cta-stage="elder" type="button">Elder</button>
+            </div>
+            <div class="cta-ritual-bar">
+              <div class="cta-ritual-copy">
+                <strong id="cta-ritual-title">Hatch the first version.</strong>
+                <span id="cta-ritual-subtitle">Start small and let Mochi grow with your streak.</span>
+              </div>
+              <a
+                class="button magnetic"
+                href="https://github.com/dot-RealityTest/mochi/releases/download/v1.0.0/Mochi.s.Daily.Quest-1.0.0-arm64.dmg"
+                target="_blank"
+                rel="noreferrer"
+              >
+                Download the DMG
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <span>Built for soft-focus productivity and tiny emotional momentum.</span>
+      <span>
+        By <a href="https://akakika.com" target="_blank" rel="noreferrer">Kika</a>
+        · <a href="https://github.com/dot-RealityTest/mochi" target="_blank" rel="noreferrer">Source</a>
+      </span>
+    </footer>
   </div>
+
+  <script>
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    const burstLayer = document.querySelector(".burst-layer");
+    const magneticItems = document.querySelectorAll(".magnetic");
+    const parallaxNodes = document.querySelectorAll("[data-parallax]");
+    const revealNodes = document.querySelectorAll(".reveal");
+    const roomCards = document.querySelectorAll("[data-room-card]");
+    const showcaseRoomImage = document.querySelector("#showcase-room-image");
+    const showcaseMainSprite = document.querySelector("#showcase-main-sprite");
+    const showcaseAltSprite = document.querySelector("#showcase-alt-sprite");
+    const showcaseMiniSprite = document.querySelector("#showcase-mini-sprite");
+    const ctaRitualRoom = document.querySelector("#cta-ritual-room");
+    const ctaRitualMochi = document.querySelector("#cta-ritual-mochi");
+    const ctaRitualTitle = document.querySelector("#cta-ritual-title");
+    const ctaRitualSubtitle = document.querySelector("#cta-ritual-subtitle");
+    const ctaStageButtons = document.querySelectorAll("[data-cta-stage]");
+
+    const stages = {
+      egg: {
+        label: "Egg",
+        title: "Mood: Hatching tension",
+        description: "The beginning is gentle and a little suspenseful. Mochi is still mostly promise.",
+        level: "Level 1",
+        mood: "Hatching",
+        roomPref: "study",
+        main: "./assets/egg_hatching Background Removed.png",
+        alt: "./assets/baby_curious Background Removed.png",
+        mini: "./assets/gift_star_reward Background Removed.png",
+        chip: "Origin stage"
+      },
+      baby: {
+        label: "Baby",
+        title: "Mood: Curious and attached",
+        description: "Your first streaks make the world responsive. Mochi begins to mirror your momentum.",
+        level: "Level 6",
+        mood: "Curious",
+        roomPref: "study",
+        main: "./assets/baby_happy Background Removed.png",
+        alt: "./assets/egg_hatching Background Removed.png",
+        mini: "./assets/gift_wrapped_present Background Removed.png",
+        chip: "Attachment stage"
+      },
+      teen: {
+        label: "Teen",
+        title: "Mood: Electric and dramatic",
+        description: "This is the high-energy chapter where personality takes over and the room starts to pulse.",
+        level: "Level 12",
+        mood: "Charged",
+        roomPref: "tokyo-day",
+        main: "./assets/teen_excited Background Removed.png",
+        alt: "./assets/teen_phone Background Removed.png",
+        mini: "./assets/gift_xp_orb Background Removed.png",
+        chip: "Spark stage"
+      },
+      mochi: {
+        label: "Mochi",
+        title: "Mood: Overjoyed in neon",
+        description: "The fully realized companion turns task completion into celebration with room-scale atmosphere.",
+        level: "Level 18",
+        mood: "Overjoyed",
+        roomPref: "tokyo-night",
+        main: "./assets/mochi_love Background Removed.png",
+        alt: "./assets/mochi_reward Background Removed.png",
+        mini: "./assets/gift_treasure_chest Background Removed.png",
+        chip: "Signature stage"
+      },
+      elder: {
+        label: "Elder",
+        title: "Mood: Calm mastery",
+        description: "The energy softens into wisdom. Rewards still sparkle, but the emotional texture turns serene.",
+        level: "Level 27",
+        mood: "Enlightened",
+        roomPref: "thailand-beach",
+        main: "./assets/elder_legacy Background Removed.png",
+        alt: "./assets/elder_meditating Background Removed.png",
+        mini: "./assets/gift_streak_flame Background Removed.png",
+        chip: "Mastery stage"
+      }
+    };
+
+    const rooms = {
+      study: {
+        label: "Study Room",
+        image: "./assets/room_study.png"
+      },
+      "tokyo-day": {
+        label: "Tokyo Day",
+        image: "./assets/room_tokyo_day.png"
+      },
+      "tokyo-night": {
+        label: "Tokyo Night",
+        image: "./assets/room_tokyo_night.png"
+      },
+      "thailand-beach": {
+        label: "Thailand Beach",
+        image: "./assets/room_thailand_beach.png"
+      }
+    };
+
+    const pageState = {
+      stage: "mochi",
+      room: "tokyo-night",
+      ctaStage: "egg"
+    };
+
+    function renderInteractiveState() {
+      const stage = stages[pageState.stage];
+      const room = rooms[pageState.room];
+
+      showcaseRoomImage.src = room.image;
+      showcaseRoomImage.alt = `${room.label} preview`;
+      showcaseMainSprite.src = stage.main;
+      showcaseAltSprite.src = stage.alt;
+      showcaseMiniSprite.src = stage.mini;
+      const ctaStage = stages[pageState.ctaStage];
+      ctaRitualRoom.src = room.image;
+      ctaRitualMochi.src = ctaStage.main;
+      ctaRitualMochi.alt = `${ctaStage.label} Mochi ritual companion`;
+      ctaRitualTitle.textContent = {
+        egg: "Hatch the first version.",
+        baby: "Build the habit loop.",
+        teen: "Add some energy.",
+        mochi: "Let progress feel alive.",
+        elder: "Stay with the ritual."
+      }[pageState.ctaStage];
+      ctaRitualSubtitle.textContent = {
+        egg: "Start small and let Mochi grow with your streak.",
+        baby: "Early wins turn into visible attachment.",
+        teen: "Momentum starts changing the mood of the room.",
+        mochi: "The full companion turns tasks into atmosphere.",
+        elder: "Consistency settles into a calmer kind of progress."
+      }[pageState.ctaStage];
+      roomCards.forEach((item) => {
+        item.classList.toggle("is-selected", item.dataset.roomCard === pageState.room);
+      });
+      ctaStageButtons.forEach((item) => {
+        item.classList.toggle("is-selected", item.dataset.ctaStage === pageState.ctaStage);
+      });
+    }
+
+    window.addEventListener("mousemove", (event) => {
+      if (prefersReducedMotion) {
+        return;
+      }
+
+      const centerX = window.innerWidth / 2;
+      const centerY = window.innerHeight / 2;
+
+      parallaxNodes.forEach((node) => {
+        const depth = Number(node.dataset.depth || 10);
+        const moveX = (event.clientX - centerX) / depth;
+        const moveY = (event.clientY - centerY) / depth;
+        node.style.transform = `translate3d(${moveX}px, ${moveY}px, 0)`;
+      });
+    });
+
+    roomCards.forEach((card) => {
+      card.addEventListener("click", () => {
+        pageState.room = card.dataset.roomCard;
+        renderInteractiveState();
+      });
+    });
+
+    ctaStageButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        pageState.ctaStage = button.dataset.ctaStage;
+        renderInteractiveState();
+      });
+    });
+
+    magneticItems.forEach((item) => {
+      item.addEventListener("mouseleave", () => {
+        item.style.transform = "";
+      });
+
+      item.addEventListener("mousemove", (event) => {
+        if (prefersReducedMotion) {
+          return;
+        }
+
+        const rect = item.getBoundingClientRect();
+        const offsetX = event.clientX - rect.left - rect.width / 2;
+        const offsetY = event.clientY - rect.top - rect.height / 2;
+        item.style.transform = `translate(${offsetX * 0.08}px, ${offsetY * 0.08}px)`;
+      });
+    });
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.16 }
+    );
+
+    revealNodes.forEach((node) => observer.observe(node));
+    renderInteractiveState();
+
+    window.render_game_to_text = () =>
+      JSON.stringify({
+        mode: "landing-page",
+        coordinateSystem: {
+          origin: "top-left",
+          xDirection: "right",
+          yDirection: "down"
+        },
+        interactive: {
+          selectedStage: pageState.stage,
+          selectedRoom: pageState.room
+        }
+      });
+
+    window.advanceTime = (ms = 16) => {
+      const syntheticY = (window.scrollY + ms * 0.06) % Math.max(window.innerHeight, document.body.scrollHeight);
+      window.scrollTo({ top: syntheticY, behavior: "instant" });
+      return window.render_game_to_text();
+    };
+  </script>
 </body>
 </html>
