@@ -1,7 +1,7 @@
 {
-  "week": 15,
+  "week": 16,
   "year": 2026,
-  "generated_at": "2026-04-12T01:50:12.265156",
+  "generated_at": "2026-04-13T08:01:15.756960",
   "repos": {
     "boss": {
       "org": "insight-platform",
@@ -31,7 +31,7 @@
         "yolov8",
         "yolov8-face"
       ],
-      "why": "does one thing. does it. doesn't get in the way.",
+      "why": "exists quietly. works consistently. that's the point.",
       "tags": [
         "macos"
       ],
@@ -40,31 +40,42 @@
     },
     "hot": [
       {
-        "org": "ika-rwth-aachen",
-        "name": "ros2-depth-anything-v3-trt",
-        "url": "https://github.com/ika-rwth-aachen/ros2-depth-anything-v3-trt",
-        "stars": 418,
-        "description": "ROS2 TensorRT Node for Monocular Metric Depth estimation and Point Cloud generation from camera images with Depth Anything V3",
-        "language": "C++",
+        "org": "datawhalechina",
+        "name": "base-llm",
+        "url": "https://github.com/datawhalechina/base-llm",
+        "stars": 639,
+        "description": "\u4ece NLP \u5230 LLM \u7684\u7b97\u6cd5\u5168\u6808\u6559\u7a0b\uff0c\u5728\u7ebf\u9605\u8bfb\u5730\u5740\uff1ahttps://datawhalechina.github.io/base-llm/",
+        "language": "Jupyter Notebook",
         "topics": [
-          "depth-anything-v3",
-          "monocular-depth",
-          "monocular-depth-estimation",
-          "ros2",
-          "tensorrt"
+          "bert",
+          "deeplearning",
+          "docker",
+          "fine-tuning",
+          "linux",
+          "llama",
+          "llm",
+          "lora",
+          "nlp",
+          "python",
+          "pytorch",
+          "qwen",
+          "rnn",
+          "tensorrt",
+          "transformer",
+          "tutorial"
         ],
         "why": "does one thing. does it. doesn't get in the way.",
         "tags": [
-          "tools"
+          "ai"
         ],
-        "lang": "c++",
+        "lang": "jupyter notebook",
         "temp": "hot"
       },
       {
         "org": "the-database",
         "name": "mpv-upscale-2x_animejanai",
         "url": "https://github.com/the-database/mpv-upscale-2x_animejanai",
-        "stars": 639,
+        "stars": 642,
         "description": "Real-time anime upscaling to 4k in mpv with Real-ESRGAN compact models",
         "language": "Python",
         "topics": [
@@ -80,7 +91,7 @@
           "vapoursynth",
           "video"
         ],
-        "why": "exists quietly. works consistently. that's the point.",
+        "why": "does one thing. does it. doesn't get in the way.",
         "tags": [
           "tools"
         ],
@@ -93,7 +104,7 @@
         "org": "SunOner",
         "name": "sunone_aimbot_2",
         "url": "https://github.com/SunOner/sunone_aimbot_2",
-        "stars": 365,
+        "stars": 366,
         "description": "Aim-bot based on AI for all FPS and TPS games",
         "language": "C++",
         "topics": [
@@ -124,140 +135,209 @@
         "temp": "warm"
       },
       {
-        "org": "PacificStudio",
-        "name": "openase",
-        "url": "https://github.com/PacificStudio/openase",
-        "stars": 128,
-        "description": "Ticket-Driven Automated Software Engineering. OpenASE is an all-in-one platform that turns tickets into working code \u2014 AI agents automatically pick up tickets, execute workflows on your machines, and deliver results with full traceability.",
-        "language": "Go",
+        "org": "marcusquinn",
+        "name": "aidevops",
+        "url": "https://github.com/marcusquinn/aidevops",
+        "stars": 176,
+        "description": "Vibe-Coding is easy. DevOps is hard. OpenCode & Git token-efficient AI agent automation for your app, business, and personal development. Opinionated tools, services, CLI & API stack for speed, security, and 24/7 results. Open-source first. SOTA everything. Try it on your repos to see the magic.",
+        "language": "Shell",
         "topics": [
-          "agent",
+          "agents",
+          "agents-md",
           "ai",
-          "software-engineering"
+          "ai-agents",
+          "ai-assistant",
+          "ai-assistants",
+          "ai-assisted-development",
+          "ai-code-review",
+          "ai-coding",
+          "ai-dev-ops",
+          "ai-devops",
+          "ai-system-admin",
+          "claude",
+          "devops",
+          "devops-tools",
+          "git-workflow",
+          "git-worktrees",
+          "opencode",
+          "opencode-plugin"
         ],
-        "why": "does one thing. does it. doesn't get in the way.",
+        "why": "cli-first. no web interface. respects your terminal.",
         "tags": [
           "ai",
-          "agents"
+          "agents",
+          "tools"
         ],
-        "lang": "go",
+        "lang": "shell",
         "temp": "warm"
       },
       {
-        "org": "NVIDIA-ISAAC-ROS",
-        "name": "isaac_ros_dnn_inference",
-        "url": "https://github.com/NVIDIA-ISAAC-ROS/isaac_ros_dnn_inference",
-        "stars": 131,
-        "description": "NVIDIA-accelerated DNN model inference ROS 2 packages using NVIDIA Triton/TensorRT for both Jetson and x86_64 with CUDA-capable GPU",
-        "language": "C++",
+        "org": "jamjamjon",
+        "name": "usls",
+        "url": "https://github.com/jamjamjon/usls",
+        "stars": 392,
+        "description": "A Rust library integrated with ONNXRuntime, providing a collection of Computer Vison and Vision-Language models such as YOLO, FastVLM, and more.",
+        "language": "Rust",
         "topics": [
-          "ai",
-          "deep-learning",
-          "deeplearning",
-          "dnn",
-          "gpu",
-          "jetson",
-          "nvidia",
-          "ros",
-          "ros2",
-          "ros2-humble",
-          "tao",
+          "cuda",
+          "florence2",
+          "grounding-dino",
+          "imshow",
+          "ocr",
+          "onnx",
+          "onnxruntime",
+          "rust-yolo",
+          "sam",
+          "sam3",
+          "smolvlm",
           "tensorrt",
-          "tensorrt-inference",
-          "triton",
-          "triton-inference-server"
+          "yolo",
+          "yolo-rs",
+          "yolo-rust",
+          "yolo11",
+          "yolov11",
+          "yolov8"
         ],
-        "why": "does one thing. does it. doesn't get in the way.",
+        "why": "rust. you know what that means. fast.",
         "tags": [
-          "ai"
+          "tools"
         ],
-        "lang": "c++",
+        "lang": "rust",
         "temp": "warm"
       }
     ],
     "cold": [
       {
-        "org": "phineas-pta",
-        "name": "NVIDIA-win",
-        "url": "https://github.com/phineas-pta/NVIDIA-win",
-        "stars": 5,
-        "description": "NVIDIA\u2019s deep learning stack on Windows: CUDA toolkit + cuDNN + TensorRT",
-        "language": null,
+        "org": "Djtony707",
+        "name": "TITAN",
+        "url": "https://github.com/Djtony707/TITAN",
+        "stars": 8,
+        "description": "TITAN \u2014 The Intelligent Task Automation Network. Autonomous AI agent framework with GPU VRAM orchestration, NVIDIA cuOpt/NIM integration, ~155 tools, 34 LLM providers, 15 channels, mesh networking, LiveKit voice, self-improvement, and a React dashboard. npm i -g titan-agent",
+        "language": "TypeScript",
         "topics": [
-          "cuda",
-          "cudnn",
-          "guide",
-          "tensorrt",
-          "tutorial",
-          "windows"
+          "agent",
+          "ai",
+          "automation",
+          "chatbot",
+          "gpu",
+          "llm",
+          "mcp",
+          "multi-agent",
+          "nodejs",
+          "nvidia",
+          "rag",
+          "tools",
+          "typescript",
+          "voice",
+          "vram"
         ],
-        "why": "found at 5 stars. the definition of under the radar.",
-        "tags": [
-          "tools"
-        ],
-        "lang": "various",
-        "temp": "cold"
-      },
-      {
-        "org": "EstebanForge",
-        "name": "construct-cli",
-        "url": "https://github.com/EstebanForge/construct-cli",
-        "stars": 56,
-        "description": "The secure loading program (sandbox) for AI Agents",
-        "language": "Go",
-        "topics": [],
-        "why": "found at 56 stars. the definition of under the radar.",
+        "why": "found at 8 stars. the definition of under the radar.",
         "tags": [
           "ai",
-          "agents"
-        ],
-        "lang": "go",
-        "temp": "cold"
-      },
-      {
-        "org": "takehaya",
-        "name": "xdperf",
-        "url": "https://github.com/takehaya/xdperf",
-        "stars": 73,
-        "description": "xdperf is a high-performance network traffic generation tool that leverages XDP (eXpress Data Path).",
-        "language": "Go",
-        "topics": [
-          "ebpf",
-          "golang",
-          "wasm",
-          "xdp"
-        ],
-        "why": "found at 73 stars. the definition of under the radar.",
-        "tags": [
+          "agents",
           "tools"
         ],
-        "lang": "go",
+        "lang": "typescript",
         "temp": "cold"
       },
       {
-        "org": "yemrealtanay",
-        "name": "llm-hasher",
-        "url": "https://github.com/yemrealtanay/llm-hasher",
-        "stars": 18,
-        "description": "Privacy-first PII tokenization middleware for LLM pipelines \u2014 local detection, encrypted vault, zero cloud dependency.",
-        "language": "Go",
+        "org": "8monkey-ai",
+        "name": "hebo-gateway",
+        "url": "https://github.com/8monkey-ai/hebo-gateway",
+        "stars": 22,
+        "description": "AI Gateway as a Framework. Full control over models, routing & lifecycle. OpenAI-compatible /chat/completions, /responses, /embeddings & /models endpoints.",
+        "language": "TypeScript",
         "topics": [
-          "ai-safety",
-          "data-privacy",
-          "gdpr",
-          "go",
+          "ai",
+          "ai-gateway",
+          "anthrophic",
+          "bedrock",
+          "elysiajs",
+          "gateway",
+          "groq",
+          "hono",
+          "javascript",
           "llm",
-          "middleware",
-          "ollama",
-          "pii",
-          "privacy",
-          "tokenization"
+          "llm-gateway",
+          "llmops",
+          "nextjs",
+          "openai",
+          "tanstack-start",
+          "typescript",
+          "vercel-ai-sdk",
+          "vertex"
         ],
-        "why": "privacy-first. actual words, not marketing.",
+        "why": "this exists and barely anyone knows about it. exactly why we care.",
         "tags": [
           "ai"
         ],
-        "lang": "go",
+        "lang": "typescript",
+        "temp": "cold"
+      },
+      {
+        "org": "freitasp1",
+        "name": "claude-code-skills",
+        "url": "https://github.com/freitasp1/claude-code-skills",
+        "stars": 7,
+        "description": "\ud83d\ude80 Build production-tested Claude Code skills for B2B SaaS using TypeScript, enhancing workflows and ensuring GDPR compliance in AI development.",
+        "language": "Python",
+        "topics": [
+          "ai",
+          "ai-development",
+          "awesome",
+          "claude",
+          "claude-skills",
+          "claudeskills",
+          "cli-tool",
+          "codex",
+          "commands",
+          "deployment",
+          "frontend",
+          "hosting",
+          "llm",
+          "mcp-tools",
+          "serverless",
+          "static-site",
+          "static-site-deploy",
+          "static-site-hosting",
+          "web-hosting"
+        ],
+        "why": "this exists and barely anyone knows about it. exactly why we care.",
+        "tags": [
+          "ai",
+          "terminal",
+          "tools"
+        ],
+        "lang": "python",
+        "temp": "cold"
+      },
+      {
+        "org": "Kind-Unes",
+        "name": "HabitNow",
+        "url": "https://github.com/Kind-Unes/HabitNow",
+        "stars": 85,
+        "description": "Habit Now is a Flutter  habit, task, and recurrent task  app manager with a built-in timer. It utilizes the Bloc pattern for state management and stores data using Hive, a NoSQL database.",
+        "language": "Dart",
+        "topics": [
+          "bloc",
+          "dart",
+          "database",
+          "flutter",
+          "habit",
+          "hive",
+          "innovative",
+          "nosql",
+          "stopwatch",
+          "tasks",
+          "timer",
+          "todolist",
+          "ui"
+        ],
+        "why": "this exists and barely anyone knows about it. exactly why we care.",
+        "tags": [
+          "tools"
+        ],
+        "lang": "dart",
         "temp": "cold"
       }
     ]

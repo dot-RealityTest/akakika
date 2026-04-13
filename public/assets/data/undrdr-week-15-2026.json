@@ -1,7 +1,7 @@
 {
   "week": 15,
   "year": 2026,
-  "generated_at": "2026-04-12T01:50:12.265156",
+  "generated_at": "2026-04-12T08:01:14.461004",
   "repos": {
     "boss": {
       "org": "insight-platform",
@@ -40,17 +40,74 @@
     },
     "hot": [
       {
-        "org": "ika-rwth-aachen",
-        "name": "ros2-depth-anything-v3-trt",
-        "url": "https://github.com/ika-rwth-aachen/ros2-depth-anything-v3-trt",
-        "stars": 418,
-        "description": "ROS2 TensorRT Node for Monocular Metric Depth estimation and Point Cloud generation from camera images with Depth Anything V3",
+        "org": "NVIDIA-ISAAC-ROS",
+        "name": "isaac_ros_pose_estimation",
+        "url": "https://github.com/NVIDIA-ISAAC-ROS/isaac_ros_pose_estimation",
+        "stars": 429,
+        "description": "Deep learned, NVIDIA-accelerated 3D object pose estimation",
         "language": "C++",
         "topics": [
-          "depth-anything-v3",
-          "monocular-depth",
-          "monocular-depth-estimation",
+          "deep-learning",
+          "dope",
+          "gpu",
+          "inference",
+          "jetson",
+          "nvidia",
+          "pose-estimation",
+          "ros",
           "ros2",
+          "ros2-humble",
+          "tensorrt"
+        ],
+        "why": "exists quietly. works consistently. that's the point.",
+        "tags": [
+          "tools"
+        ],
+        "lang": "c++",
+        "temp": "hot"
+      },
+      {
+        "org": "GCWing",
+        "name": "BitFun",
+        "url": "https://github.com/GCWing/BitFun",
+        "stars": 569,
+        "description": "BitFun is a next-generation AI assistant with built-in Code Agent and Cowork Agent. It has memory, personality, and the ability to evolve over time. You can remotely control the desktop through mobile QR pairing or Telegram / Feishu bots, send instructions, and watch each execution step in real time while the Agent keeps working in the background.",
+        "language": "TypeScript",
+        "topics": [
+          "agent",
+          "agent-teams",
+          "agentic-os",
+          "ai",
+          "ai-coding",
+          "ai-ide",
+          "ai-os",
+          "cowork",
+          "human-computer-interaction",
+          "ide",
+          "openclaw",
+          "vibe-coding"
+        ],
+        "why": "does one thing. does it. doesn't get in the way.",
+        "tags": [
+          "ai",
+          "agents"
+        ],
+        "lang": "typescript",
+        "temp": "hot"
+      }
+    ],
+    "warm": [
+      {
+        "org": "leon0514",
+        "name": "trt-sam3",
+        "url": "https://github.com/leon0514/trt-sam3",
+        "stars": 100,
+        "description": "Using C++ TensorRT for SAM3 model inference",
+        "language": "C++",
+        "topics": [
+          "cpp17",
+          "sam3",
+          "segment-anything",
           "tensorrt"
         ],
         "why": "does one thing. does it. doesn't get in the way.",
@@ -58,89 +115,30 @@
           "tools"
         ],
         "lang": "c++",
-        "temp": "hot"
-      },
-      {
-        "org": "the-database",
-        "name": "mpv-upscale-2x_animejanai",
-        "url": "https://github.com/the-database/mpv-upscale-2x_animejanai",
-        "stars": 639,
-        "description": "Real-time anime upscaling to 4k in mpv with Real-ESRGAN compact models",
-        "language": "Python",
-        "topics": [
-          "4k",
-          "anime",
-          "anime-upscaling",
-          "esrgan",
-          "mpv",
-          "nvidia",
-          "real-esrgan",
-          "super-resolution",
-          "tensorrt",
-          "vapoursynth",
-          "video"
-        ],
-        "why": "exists quietly. works consistently. that's the point.",
-        "tags": [
-          "tools"
-        ],
-        "lang": "python",
-        "temp": "hot"
-      }
-    ],
-    "warm": [
-      {
-        "org": "SunOner",
-        "name": "sunone_aimbot_2",
-        "url": "https://github.com/SunOner/sunone_aimbot_2",
-        "stars": 365,
-        "description": "Aim-bot based on AI for all FPS and TPS games",
-        "language": "C++",
-        "topics": [
-          "ai",
-          "ai-aimbot",
-          "aimbot",
-          "arduino",
-          "cpp",
-          "cs2",
-          "cuda",
-          "cv2",
-          "directml",
-          "fortnite",
-          "gpu",
-          "kmbox",
-          "makcu",
-          "tensorrt",
-          "warface",
-          "yolo12",
-          "yolov11",
-          "yolov8"
-        ],
-        "why": "does one thing. does it. doesn't get in the way.",
-        "tags": [
-          "ai"
-        ],
-        "lang": "c++",
         "temp": "warm"
       },
       {
-        "org": "PacificStudio",
-        "name": "openase",
-        "url": "https://github.com/PacificStudio/openase",
-        "stars": 128,
-        "description": "Ticket-Driven Automated Software Engineering. OpenASE is an all-in-one platform that turns tickets into working code \u2014 AI agents automatically pick up tickets, execute workflows on your machines, and deliver results with full traceability.",
-        "language": "Go",
+        "org": "suyoumo",
+        "name": "ClawProBench",
+        "url": "https://github.com/suyoumo/ClawProBench",
+        "stars": 345,
+        "description": "ClawProBench is a live-first benchmark harness for evaluating LLM agents   in the OpenClaw runtime with deterministic grading and repeated-trial   reliability.",
+        "language": "Python",
         "topics": [
           "agent",
-          "ai",
-          "software-engineering"
+          "benchmark",
+          "evaluation",
+          "harness",
+          "leaderboard",
+          "llm",
+          "openclaw"
         ],
-        "why": "does one thing. does it. doesn't get in the way.",
+        "why": "exists quietly. works consistently. that's the point.",
         "tags": [
           "ai",
           "agents"
         ],
-        "lang": "go",
+        "lang": "python",
         "temp": "warm"
       },
       {
@@ -177,87 +175,142 @@
     ],
     "cold": [
       {
-        "org": "phineas-pta",
-        "name": "NVIDIA-win",
-        "url": "https://github.com/phineas-pta/NVIDIA-win",
+        "org": "vizier-lab",
+        "name": "vizier",
+        "url": "https://github.com/vizier-lab/vizier",
         "stars": 5,
-        "description": "NVIDIA\u2019s deep learning stack on Windows: CUDA toolkit + cuDNN + TensorRT",
-        "language": null,
+        "description": "Right-hand Agent for your majesty;",
+        "language": "Rust",
         "topics": [
-          "cuda",
-          "cudnn",
-          "guide",
-          "tensorrt",
-          "tutorial",
-          "windows"
+          "agent",
+          "ai",
+          "ai-agents",
+          "ai-tools",
+          "artificial-intelligence",
+          "openclaw",
+          "rust"
         ],
-        "why": "found at 5 stars. the definition of under the radar.",
-        "tags": [
-          "tools"
-        ],
-        "lang": "various",
-        "temp": "cold"
-      },
-      {
-        "org": "EstebanForge",
-        "name": "construct-cli",
-        "url": "https://github.com/EstebanForge/construct-cli",
-        "stars": 56,
-        "description": "The secure loading program (sandbox) for AI Agents",
-        "language": "Go",
-        "topics": [],
-        "why": "found at 56 stars. the definition of under the radar.",
+        "why": "rust. you know what that means. fast.",
         "tags": [
           "ai",
-          "agents"
-        ],
-        "lang": "go",
-        "temp": "cold"
-      },
-      {
-        "org": "takehaya",
-        "name": "xdperf",
-        "url": "https://github.com/takehaya/xdperf",
-        "stars": 73,
-        "description": "xdperf is a high-performance network traffic generation tool that leverages XDP (eXpress Data Path).",
-        "language": "Go",
-        "topics": [
-          "ebpf",
-          "golang",
-          "wasm",
-          "xdp"
-        ],
-        "why": "found at 73 stars. the definition of under the radar.",
-        "tags": [
+          "agents",
           "tools"
         ],
-        "lang": "go",
+        "lang": "rust",
         "temp": "cold"
       },
       {
-        "org": "yemrealtanay",
-        "name": "llm-hasher",
-        "url": "https://github.com/yemrealtanay/llm-hasher",
-        "stars": 18,
-        "description": "Privacy-first PII tokenization middleware for LLM pipelines \u2014 local detection, encrypted vault, zero cloud dependency.",
-        "language": "Go",
+        "org": "sprklai",
+        "name": "zenii",
+        "url": "https://github.com/sprklai/zenii",
+        "stars": 16,
+        "description": "Your machine's AI brain. One 20MB binary gives every tool, script, and cron job shared AI memory + 114 API routes. Desktop app, CLI, Telegram \u2014 all connected. Rust-powered.",
+        "language": "Rust",
         "topics": [
-          "ai-safety",
-          "data-privacy",
-          "gdpr",
-          "go",
-          "llm",
-          "middleware",
+          "ai-agents",
+          "ai-backend",
+          "ai-infrastructure",
+          "ai-memory",
+          "cli",
+          "desktop-apps",
+          "developer-tools",
+          "local-ai",
+          "local-first",
+          "mcp",
+          "mit-license",
           "ollama",
-          "pii",
+          "open-source",
           "privacy",
-          "tokenization"
+          "rust-lang",
+          "self-hosted-ai",
+          "sqlite",
+          "tauri",
+          "telegram-bot",
+          "workflow-automation"
         ],
-        "why": "privacy-first. actual words, not marketing.",
+        "why": "written in rust. probably correct and probably fast.",
         "tags": [
-          "ai"
+          "ai",
+          "agents",
+          "terminal"
         ],
-        "lang": "go",
+        "lang": "rust",
+        "temp": "cold"
+      },
+      {
+        "org": "wolfsoftwaresystemsltd",
+        "name": "WolfStack",
+        "url": "https://github.com/wolfsoftwaresystemsltd/WolfStack",
+        "stars": 90,
+        "description": "Server management platform for the Wolf software suite",
+        "language": "Rust",
+        "topics": [
+          "actix-web",
+          "backup",
+          "cluster-management",
+          "container-management",
+          "devops",
+          "docker",
+          "docker-management",
+          "homelab",
+          "infrastructure",
+          "linux-server",
+          "lxc",
+          "monitoring",
+          "networking",
+          "proxmox-alternative",
+          "rust",
+          "self-hosted",
+          "server-management",
+          "sysadmin",
+          "virtual-machines",
+          "web-ui"
+        ],
+        "why": "rust. you know what that means. fast.",
+        "tags": [
+          "ai",
+          "macos",
+          "local llm"
+        ],
+        "lang": "rust",
+        "temp": "cold"
+      },
+      {
+        "org": "yurukusa",
+        "name": "cc-safe-setup",
+        "url": "https://github.com/yurukusa/cc-safe-setup",
+        "stars": 8,
+        "description": "One command to make Claude Code safe. Prevents rm -rf disasters, secret leaks, broken deployments. 650+ hooks \u00b7 9,200+ tests \u00b7 Built from 800hrs of autonomous operation.",
+        "language": "Shell",
+        "topics": [
+          "agent",
+          "agentic-coding",
+          "ai-safety",
+          "anthropic",
+          "automation",
+          "autonomous",
+          "bash",
+          "claude",
+          "claude-code",
+          "cli",
+          "coding-agent",
+          "data-loss-prevention",
+          "database-protection",
+          "developer-tools",
+          "hooks",
+          "llm-tools",
+          "pretooluse",
+          "safety",
+          "security",
+          "token-consumption"
+        ],
+        "why": "found at 8 stars. the definition of under the radar.",
+        "tags": [
+          "ai",
+          "agents",
+          "terminal"
+        ],
+        "lang": "shell",
         "temp": "cold"
       }
     ]
