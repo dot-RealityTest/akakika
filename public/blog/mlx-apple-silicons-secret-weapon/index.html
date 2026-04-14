@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MLX — Apple Silicon's Secret Weapon | kika</title>
+  <meta name="description" content="Apple's MLX framework runs AI models at near-native speed on Apple Silicon M-chips. 20-30% faster than Ollama, unified memory architecture, no CUDA. Learn how to run local AI inference on your M4.">
+  <meta name="author" content="kika">
+  <meta name="date" content="2026-04-13">
+  <meta name="keywords" content="MLX, Apple Silicon, M4, local AI, mlx-lm, mlx-swift, unified memory architecture, on-device inference, Apple GPU, Metal, machine learning framework">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="MLX — Apple Silicon's Secret Weapon">
+  <meta property="og:description" content="Apple's MLX framework runs AI models at near-native speed on M-chips. 20-30% faster than Ollama, unified memory architecture, no CUDA dependency hell.">
+  <meta property="og:url" content="https://akakika.com/blog/mlx-apple-silicons-secret-weapon">
+  <meta property="og:site_name" content="kika">
+  <meta property="og:locale" content="en_US">
+  <meta property="article:published_time" content="2026-04-13">
+  <meta property="article:section" content="Technology">
+  <meta property="article:tag" content="MLX">
+  <meta property="article:tag" content="Apple Silicon">
+  <meta property="article:tag" content="M4">
+  <meta property="article:tag" content="local AI">
+  <meta property="article:tag" content="machine learning">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="MLX — Apple Silicon's Secret Weapon">
+  <meta name="twitter:description" content="Apple's MLX framework runs AI models at near-native speed on M-chips. 20-30% faster than Ollama, unified memory architecture, no CUDA.">
+
+  <!-- Article JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "MLX — Apple Silicon's Secret Weapon",
+    "description": "Apple's MLX framework runs AI models at near-native speed on Apple Silicon M-chips using unified memory architecture. 20-30% faster than Ollama, no CUDA, no Python dependency hell.",
+    "datePublished": "2026-04-13",
+    "dateModified": "2026-04-13",
+    "author": {
+      "@type": "Person",
+      "name": "kika",
+      "url": "https://akakika.com"
+    },
+    "publisher": {
+      "@type": "Person",
+      "name": "kika",
+      "url": "https://akakika.com"
+    },
+    "mainEntityOfPage": "https://akakika.com/blog/mlx-apple-silicons-secret-weapon",
+    "keywords": ["MLX", "Apple Silicon", "M4", "local AI", "mlx-lm", "mlx-swift", "unified memory architecture", "on-device inference", "Apple GPU", "Metal", "machine learning framework"],
+    "citation": [
+      "https://ml-explore.github.io/mlx/",
+      "https://github.com/ml-explore/mlx",
+      "https://github.com/ml-explore/mlx-lm",
+      "https://github.com/ml-explore/mlx-swift",
+      "https://huggingface.co/mlx-community",
+      "https://opensource.apple.com/projects/mlx/"
+    ],
+    "about": [
+      {"@type": "SoftwareFramework", "name": "MLX", "url": "https://github.com/ml-explore/mlx"},
+      {"@type": "Thing", "name": "Apple Silicon"},
+      {"@type": "Thing", "name": "Unified Memory Architecture"},
+      {"@type": "Thing", "name": "Local AI Inference"}
+    ]
+  }
+  </script>
+
+  <!-- Redirect to SPA -->
+  <script>
+    window.location.replace('/blog/mlx-apple-silicons-secret-weapon');
+  </script>
+
+  <!-- Fallback if JS disabled -->
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: #0a0a0a;
+      color: #e5e5e5;
+      font-family: 'IBM Plex Mono', 'SF Mono', 'Menlo', monospace;
+      padding: 4rem 2rem;
+      max-width: 700px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+    h1 { font-size: 2.5rem; font-weight: 700; letter-spacing: -0.03em; color: #fff; margin-bottom: 1rem; }
+    .meta { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.3em; color: #888; margin-bottom: 2rem; }
+    .meta span { margin-right: 1rem; }
+    .intro { font-size: 1.2rem; color: #d1d5db; margin-bottom: 3rem; max-width: 40rem; }
+    h2 { font-size: 1.5rem; font-weight: 700; letter-spacing: -0.02em; color: #fff; margin: 2.5rem 0 1rem; }
+    h3 { font-size: 1.1rem; font-weight: 700; color: #fff; margin: 2rem 0 0.75rem; }
+    p { margin-bottom: 1rem; color: #d1d5db; }
+    strong { color: #fff; }
+    a { color: #a5b4fc; text-decoration: underline; text-underline-offset: 4px; }
+    a:hover { color: #818cf8; }
+    code { background: #1e1e2e; padding: 0.15em 0.4em; border-radius: 0.25em; font-size: 0.9em; }
+    .terminal { background: #1e1e2e; border: 1px solid #2a2a3a; border-radius: 0.5rem; padding: 1.5rem; font-family: 'SF Mono', 'Menlo', monospace; font-size: 0.85rem; color: #d1d5db; margin: 1.5rem 0; }
+    .terminal .comment { color: #666; }
+    .terminal .prompt { color: #666; }
+    .terminal .output { color: #34d399; }
+    ol, ul { margin: 1rem 0; padding-left: 1.5rem; }
+    li { margin-bottom: 0.75rem; color: #d1d5db; }
+    .sources { margin-top: 3rem; }
+    .sources h2 { font-size: 1.1rem; }
+    .sources ol { font-size: 0.85rem; }
+    .sources a { color: #888; }
+    .sources a:hover { color: #fff; }
+    .back { display: inline-block; color: #888; text-decoration: none; margin-bottom: 2rem; }
+    .back:hover { color: #fff; }
+    .cite { color: #666; font-size: 0.85em; }
+    .cite a { color: #666; }
+  </style>
+</head>
+<body>
+  <a href="/blog" class="back">← back to blog</a>
+
+  <div class="meta">
+    <span>Sunday, April 13, 2026</span>
+    <span>apple silicon</span>
+    <span>local ai</span>
+    <span>mlx</span>
+    <span>m4</span>
+  </div>
+
+  <h1>MLX — Apple Silicon's Secret Weapon</h1>
+
+  <p class="intro">
+    your m-chip was born for this. apple's machine learning framework runs models at near-native speed, no cuda, no gpu drivers, no python dependency hell. just your hardware doing what it was designed to do.
+  </p>
+
+  <p>i've been running local ai on macs for two years. ollama, llama.cpp, python venvs that break every update, cuda drivers that don't exist on apple silicon — i've fought all of it. and then i found MLX.</p>
+
+  <p><a href="https://github.com/ml-explore/mlx">MLX</a> is apple's machine learning framework, built specifically for their chips. not ported. not adapted. <strong>built for the hardware you already have.</strong> 25K+ stars on github, actively maintained by apple's ML research team, and gaining adoption fast in the apple silicon developer community <a href="https://ml-explore.github.io/mlx/" class="cite">[1]</a>.</p>
+
+  <h2>the shared memory thing</h2>
+
+  <p>here's the part that actually matters: on intel/nvidia setups, the CPU and GPU have separate memory pools. every computation means copying data back and forth across the PCIe bus. that's latency. that's heat. that's wasted cycles. an NVIDIA RTX 4090 has 1TB/s bandwidth to its own VRAM — but the CPU→GPU transfer is limited to ~64 GB/s across PCIe 4.0 x16.</p>
+
+  <p>apple silicon has <strong>unified memory architecture</strong>. CPU and GPU share the same physical pool. the M4 Max delivers <strong>546 GB/s</strong> bandwidth to a single shared memory — no PCIe bottleneck. MLX exploits this directly — no copies, no transfers, no data movement overhead. the model weights live in memory once, and both processors access them simultaneously <a href="https://ml-explore.github.io/mlx/" class="cite">[1]</a>.</p>
+
+  <p>the result? on an M4 with 128GB of unified memory, you can run a 70B parameter model locally. not a cloud proxy. not a quantized toy. a real model, on your machine, at speeds that make you forget it's not chatGPT.</p>
+
+  <h2>mlx-lm — the one you actually use</h2>
+
+  <p><a href="https://github.com/ml-explore/mlx-lm">mlx-lm</a> (4.7K stars) is the serving layer. you point it at a model, it starts an openAI-compatible API server on your machine. same format as ollama. same endpoints. drop-in replacement for any tool that speaks the openAI completions API.</p>
+
+  <p>but here's the difference: <strong>pure MLX inference runs 20-30% faster than ollama on the same hardware</strong>, because there's no middle layer. no python–C bridge. no llama.cpp abstraction. the computation goes straight to the Apple GPU via Metal. on my M4, a 14B model at 8-bit quantization hits ~45 tokens/sec through MLX vs ~35 tokens/sec through ollama — that's the difference between conversational and waiting.</p>
+
+  <div class="terminal">
+    <p class="comment"># they run side by side. ollama untouched.</p>
+    <p><span class="prompt">$</span> mlx-serve gemma-4-26b-4bit</p>
+    <p class="output">🧠 MLX server on port 8342 — ollama stays on 11434</p>
+  </div>
+
+  <p>they coexist. ollama for your cloud models and local fallbacks. MLX for raw speed when you're running something that has an MLX-optimized variant. your agents switch between them like it's nothing.</p>
+
+  <h2><a href="https://github.com/ml-explore/mlx-swift">mlx-swift</a> — native in your apps</h2>
+
+  <p>this is where it gets insane. <a href="https://github.com/ml-explore/mlx-swift">mlx-swift</a> (1.7K stars) is a Swift API for MLX. no python. no server process. you embed the model directly in your macOS or iOS app. the model runs in the same process as your UI. same binary. same memory space. Apple's own <a href="https://github.com/ml-explore/mlx-swift-examples">mlx-swift-examples</a> repo shows this working with LLMs, image generation, and MNIST — all as native Swift apps.</p>
+
+  <p>i'm building mac apps — breakpoint, promptvault, clipboard sanitizer. all swift, all native. with mlx-swift, i can add local AI to any of them without shipping a python runtime, without running a separate server, without asking users to install anything. the model is part of the app.</p>
+
+  <h2>the MLX ecosystem</h2>
+
+  <p>MLX isn't just one library. it's a complete stack for Apple Silicon machine learning:</p>
+
+  <ol>
+    <li><strong><a href="https://github.com/ml-explore/mlx">mlx</a></strong> — the core framework (25K+ stars). numpy-like API with automatic differentiation, GPU acceleration via Metal, lazy evaluation, and unified memory optimization <a href="https://ml-explore.github.io/mlx/" class="cite">[1]</a>.</li>
+    <li><strong><a href="https://github.com/ml-explore/mlx-lm">mlx-lm</a></strong> — LLM inference and serving (4.7K stars). openAI-compatible server, chat completions, streaming.</li>
+    <li><strong><a href="https://github.com/ml-explore/mlx-swift">mlx-swift</a></strong> — native Swift bindings (1.7K stars). embed MLX directly in iOS/macOS apps with zero python dependency.</li>
+    <li><strong><a href="https://huggingface.co/mlx-community">mlx-community on hugging face</a></strong> — 500+ pre-quantized models ready to run. gemma, qwen, phi, llama, mistral — all optimized for Apple Silicon <a href="https://huggingface.co/mlx-community" class="cite">[2]</a>.</li>
+    <li><strong><a href="https://github.com/Blaizzy/mlx-audio">mlx-audio</a></strong> — audio generation. TTS, music, sound effects. all on-device.</li>
+    <li><strong><a href="https://github.com/Blaizzy/mlx-vlm">mlx-vlm</a></strong> — vision language models. image understanding running locally.</li>
+  </ol>
+
+  <h2>what i run on M4</h2>
+
+  <p>on my M4 with 128GB unified memory (546 GB/s bandwidth), these are the models that make sense for local Apple Silicon inference:</p>
+
+  <ul>
+    <li><strong>hermes-4-14B-8bit</strong> — daily driver. fast, smart, tool-calling capable. ~45 tokens/sec through MLX at 8-bit quantization. runs my openclaw agent.</li>
+    <li><strong>qwen3-coder-8bit</strong> — coding tasks. built for code completion, and it shows on apple silicon inference.</li>
+    <li><strong>gemma-4-26b-4bit</strong> — general reasoning. 26B parameters at 4-bit quantization fits in 128GB unified memory with room to spare.</li>
+  </ul>
+
+  <p>and here's the thing — <strong>they all run simultaneously</strong>. unified memory architecture means i can have ollama serving one model on port 11434 while MLX serves another on 8342, and the M4 doesn't break a sweat. try that on a nvidia setup without buying a second GPU.</p>
+
+  <h2>why local AI on Apple Silicon matters</h2>
+
+  <p>i've been running local AI since before it was cool. two years of fighting with python environments, broken CUDA installations, models that need more VRAM than any macbook has, tools that crash your entire agent setup because they decided to hijack your port.</p>
+
+  <p>MLX is different because it was designed for the hardware i already own. no buying a second GPU. no renting cloud instances for inference. no python dependency hell. just <code>pip install mlx-lm</code> and you're running at near-native speed on Apple Silicon.</p>
+
+  <p>and with mlx-swift, the next step is obvious — embed the model directly in your macOS apps. no server. no runtime. no install step for your users. the model is part of the binary. your mac app has an AI brain and nothing else needs to be running.</p>
+
+  <p><strong>the M4 was designed for this. MLX just unlocks it.</strong></p>
+
+  <div class="sources">
+    <h2>sources</h2>
+    <ol>
+      <li><a href="https://ml-explore.github.io/mlx/">Apple MLX Documentation</a> — official framework reference and architecture overview</li>
+      <li><a href="https://huggingface.co/mlx-community">MLX Community on Hugging Face</a> — pre-quantized models for Apple Silicon</li>
+      <li><a href="https://opensource.apple.com/projects/mlx/">Apple Open Source — MLX Project</a></li>
+      <li><a href="https://github.com/ml-explore/mlx-examples">MLX Examples</a> — practical code examples for LLMs, image generation, and more</li>
+    </ol>
+  </div>
+
+  <p style="margin-top: 3rem;color: #666;font-style: italic;">more where this came from. follow the repo.</p>
+</body>
+</html>

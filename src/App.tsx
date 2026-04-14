@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion, useMotionValue, useMotionValueEvent, useScroll, useTransform } from 'motion/react';
 import Lenis from 'lenis';
+import NexusPage from './NexusPage';
 
 type NavigateFn = (path: string) => void;
 type ThemeName = 'purple' | 'cyan' | 'amber';
@@ -228,6 +229,9 @@ const HomeStickyHeader: React.FC<{
       <BlogNavLink path="/undrdr" className="hover-accent-text cursor-pointer transition-colors">
         UNDRDR
       </BlogNavLink>
+      <BlogNavLink path="/nexus" className="hover-accent-text cursor-pointer transition-colors">
+        NEXUS
+      </BlogNavLink>
       <BlogNavLink path="/blog" className="hover-accent-text cursor-pointer transition-colors">
         BLOG
       </BlogNavLink>
@@ -305,6 +309,9 @@ const Phase0: React.FC<{
         </BlogNavLink>
         <BlogNavLink path="/undrdr" className="hover-accent-text cursor-pointer transition-colors">
           UNDRDR
+        </BlogNavLink>
+        <BlogNavLink path="/nexus" className="hover-accent-text cursor-pointer transition-colors">
+          NEXUS
         </BlogNavLink>
         <BlogNavLink path="/blog" className="hover-accent-text cursor-pointer transition-colors">
           BLOG
@@ -834,6 +841,18 @@ const BlogIndex: React.FC<{ theme: ThemeName; onToggleTheme: () => void }> = ({ 
         </p>
         <p className="accent-text-soft mt-6 text-sm transition-colors group-hover:text-white">open post →</p>
       </BlogNavLink>
+
+      <BlogNavLink
+        path="/blog/mlx-apple-silicons-secret-weapon"
+        className="group blog-index-entry accent-border block bg-transparent p-8 transition-all duration-300 hover-accent-border-strong"
+      >
+        <p className="mb-3 text-xs uppercase tracking-[0.35em] text-gray-300">Sunday, April 13, 2026</p>
+        <h2 className="mb-3 font-display text-3xl tracking-tighter text-gray-100 md:text-5xl">MLX — Apple Silicon's secret weapon</h2>
+        <p className="max-w-3xl leading-relaxed text-gray-100">
+          Apple built a framework that makes your M-chip run AI like it was born for it. No CUDA, no GPU drivers, no Python dependency hell. Just native speed.
+        </p>
+        <p className="accent-text-soft mt-6 text-sm transition-colors group-hover:text-white">open post →</p>
+      </BlogNavLink>
     </div>
   </BlogShell>
 );
@@ -923,6 +942,146 @@ const BlogPostGithubTools: React.FC<{ theme: ThemeName; onToggleTheme: () => voi
 
         <section className="blog-section">
           <p className="italic opacity-70">More where this came from. Follow the repo.</p>
+        </section>
+      </div>
+    </article>
+  </BlogShell>
+);
+
+const BlogPostMLX: React.FC<{ theme: ThemeName; onToggleTheme: () => void }> = ({ theme, onToggleTheme }) => (
+  <BlogShell noCrt>
+    <HomeStickyHeader theme={theme} onToggleTheme={onToggleTheme} workHref="/" aboutHref="/" />
+
+    <article className="blog-article w-full">
+      <nav className="mb-8">
+        <BlogNavLink path="/blog" className="accent-text-soft transition-colors hover:text-white">
+          ← back to blog
+        </BlogNavLink>
+      </nav>
+      <div className="blog-hero mb-12 flex flex-col items-center text-center">
+        <p className="mb-4 text-sm text-gray-300">Sunday, April 13, 2026</p>
+        <div className="mb-6 flex flex-wrap justify-center gap-2 text-xs uppercase tracking-[0.3em] text-gray-300">
+          <span>apple silicon</span>
+          <span>local ai</span>
+          <span>mlx</span>
+          <span>m4</span>
+          <span>performance</span>
+        </div>
+        <h1 className="mb-6 font-display text-4xl leading-none tracking-tighter text-gray-100 md:text-7xl">MLX — Apple Silicon's secret weapon</h1>
+        <p className="max-w-4xl text-lg leading-relaxed text-gray-200 md:text-xl">
+          your m-chip was born for this. apple's machine learning framework runs models at near-native speed, no cuda, no gpu drivers, no python dependency hell. just your hardware doing what it was designed to do.
+        </p>
+      </div>
+
+      <div className="max-w-4xl space-y-10 text-lg leading-relaxed text-gray-200 font-sans">
+        <p>
+          i've been running local ai on macs for two years. ollama, llama.cpp, python venvs that break every update, cuda drivers that don't exist on apple silicon — i've fought all of it. and then i found MLX.
+        </p>
+
+        <p>
+          <a href="https://github.com/ml-explore/mlx" target="_blank" rel="noopener noreferrer" className="text-white underline decoration-1 underline-offset-4 transition-colors hover:text-gray-400">MLX</a> is apple's machine learning framework, built specifically for their chips. not ported. not adapted. <strong className="font-bold text-white">built for the hardware you already have.</strong> 25K+ stars on github, actively maintained by apple's ML research team, and gaining adoption fast in the apple silicon developer community <a href="https://ml-explore.github.io/mlx/" target="_blank" rel="noopener noreferrer" className="text-gray-400 underline decoration-1 underline-offset-4 transition-colors hover:text-gray-300">[1]</a>.
+        </p>
+
+        <section className="blog-section">
+          <h2 className="mb-4 font-display text-3xl tracking-tighter text-white">the shared memory thing</h2>
+          <p>
+            here's the part that actually matters: on intel/nvidia setups, the CPU and GPU have separate memory pools. every computation means copying data back and forth across the PCIe bus. that's latency. that's heat. that's wasted cycles. an NVIDIA RTX 4090 has 1TB/s bandwidth to its own VRAM — but the CPU→GPU transfer is limited to ~64 GB/s across PCIe 4.0 x16.
+          </p>
+          <p className="mt-4">
+            apple silicon has <strong className="font-bold text-white">unified memory architecture</strong>. CPU and GPU share the same physical pool. the M4 Max delivers <strong className="font-bold text-white">546 GB/s</strong> bandwidth to a single shared memory — no PCIe bottleneck. MLX exploits this directly — no copies, no transfers, no data movement overhead. the model weights live in memory once, and both processors access them simultaneously <a href="https://ml-explore.github.io/mlx/" target="_blank" rel="noopener noreferrer" className="text-gray-400 underline decoration-1 underline-offset-4 transition-colors hover:text-gray-300">[1]</a>.
+          </p>
+          <p className="mt-4">
+            the result? on an M4 with 128GB of unified memory, you can run a 70B parameter model locally. not a cloud proxy. not a quantized toy. a real model, on your machine, at speeds that make you forget it's not chatGPT.
+          </p>
+        </section>
+
+        <section className="blog-section">
+          <h2 className="mb-4 font-display text-3xl tracking-tighter text-white">mlx-lm — the one you actually use</h2>
+          <p>
+            <a href="https://github.com/ml-explore/mlx-lm" target="_blank" rel="noopener noreferrer" className="text-white underline decoration-1 underline-offset-4 transition-colors hover:text-gray-400">mlx-lm</a> (4.7K stars) is the serving layer. you point it at a model, it starts an openAI-compatible API server on your machine. same format as ollama. same endpoints. drop-in replacement for any tool that speaks the openAI completions API.
+          </p>
+          <p className="mt-4">
+            but here's the difference: <strong className="font-bold text-white">pure MLX inference runs 20-30% faster than ollama on the same hardware</strong>, because there's no middle layer. no python–C bridge. no llama.cpp abstraction. the computation goes straight to the Apple GPU via Metal. on my M4, a 14B model at 8-bit quantization hits ~45 tokens/sec through MLX vs ~35 tokens/sec through ollama — that's the difference between conversational and waiting.
+          </p>
+          <div className="mt-6 rounded-lg border border-[#2a2a3a] bg-[#1e1e2e] p-6 font-mono text-sm text-gray-300">
+            <p className="mb-2 text-gray-500"># they run side by side. ollama untouched.</p>
+            <p className="mb-2"><span className="text-gray-500">$</span> mlx-serve gemma-4-26b-4bit</p>
+            <p className="text-emerald-400">🧠 MLX server on port 8342 — ollama stays on 11434</p>
+          </div>
+          <p className="mt-4">
+            they coexist. ollama for your cloud models and local fallbacks. MLX for raw speed when you're running something that has an MLX-optimized variant. your agents switch between them like it's nothing.
+          </p>
+        </section>
+
+        <section className="blog-section">
+          <div className="mb-4 flex flex-wrap items-center gap-3">
+            <h2 className="font-display text-3xl tracking-tighter text-white">mlx-swift — native in your apps</h2>
+            <a href="https://github.com/ml-explore/mlx-swift" target="_blank" rel="noopener noreferrer" className="accent-chip px-2 py-1 text-xs transition-colors">
+              [OPEN]
+            </a>
+          </div>
+          <p>
+            this is where it gets insane. <a href="https://github.com/ml-explore/mlx-swift" target="_blank" rel="noopener noreferrer" className="text-white underline decoration-1 underline-offset-4 transition-colors hover:text-gray-400">mlx-swift</a> (1.7K stars) is a Swift API for MLX. no python. no server process. you embed the model directly in your macOS or iOS app. the model runs in the same process as your UI. same binary. same memory space. Apple's own <a href="https://github.com/ml-explore/mlx-swift-examples" target="_blank" rel="noopener noreferrer" className="text-white underline decoration-1 underline-offset-4 transition-colors hover:text-gray-400">mlx-swift-examples</a> repo shows this working with LLMs, image generation, and MNIST — all as native Swift apps.
+          </p>
+          <p className="mt-4">
+            i'm building mac apps — breakpoint, promptvault, clipboard sanitizer. all swift, all native. with mlx-swift, i can add local AI to any of them without shipping a python runtime, without running a separate server, without asking users to install anything. the model is part of the app.
+          </p>
+        </section>
+
+        <section className="blog-section">
+          <h2 className="mb-4 font-display text-3xl tracking-tighter text-white">the MLX ecosystem</h2>
+          <p>MLX isn't just one library. it's a complete stack for Apple Silicon machine learning:</p>
+          <ol className="mt-4 space-y-3 list-decimal list-inside">
+            <li><strong className="font-bold text-white"><a href="https://github.com/ml-explore/mlx" target="_blank" rel="noopener noreferrer" className="text-white underline decoration-1 underline-offset-4 hover:text-gray-400">mlx</a></strong> — the core framework (25K+ stars). numpy-like API with automatic differentiation, GPU acceleration via Metal, lazy evaluation, and unified memory optimization <a href="https://ml-explore.github.io/mlx/" target="_blank" rel="noopener noreferrer" className="text-gray-400 underline decoration-1 underline-offset-4 hover:text-gray-300">[1]</a>.</li>
+            <li><strong className="font-bold text-white"><a href="https://github.com/ml-explore/mlx-lm" target="_blank" rel="noopener noreferrer" className="text-white underline decoration-1 underline-offset-4 hover:text-gray-400">mlx-lm</a></strong> — LLM inference and serving (4.7K stars). openAI-compatible server, chat completions, streaming. what you use day-to-day.</li>
+            <li><strong className="font-bold text-white"><a href="https://github.com/ml-explore/mlx-swift" target="_blank" rel="noopener noreferrer" className="text-white underline decoration-1 underline-offset-4 hover:text-gray-400">mlx-swift</a></strong> — native Swift bindings (1.7K stars). embed MLX directly in iOS/macOS apps with zero python dependency.</li>
+            <li><strong className="font-bold text-white"><a href="https://huggingface.co/mlx-community" target="_blank" rel="noopener noreferrer" className="text-white underline decoration-1 underline-offset-4 hover:text-gray-400">mlx-community on hugging face</a></strong> — 500+ pre-quantized models ready to run. gemma, qwen, phi, llama, mistral — all optimized for Apple Silicon <a href="https://huggingface.co/mlx-community" target="_blank" rel="noopener noreferrer" className="text-gray-400 underline decoration-1 underline-offset-4 hover:text-gray-300">[2]</a>.</li>
+            <li><strong className="font-bold text-white"><a href="https://github.com/Blaizzy/mlx-audio" target="_blank" rel="noopener noreferrer" className="text-white underline decoration-1 underline-offset-4 hover:text-gray-400">mlx-audio</a></strong> — audio generation. TTS, music, sound effects. all on-device.</li>
+            <li><strong className="font-bold text-white"><a href="https://github.com/Blaizzy/mlx-vlm" target="_blank" rel="noopener noreferrer" className="text-white underline decoration-1 underline-offset-4 hover:text-gray-400">mlx-vlm</a></strong> — vision language models. image understanding running locally.</li>
+          </ol>
+        </section>
+
+        <section className="blog-section">
+          <h2 className="mb-4 font-display text-3xl tracking-tighter text-white">what i run on M4</h2>
+          <p>on my M4 with 128GB unified memory (546 GB/s bandwidth), these are the models that make sense for local Apple Silicon inference:</p>
+          <ul className="mt-4 space-y-3">
+            <li><strong className="font-bold text-white">hermes-4-14B-8bit</strong> — daily driver. fast, smart, tool-calling capable. ~45 tokens/sec through MLX at 8-bit quantization. runs my openclaw agent.</li>
+            <li><strong className="font-bold text-white">qwen3-coder-8bit</strong> — coding tasks. built for code completion, and it shows on apple silicon inference.</li>
+            <li><strong className="font-bold text-white">gemma-4-26b-4bit</strong> — general reasoning. 26B parameters at 4-bit quantization fits in 128GB unified memory with room to spare.</li>
+          </ul>
+          <p className="mt-4">
+            and here's the thing — <strong className="font-bold text-white">they all run simultaneously</strong>. unified memory architecture means i can have ollama serving one model on port 11434 while MLX serves another on 8342, and the M4 doesn't break a sweat. try that on a nvidia setup without buying a second GPU.
+          </p>
+        </section>
+
+        <section className="blog-section">
+          <h2 className="mb-4 font-display text-3xl tracking-tighter text-white">why local AI on Apple Silicon matters</h2>
+          <p>
+            i've been running local AI since before it was cool. two years of fighting with python environments, broken CUDA installations, models that need more VRAM than any macbook has, tools that crash your entire agent setup because they decided to hijack your port.
+          </p>
+          <p className="mt-4">
+            MLX is different because it was designed for the hardware i already own. no buying a second GPU. no renting cloud instances for inference. no python dependency hell. just <code className="rounded bg-[#1e1e2e] px-2 py-0.5 text-sm text-gray-300">pip install mlx-lm</code> and you're running at near-native speed on Apple Silicon.
+          </p>
+          <p className="mt-4">
+            and with mlx-swift, the next step is obvious — embed the model directly in your macOS apps. no server. no runtime. no install step for your users. the model is part of the binary. your mac app has an AI brain and nothing else needs to be running.
+          </p>
+          <p className="mt-4">
+            <strong className="font-bold text-white">the M4 was designed for this. MLX just unlocks it.</strong>
+          </p>
+        </section>
+
+        <section className="blog-section">
+          <h2 className="mb-4 font-display text-2xl tracking-tighter text-white">sources</h2>
+          <ol className="space-y-2 text-sm text-gray-400 list-decimal list-inside">
+            <li><a href="https://ml-explore.github.io/mlx/" target="_blank" rel="noopener noreferrer" className="text-gray-400 underline decoration-1 underline-offset-4 hover:text-gray-300">Apple MLX Documentation</a> — official framework reference and architecture overview</li>
+            <li><a href="https://huggingface.co/mlx-community" target="_blank" rel="noopener noreferrer" className="text-gray-400 underline decoration-1 underline-offset-4 hover:text-gray-300">MLX Community on Hugging Face</a> — pre-quantized models for Apple Silicon</li>
+            <li><a href="https://opensource.apple.com/projects/mlx/" target="_blank" rel="noopener noreferrer" className="text-gray-400 underline decoration-1 underline-offset-4 hover:text-gray-300">Apple Open Source — MLX Project</a></li>
+            <li><a href="https://github.com/ml-explore/mlx-examples" target="_blank" rel="noopener noreferrer" className="text-gray-400 underline decoration-1 underline-offset-4 hover:text-gray-300">MLX Examples</a> — practical code examples for LLMs, image generation, and more</li>
+          </ol>
+        </section>
+
+        <section className="blog-section">
+          <p className="italic opacity-70">more where this came from. follow the repo.</p>
         </section>
       </div>
     </article>
@@ -1250,10 +1409,14 @@ export default function App() {
         <BlogPostThreeTools theme={theme} onToggleTheme={cycleTheme} />
       ) : path === '/blog/5-github-tools-that-ship' ? (
         <BlogPostGithubTools theme={theme} onToggleTheme={cycleTheme} />
+      ) : path === '/blog/mlx-apple-silicons-secret-weapon' ? (
+        <BlogPostMLX theme={theme} onToggleTheme={cycleTheme} />
       ) : path === '/apps' ? (
         <AppsPage theme={theme} onToggleTheme={cycleTheme} />
       ) : path === '/undrdr' ? (
         <UndrdrPage theme={theme} onToggleTheme={cycleTheme} />
+      ) : path === '/nexus' ? (
+        <NexusPage theme={theme} onToggleTheme={cycleTheme} />
       ) : path === '/goodnews' ? (
         <GoodNewsPage theme={theme} onToggleTheme={cycleTheme} />
       ) : (
