@@ -243,11 +243,9 @@ const Phase0: React.FC<{
   scrollProgress: number;
   isStarting: boolean;
   hasBooted: boolean;
-  theme: ThemeName;
-  onToggleTheme: () => void;
   mousePos: { x: number; y: number };
   transitionDirection: 1 | -1;
-}> = ({ isScriptRunning, scrollProgress, isStarting, hasBooted, theme, onToggleTheme, mousePos, transitionDirection }) => (
+}> = ({ isScriptRunning, scrollProgress, isStarting, hasBooted, mousePos, transitionDirection }) => (
   <motion.div
     className="absolute inset-0 flex flex-col items-center justify-center bg-[#0a0a0a] font-mono dotted-bg"
     initial={{ opacity: 0, scale: 0.95, y: transitionDirection === -1 ? '-18vh' : 0 }}
@@ -281,31 +279,6 @@ const Phase0: React.FC<{
         </motion.div>
       )}
     </AnimatePresence>
-    <div className="home-toolbar absolute top-0 left-0 z-10 flex w-full items-center justify-between p-4 text-sm font-bold text-gray-100 md:p-6">
-      <div className="flex items-center gap-2">
-        <span className="bg-gray-200 px-2 py-1 text-black">AKA</span>
-        <span className="tracking-widest">KIKA</span>
-        <div className="blink h-5 w-3 accent-bg" />
-      </div>
-      <div className="flex items-center gap-3 tracking-widest md:gap-6">
-        <BlogNavLink path="/apps" className="hover-accent-text cursor-pointer transition-colors">
-          APPS
-        </BlogNavLink>
-        <BlogNavLink path="/undrdr" className="hover-accent-text cursor-pointer transition-colors">
-          UNDRDR
-        </BlogNavLink>
-        <BlogNavLink path="/blog" className="hover-accent-text cursor-pointer transition-colors">
-          BLOG
-        </BlogNavLink>
-        <BlogNavLink path="/goodnews" className="hover-accent-text cursor-pointer transition-colors">
-          GOOD NEWS ✦
-        </BlogNavLink>
-        <a href="#about" className="hover-accent-text cursor-pointer transition-colors">
-          ABOUT
-        </a>
-        <ThemeToggle theme={theme} onToggle={onToggleTheme} />
-      </div>
-    </div>
     <div className="accent-text absolute top-24 left-6 z-10 flex flex-col gap-1 text-[10px] opacity-80 md:text-sm">
       {isScriptRunning ? (
         <TerminalBlock lines={['boot sequence engaged', 'mounting memory layer', 'line_format', 'welcome', '']} delay={120} showCursor={true} />
@@ -1491,8 +1464,6 @@ const HomeExperience: React.FC<{ theme: ThemeName; onToggleTheme: () => void }> 
             scrollProgress={scrollProgress}
             isStarting={isStarting}
             hasBooted={hasBooted}
-            theme={theme}
-            onToggleTheme={onToggleTheme}
             mousePos={mousePos}
             transitionDirection={phaseDirection}
           />
