@@ -2,7 +2,7 @@
 
 [akakika.com](https://akakika.com) — portfolio, blog, and a curated list of interesting open source projects.
 
-## Pages
+What you'll find:
 
 | Page | What's there |
 |------|-------------|
@@ -11,23 +11,23 @@
 | `/undrdr` | UNDRDR — under the radar repos, updated weekly |
 | `/blog` | Blog posts |
 
-## Run locally
+## Get started
 
 ```bash
 npm install
 npm run dev
 ```
 
-Open [localhost:3000](http://localhost:3000).
+Then open [localhost:3000](http://localhost:3000) in your browser.
 
-## Build
+## Publish
 
 ```bash
 npm run build
 ```
 
-Output goes to `dist/`. Deployed on Vercel.
+The finished site ends up in the `dist` folder. Vercel handles hosting.
 
 ## UNDRDR data
 
-Repo data lives in `public/assets/data/undrdr.json`. Past weeks are in `undrdr-week-{week}-{year}.json`. Updated automatically on a schedule.
+The repo list lives in `public/assets/data/undrdr.json`. Older weeks are saved as `undrdr-week-{week}-{year}.json`. A script updates these weekly.
