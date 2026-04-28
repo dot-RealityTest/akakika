@@ -200,9 +200,7 @@ const ThemeToggle: React.FC<{ theme: ThemeName; onToggle: () => void }> = ({ the
 const HomeStickyHeader: React.FC<{
   theme: ThemeName;
   onToggleTheme: () => void;
-  workHref?: string;
-  aboutHref?: string;
-}> = ({ theme, onToggleTheme, workHref, aboutHref }) => (
+}> = ({ theme, onToggleTheme }) => (
   <motion.div
     className="sticky top-0 z-50 flex w-full items-center justify-between border-b border-white/[0.06] bg-[#0a0a0a]/90 px-6 py-4 backdrop-blur-xl md:px-12 -mt-6 md:-mt-12"
     style={{
@@ -219,13 +217,6 @@ const HomeStickyHeader: React.FC<{
       <BlogNavLink path="/" className="hover-accent-text cursor-pointer transition-colors">
         HOME
       </BlogNavLink>
-      {workHref ? (
-        <BlogNavLink path={workHref} className="hover-accent-text cursor-pointer transition-colors">
-          WORK
-        </BlogNavLink>
-      ) : (
-        <span>WORK</span>
-      )}
       <BlogNavLink path="/apps" className="hover-accent-text cursor-pointer transition-colors">
         APPS
       </BlogNavLink>
@@ -238,15 +229,9 @@ const HomeStickyHeader: React.FC<{
       <BlogNavLink path="/goodnews" className="hover-accent-text cursor-pointer transition-colors">
         GOOD NEWS ✦
       </BlogNavLink>
-      {aboutHref ? (
-        <BlogNavLink path={aboutHref} className="hover-accent-text cursor-pointer transition-colors">
-          ABOUT
-        </BlogNavLink>
-      ) : (
-        <a href="#about" className="hover-accent-text cursor-pointer transition-colors">
-          ABOUT
-        </a>
-      )}
+      <a href="#about" className="hover-accent-text cursor-pointer transition-colors">
+        ABOUT
+      </a>
       <ThemeToggle theme={theme} onToggle={onToggleTheme} />
     </div>
   </motion.div>
@@ -303,7 +288,6 @@ const Phase0: React.FC<{
         <div className="blink h-5 w-3 accent-bg" />
       </div>
       <div className="flex items-center gap-3 tracking-widest md:gap-6">
-        <span>WORK</span>
         <BlogNavLink path="/apps" className="hover-accent-text cursor-pointer transition-colors">
           APPS
         </BlogNavLink>
@@ -316,7 +300,9 @@ const Phase0: React.FC<{
         <BlogNavLink path="/goodnews" className="hover-accent-text cursor-pointer transition-colors">
           GOOD NEWS ✦
         </BlogNavLink>
-        <span>ABOUT</span>
+        <a href="#about" className="hover-accent-text cursor-pointer transition-colors">
+          ABOUT
+        </a>
         <ThemeToggle theme={theme} onToggle={onToggleTheme} />
       </div>
     </div>
@@ -806,7 +792,7 @@ const BlogShell: React.FC<{ children: React.ReactNode; noCrt?: boolean }> = ({ c
 
 const BlogIndex: React.FC<{ theme: ThemeName; onToggleTheme: () => void }> = ({ theme, onToggleTheme }) => (
   <BlogShell>
-    <HomeStickyHeader theme={theme} onToggleTheme={onToggleTheme} workHref="/" aboutHref="/" />
+    <HomeStickyHeader theme={theme} onToggleTheme={onToggleTheme} />
 
     <div className="w-full blog-index">
       <p className="accent-text-soft mb-4">kika@portfolio:~$ ls blog/</p>
@@ -868,7 +854,7 @@ const BlogIndex: React.FC<{ theme: ThemeName; onToggleTheme: () => void }> = ({ 
 
 const BlogPostGithubTools: React.FC<{ theme: ThemeName; onToggleTheme: () => void }> = ({ theme, onToggleTheme }) => (
   <BlogShell noCrt>
-    <HomeStickyHeader theme={theme} onToggleTheme={onToggleTheme} workHref="/" aboutHref="/" />
+    <HomeStickyHeader theme={theme} onToggleTheme={onToggleTheme} />
 
     <article className="blog-article w-full">
       <nav className="mb-8">
@@ -959,7 +945,7 @@ const BlogPostGithubTools: React.FC<{ theme: ThemeName; onToggleTheme: () => voi
 
 const BlogPostMLX: React.FC<{ theme: ThemeName; onToggleTheme: () => void }> = ({ theme, onToggleTheme }) => (
   <BlogShell noCrt>
-    <HomeStickyHeader theme={theme} onToggleTheme={onToggleTheme} workHref="/" aboutHref="/" />
+    <HomeStickyHeader theme={theme} onToggleTheme={onToggleTheme} />
 
     <article className="blog-article w-full">
       <nav className="mb-8">
@@ -1099,7 +1085,7 @@ const BlogPostMLX: React.FC<{ theme: ThemeName; onToggleTheme: () => void }> = (
 
 const BlogPostThreeTools: React.FC<{ theme: ThemeName; onToggleTheme: () => void }> = ({ theme, onToggleTheme }) => (
   <BlogShell noCrt>
-    <HomeStickyHeader theme={theme} onToggleTheme={onToggleTheme} workHref="/" aboutHref="/" />
+    <HomeStickyHeader theme={theme} onToggleTheme={onToggleTheme} />
 
     <article className="blog-article w-full">
       <nav className="mb-8">
@@ -1252,7 +1238,7 @@ const BlogPostAIDivergence: React.FC<{ theme: ThemeName; onToggleTheme: () => vo
 
   return (
   <BlogShell noCrt>
-    <HomeStickyHeader theme={theme} onToggleTheme={onToggleTheme} workHref="/" aboutHref="/" />
+    <HomeStickyHeader theme={theme} onToggleTheme={onToggleTheme} />
 
     <article className="blog-article w-full">
       <nav className="mb-8">
