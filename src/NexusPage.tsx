@@ -107,7 +107,7 @@ const HomeStickyHeader: React.FC<{
   aboutHref?: string;
 }> = ({ theme, onToggleTheme, workHref, aboutHref }) => (
   <motion.div
-    className="home-toolbar sticky top-0 z-50 mb-12 flex w-full items-center justify-between px-6 py-4 text-sm font-bold md:px-12 -mt-6 md:-mt-12"
+    className="sticky top-0 z-50 flex w-full items-center justify-between border-b border-white/[0.06] bg-[#0a0a0a]/90 px-6 py-4 backdrop-blur-xl md:px-12 -mt-6 md:-mt-12"
     style={{
       paddingRight: 'max(1.5rem, env(safe-area-inset-right))',
       paddingLeft: 'max(1.5rem, env(safe-area-inset-left))',
