@@ -52,7 +52,7 @@
     "tier": "EDGE",
     "category": "Apple Intelligence",
     "description": "Example apps for Foundation Models Framework in iOS 26 and macOS 26",
-    "stars": 976,
+    "stars": 986,
     "forks": 0,
     "language": "Swift",
     "updated": "7d ago"
@@ -60,13 +60,14 @@
   {
     "name": "fspecii/ace-step-ui",
     "url": "https://github.com/fspecii/ace-step-ui",
-    "tier": "LAB",
+    "tier": "RISEN",
     "category": "AI Music",
     "description": "The Ultimate Open Source Suno Alternative - Professional UI for ACE-Step 1.5 AI Music Generation. Free, local",
-    "stars": 993,
+    "stars": 1307,
     "forks": 154,
     "language": "JavaScript",
-    "updated": "9d ago"
+    "updated": "9d ago",
+    "_graduated_at": "2026-04-28T05:39:37.563370"
   },
   {
     "name": "CatMe0w/zouxian",
@@ -85,7 +86,7 @@
     "tier": "GEM",
     "category": "Mac Tool",
     "description": "View Spaces and Virtual Desktops in the macOS menu bar",
-    "stars": 960,
+    "stars": 962,
     "forks": 45,
     "language": "Swift",
     "updated": "7d ago"
@@ -96,7 +97,7 @@
     "tier": "LAB",
     "category": "TUI / Terminal",
     "description": "Offline search engine for man pages, Arch and Gentoo wikis via TUI",
-    "stars": 945,
+    "stars": 947,
     "forks": 0,
     "language": "Python",
     "updated": "8d ago"
@@ -107,7 +108,7 @@
     "tier": "GEM",
     "category": "Mac Tool",
     "description": "CLI tool for inspecting and managing services listening on localhost ports",
-    "stars": 929,
+    "stars": 932,
     "forks": 25,
     "language": "Go",
     "updated": "10d ago"
@@ -126,13 +127,14 @@
   {
     "name": "oh-my-mermaid/oh-my-mermaid",
     "url": "https://github.com/oh-my-mermaid/oh-my-mermaid",
-    "tier": "LAB",
+    "tier": "RISEN",
     "category": "Dev Tools",
     "description": "Turn complex codebases into clear, navigable architecture diagrams",
-    "stars": 990,
+    "stars": 1012,
     "forks": 0,
     "language": "TypeScript",
-    "updated": ""
+    "updated": "",
+    "_graduated_at": "2026-04-28T05:39:39.118243"
   },
   {
     "name": "madsmtm/objc2",
@@ -140,7 +142,7 @@
     "tier": "LAB",
     "category": "AR / XR",
     "description": "Bindings to Apple frameworks in Rust",
-    "stars": 903,
+    "stars": 912,
     "forks": 69,
     "language": "Rust",
     "updated": ""
@@ -151,7 +153,7 @@
     "tier": "LAB",
     "category": "Dev Tools",
     "description": "Universal AI context generator. Saves thousands of tokens per session",
-    "stars": 955,
+    "stars": 994,
     "forks": 0,
     "language": "Unknown",
     "updated": ""
@@ -173,7 +175,7 @@
     "tier": "GEM",
     "category": "Mac Tool",
     "description": "Beautiful battery monitoring app for macOS with detailed stats",
-    "stars": 862,
+    "stars": 861,
     "forks": 0,
     "language": "Swift",
     "updated": ""
@@ -196,7 +198,7 @@
     "tier": "GEM",
     "category": "Mac Tool",
     "description": "A free, open source, privacy-first voice input app for macOS",
-    "stars": 859,
+    "stars": 863,
     "forks": 0,
     "language": "Swift",
     "updated": ""
@@ -207,7 +209,7 @@
     "tier": "GEM",
     "category": "Mac Tool",
     "description": "macOS app for capturing and stitching scrolling screenshots into one image",
-    "stars": 840,
+    "stars": 843,
     "forks": 0,
     "language": "Swift",
     "updated": ""
@@ -218,7 +220,7 @@
     "tier": "EDGE",
     "category": "Apple Intelligence",
     "description": "Drop-in replacement for Apple Foundation Models with any LLM backend",
-    "stars": 836,
+    "stars": 839,
     "forks": 0,
     "language": "Swift",
     "updated": ""
@@ -240,7 +242,7 @@
     "tier": "LAB",
     "category": "Dev Tools",
     "description": "Real-time architectural sensor that helps AI agents close the feedback loop",
-    "stars": 839,
+    "stars": 858,
     "forks": 0,
     "language": "TypeScript",
     "updated": ""
@@ -251,7 +253,7 @@
     "tier": "LAB",
     "category": "Dev Tools",
     "description": "A lightweight cli for running single-purpose AI agents",
-    "stars": 795,
+    "stars": 801,
     "forks": 0,
     "language": "Go",
     "updated": ""
@@ -262,7 +264,7 @@
     "tier": "GEM",
     "category": "Mac Tool",
     "description": "Organize and snap windows into custom zones on macOS \u2014 like Windows Fancy Zones",
-    "stars": 800,
+    "stars": 801,
     "forks": 0,
     "language": "Swift",
     "updated": ""
@@ -295,7 +297,7 @@
     "tier": "LAB",
     "category": "Design AI",
     "description": "ENFUGUE is an open-source web app for making studio-grade AI images",
-    "stars": 761,
+    "stars": 760,
     "forks": 0,
     "language": "Python",
     "updated": ""
@@ -306,7 +308,7 @@
     "tier": "LAB",
     "category": "TUI / Terminal",
     "description": "Terminal UI to chat with large language models (LLM) using backends like ollama",
-    "stars": 756,
+    "stars": 757,
     "forks": 0,
     "language": "Go",
     "updated": ""
@@ -341,7 +343,7 @@
     "tier": "LAB",
     "category": "Dev Tools",
     "description": "AI writes code. This automates everything else \u2014 19 plugins, 47 tools",
-    "stars": 749,
+    "stars": 766,
     "forks": 0,
     "language": "Unknown",
     "updated": ""
@@ -352,7 +354,7 @@
     "tier": "LAB",
     "category": "Dev Tools",
     "description": "AI-powered multi-agent system that automatically analyzes code",
-    "stars": 710,
+    "stars": 712,
     "forks": 0,
     "language": "Unknown",
     "updated": ""
@@ -363,7 +365,7 @@
     "tier": "LAB",
     "category": "Self-Hosted",
     "description": "Real-time web cockpit for OpenClaw: voice conversations, live tool calls",
-    "stars": 751,
+    "stars": 769,
     "forks": 0,
     "language": "Unknown",
     "updated": ""
@@ -374,7 +376,7 @@
     "tier": "GEM",
     "category": "Mac Tool",
     "description": "Single-file memory layer for AI agents \u2014 sub-millisecond RAG",
-    "stars": 713,
+    "stars": 721,
     "forks": 0,
     "language": "Swift",
     "updated": ""
@@ -382,13 +384,14 @@
   {
     "name": "stirling-image/stirling-image",
     "url": "https://github.com/stirling-image/stirling-image",
-    "tier": "LAB",
+    "tier": "RISEN",
     "category": "Self-Hosted",
     "description": "Stirling-PDF but for images. 30+ tools and local AI",
-    "stars": 855,
+    "stars": 1010,
     "forks": 0,
     "language": "Unknown",
-    "updated": ""
+    "updated": "",
+    "_graduated_at": "2026-04-28T05:39:59.303743"
   },
   {
     "name": "caliber-ai-org/ai-setup",
@@ -396,7 +399,7 @@
     "tier": "LAB",
     "category": "Dev Tools",
     "description": "Continuously sync your AI setups with one command",
-    "stars": 725,
+    "stars": 867,
     "forks": 0,
     "language": "Unknown",
     "updated": ""
@@ -418,7 +421,7 @@
     "tier": "GEM",
     "category": "Mac Tool",
     "description": "distraction-free teleprompter hidden in the macbook notch",
-    "stars": 696,
+    "stars": 732,
     "forks": 0,
     "language": "Swift",
     "updated": ""
@@ -440,7 +443,7 @@
     "tier": "LAB",
     "category": "Dev Tools",
     "description": "Real-time visualization of Claude Code agent orchestration",
-    "stars": 763,
+    "stars": 841,
     "forks": 0,
     "language": "Unknown",
     "updated": ""
@@ -451,7 +454,7 @@
     "tier": "LAB",
     "category": "Dev Tools",
     "description": "Supercharge Claude Code with 11 AI agents, 36 commands",
-    "stars": 659,
+    "stars": 666,
     "forks": 0,
     "language": "Unknown",
     "updated": ""
@@ -462,7 +465,7 @@
     "tier": "LAB",
     "category": "Self-Hosted",
     "description": "Self-hostable YesCaptcha-compatible captcha solver",
-    "stars": 688,
+    "stars": 715,
     "forks": 0,
     "language": "Unknown",
     "updated": ""
@@ -473,7 +476,7 @@
     "tier": "GEM",
     "category": "Mac Tool",
     "description": "Native macOS menu bar app for managing audio device priorities",
-    "stars": 642,
+    "stars": 645,
     "forks": 0,
     "language": "Swift",
     "updated": ""
@@ -484,7 +487,7 @@
     "tier": "LAB",
     "category": "CLI Tool",
     "description": "Persistent project memory for AI coding agents",
-    "stars": 679,
+    "stars": 688,
     "forks": 0,
     "language": "Unknown",
     "updated": ""
@@ -495,7 +498,7 @@
     "tier": "LAB",
     "category": "Robotics",
     "description": "Secure, real-time monitoring dashboard for OpenClaw",
-    "stars": 652,
+    "stars": 657,
     "forks": 0,
     "language": "Unknown",
     "updated": ""
@@ -506,7 +509,7 @@
     "tier": "LAB",
     "category": "Self-Hosted",
     "description": "A curated list of the best OpenClaw resources",
-    "stars": 639,
+    "stars": 650,
     "forks": 0,
     "language": "Unknown",
     "updated": ""
@@ -517,7 +520,7 @@
     "tier": "LAB",
     "category": "Mac Tool",
     "description": "AI speech toolkit for Apple Silicon \u2014 ASR, TTS, speech-to-speech",
-    "stars": 651,
+    "stars": 671,
     "forks": 0,
     "language": "Swift",
     "updated": ""
@@ -528,7 +531,7 @@
     "tier": "LAB",
     "category": "Dev Tools",
     "description": "Overture is an open-source, locally running web interface",
-    "stars": 611,
+    "stars": 615,
     "forks": 0,
     "language": "Unknown",
     "updated": ""
@@ -539,7 +542,7 @@
     "tier": "LAB",
     "category": "Dev Tools",
     "description": "Rezi \u2014 TypeScript TUI, Near-Native Performance",
-    "stars": 614,
+    "stars": 615,
     "forks": 0,
     "language": "TypeScript",
     "updated": ""
@@ -550,7 +553,7 @@
     "tier": "LAB",
     "category": "Mac Tool",
     "description": "A lightweight macOS selection translator built with pure Swift 6",
-    "stars": 630,
+    "stars": 637,
     "forks": 0,
     "language": "Swift",
     "updated": ""
@@ -561,7 +564,7 @@
     "tier": "GEM",
     "category": "Mac Tool",
     "description": "macOS menu bar app to plan across multiple timezones",
-    "stars": 603,
+    "stars": 604,
     "forks": 0,
     "language": "Swift",
     "updated": ""
@@ -572,7 +575,7 @@
     "tier": "LAB",
     "category": "Dev Tools",
     "description": "Pre-build reality check for AI coding agents",
-    "stars": 620,
+    "stars": 649,
     "forks": 0,
     "language": "Unknown",
     "updated": ""
@@ -594,7 +597,7 @@
     "tier": "LAB",
     "category": "CLI Tool",
     "description": "Reduce AI coding costs by 99% \u2014 MCP Server + Shell Hook",
-    "stars": 761,
+    "stars": 898,
     "forks": 0,
     "language": "Unknown",
     "updated": ""
@@ -605,7 +608,7 @@
     "tier": "LAB",
     "category": "Dev Tools",
     "description": "You're the CTO, agents are your team",
-    "stars": 640,
+    "stars": 697,
     "forks": 0,
     "language": "Unknown",
     "updated": ""
