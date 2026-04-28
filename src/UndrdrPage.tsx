@@ -322,7 +322,11 @@ export default function UndrdrPage({ theme, onToggleTheme }: { theme: string; on
         </p>
         <p className="accent-text mb-8 font-mono text-xs tracking-[0.2em]">
           {repos.length} repos · {totalStars.toLocaleString()} stars ·{' '}
-          <a href="/undrdr/graph" className="transition-colors hover:text-white">graph</a> ·{' '}
+          <a href="/undrdr/graph" className="inline-flex items-center gap-1.5 rounded-full border border-[#7dd3fc]/30 bg-[#7dd3fc]/10 px-3 py-1 text-sm font-bold tracking-wider text-[#7dd3fc] shadow-[0_0_14px_rgba(125,211,252,0.3)] transition-all duration-300 hover:bg-[#7dd3fc]/20 hover:shadow-[0_0_24px_rgba(125,211,252,0.5)] hover:scale-105 hover:text-white">
+            graph
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+          </a>
+          {' · '}
           <a href="/undrdr/submit" className="transition-colors hover:text-white">submit</a>
         </p>
 
