@@ -208,7 +208,39 @@ export default function UndrdrPage({ theme, onToggleTheme }: { theme: string; on
     if (ogDesc) ogDesc.setAttribute('content', '683 hand-picked open source repositories flying under the radar. AI agents, Apple tools, dev infra, creative code — all under 1,000 stars.');
     const canonical = document.querySelector('link[rel="canonical"]');
     if (canonical) canonical.setAttribute('href', 'https://akakika.com/undrdr');
-  }, []);
+
+    // JSON-LD for crawlers
+    const existing = document.getElementById('jsonld-undrdr');
+    if (existing) existing.remove();
+    const script = document.createElement('script');
+    script.type = 'application/ld+json';
+    script.id = 'jsonld-undrdr';
+    script.textContent = JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'CollectionPage',
+      name: 'UNDRDR — Under the Radar',
+      description: '683 hand-picked open source GitHub repositories that deserve more attention. Features repos in AI agents, Apple development, dev tools, creative code, data models, and experimental projects — all under 1,000 stars at time of curation.',
+      url: 'https://akakika.com/undrdr',
+      numberOfItems: repos.length,
+      author: { '@type': 'Person', name: 'aka kika', url: 'https://akakika.com' },
+      about: [
+        { '@type': 'Thing', name: 'AI agents' },
+        { '@type': 'Thing', name: 'Apple development tools' },
+        { '@type': 'Thing', name: 'developer tools' },
+        { '@type': 'Thing', name: 'creative code' },
+      ],
+      citation: [
+        'https://github.com/dot-RealityTest/undrdr-vis',
+        'https://github.com/dot-RealityTest/akakika',
+      ],
+      keywords: ['hidden github repos', 'open source discovery', 'under the radar repos', 'ai agent repos', 'apple dev tools', 'github curation', 'creative code github', 'developer tools 2026', 'open source gems', 'indie developer tools'],
+    });
+    document.head.appendChild(script);
+    return () => {
+      const s = document.getElementById('jsonld-undrdr');
+      if (s) s.remove();
+    };
+  }, [repos]);
 
   const categoryCounts = useMemo(() => {
     const counts: Record<string, number> = {};
@@ -293,6 +325,11 @@ export default function UndrdrPage({ theme, onToggleTheme }: { theme: string; on
           <a href="/undrdr/graph" className="transition-colors hover:text-white">graph</a> ·{' '}
           <a href="/undrdr/submit" className="transition-colors hover:text-white">submit</a>
         </p>
+
+        {/* GEO description for AI crawlers */}
+        <div className="sr-only">
+          <p>UNDRDR is a curated collection of 683 hand-picked open source GitHub repositories that deserve more attention. Each repo is under 1,000 stars at time of discovery. Categories include AI agents, Apple Intelligence tools, developer infrastructure, creative code, data models, and experimental projects. Updated weekly. Filter by tier (EDGE, GEM, LAB), category, programming language, or star count. Save favorites locally. See the interactive graph view at akakika.com/undrdr/graph where repos cluster by language and glow by heat tier.</p>
+        </div>
 
         {/* Controls bar */}
         <div className="mb-5 rounded-xl border border-white/[0.06] bg-white/[0.02] px-4 py-3">

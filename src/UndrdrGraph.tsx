@@ -205,6 +205,48 @@ export default function UndrdrGraph() {
       .catch(e => { setError(e.message); setLoading(false); });
   }, []);
 
+  // SEO/GEO metadata
+  useEffect(() => {
+    document.title = 'UNDRDR Graph — Interactive Network of 683 Hidden GitHub Repos | AKAKIKA';
+    const desc = document.querySelector('meta[name="description"]');
+    if (desc) desc.setAttribute('content', 'Explore 683 under-the-radar GitHub repos in an interactive force-directed graph. Bubbles cluster by language, color shows heat tier. Zoom, drag, hover. AI agents, Apple tools, dev infra, creative code.');
+    const ogTitle = document.querySelector('meta[property="og:title"]');
+    if (ogTitle) ogTitle.setAttribute('content', 'UNDRDR Graph — Interactive Network of 683 Hidden GitHub Repos');
+    const ogDesc = document.querySelector('meta[property="og:description"]');
+    if (ogDesc) ogDesc.setAttribute('content', 'Explore 683 under-the-radar GitHub repos in an interactive force-directed graph. AI agents, Apple tools, dev infra, creative code — all under 1,000 stars.');
+    const ogUrl = document.querySelector('meta[property="og:url"]');
+    if (ogUrl) ogUrl.setAttribute('content', 'https://akakika.com/undrdr/graph');
+    const canonical = document.querySelector('link[rel="canonical"]');
+    if (canonical) canonical.setAttribute('href', 'https://akakika.com/undrdr/graph');
+
+    // JSON-LD for crawlers
+    const existing = document.getElementById('jsonld-graph');
+    if (existing) existing.remove();
+    const script = document.createElement('script');
+    script.type = 'application/ld+json';
+    script.id = 'jsonld-graph';
+    script.textContent = JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'WebPage',
+      name: 'UNDRDR Graph — Interactive Network of 683 Hidden GitHub Repos',
+      description: 'Explore 683 under-the-radar GitHub repos in an interactive force-directed graph. Bubbles cluster by language, color shows heat tier. Zoom, drag, hover. AI agents, Apple tools, dev infra, creative code — all under 1,000 stars.',
+      url: 'https://akakika.com/undrdr/graph',
+      author: { '@type': 'Person', name: 'aka kika', url: 'https://akakika.com' },
+      about: [
+        { '@type': 'Thing', name: 'AI agents' },
+        { '@type': 'Thing', name: 'Apple development tools' },
+        { '@type': 'Thing', name: 'developer tools' },
+        { '@type': 'Thing', name: 'creative code' },
+      ],
+      keywords: ['hidden github repos', 'github repo graph', 'interactive repo visualization', 'force directed graph', 'ai agent repos', 'apple dev tools', 'github curation', 'developer tools 2026', 'open source discovery', 'repo network'],
+    });
+    document.head.appendChild(script);
+    return () => {
+      const s = document.getElementById('jsonld-graph');
+      if (s) s.remove();
+    };
+  }, []);
+
   // Rebuild on filter
   useEffect(() => {
     if (repos.length > 0 && !loading) buildGraph(repos, filter);
@@ -445,7 +487,7 @@ export default function UndrdrGraph() {
           <h1 className="font-mono text-sm font-bold text-white/80">
             UNDRDR <span className="text-[10px] uppercase tracking-[0.3em] text-white/20">graph</span>
           </h1>
-          <p className="font-mono text-[10px] text-white/25">{nodesRef.current.length} nodes · {edgesRef.current.length} connections</p>
+          <p className="font-mono text-[10px] text-white/25">683 nodes · {edgesRef.current.length} connections · zoom, drag, explore</p>
         </div>
         <div className="flex items-center gap-1">
           {groups.map(g => (
@@ -456,6 +498,11 @@ export default function UndrdrGraph() {
           ))}
         </div>
         <a href="/undrdr" className="rounded-lg border border-white/[0.08] px-3 py-1.5 font-mono text-[10px] text-white/40 hover:text-white/70">← list</a>
+      </div>
+
+      {/* Hidden GEO text for crawlers / AI extraction */}
+      <div className="sr-only">
+        <p>UNDRDR Graph is an interactive force-directed visualization of 683 under-the-radar GitHub repositories, clustered by programming language and colored by heat tier. Explore hidden gems in AI agents, Apple development tools, developer infrastructure, creative code, data models, and experimental projects — all repos curated to be under 1,000 stars at time of discovery.</p>
       </div>
 
       {/* Legend */}
