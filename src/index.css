@@ -1,7 +1,8 @@
 @import "tailwindcss";
 
 @theme {
-  --font-mono: "IBM Plex Mono", "Fira Code", monospace;
+  --font-mono: "Fira Code", "IBM Plex Mono", monospace;
+  --font-sans: "Fira Sans", system-ui, sans-serif;
   --font-display: "Arial Black", "Impact", sans-serif;
 }
 
@@ -15,6 +16,15 @@
   --accent-border-strong: rgba(129, 140, 248, 0.5);
   --accent-shadow: rgba(99, 102, 241, 0.22);
   --accent-glow: rgba(139, 92, 246, 0.6);
+
+  /* Cyberpunk UI palette */
+  --cyber-bg: #0F172A;
+  --cyber-surface: #1E293B;
+  --cyber-border: rgba(255, 255, 255, 0.06);
+  --cyber-text: #F8FAFC;
+  --cyber-muted: rgba(248, 250, 252, 0.3);
+  --cyber-cta: #22C55E;
+  --cyber-cta-glow: rgba(34, 197, 94, 0.3);
 }
 
 body {
@@ -47,6 +57,25 @@ html {
 .hover-accent-text:hover { color: var(--accent-300); }
 .hover-accent-text-soft:hover { color: var(--accent-200); }
 .hover-accent-border-strong:hover { border-color: var(--accent-border-strong); }
+
+/* CTA / Green accent */
+.cta-btn {
+  color: #0F172A;
+  background: var(--cyber-cta);
+  transition: all 0.2s;
+}
+.cta-btn:hover {
+  box-shadow: 0 0 16px var(--cyber-cta-glow), 0 0 32px var(--cyber-cta-glow);
+}
+
+/* Neon glow on hover */
+.neon-hover {
+  transition: box-shadow 0.2s;
+}
+.neon-hover:hover {
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.08), 0 0 24px rgba(255, 255, 255, 0.04);
+}
+
 .accent-chip {
   border: 1px solid var(--accent-border-strong);
   color: var(--accent-300);
@@ -95,6 +124,8 @@ html {
 .project-card {
   overflow: hidden;
   transform-origin: center center;
+  background: rgba(12, 12, 22, 1) !important;
+  backdrop-filter: blur(12px);
 }
 
 .project-card::before {
@@ -117,9 +148,9 @@ html {
   inset: 0;
   pointer-events: none;
   background:
-    linear-gradient(135deg, color-mix(in srgb, var(--accent-500) 10%, transparent), transparent 40%),
-    linear-gradient(180deg, transparent 70%, color-mix(in srgb, black 30%, transparent));
-  opacity: 0.75;
+    linear-gradient(135deg, color-mix(in srgb, var(--accent-500) 6%, transparent), transparent 40%),
+    linear-gradient(180deg, transparent 70%, color-mix(in srgb, black 50%, transparent));
+  opacity: 0.5;
 }
 
 .project-card:hover::before {
@@ -354,4 +385,24 @@ html {
 .blog-section p,
 .blog-section li {
   max-width: 74ch;
+}
+
+/* Graph floating particles */
+@keyframes float-particle {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.06;
+  }
+  25% {
+    transform: translate(20px, -30px) scale(1.2);
+    opacity: 0.12;
+  }
+  50% {
+    transform: translate(-15px, -50px) scale(0.8);
+    opacity: 0.04;
+  }
+  75% {
+    transform: translate(25px, -20px) scale(1.1);
+    opacity: 0.1;
+  }
 }

@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite --port=3000 --host=0.0.0.0",
-    "build": "vite build",
+    "build": "vite build && mkdir -p dist/undrdr/graph dist/undrdr/submit && cp dist/index.html dist/undrdr/index.html && cp dist/index.html dist/undrdr/submit/index.html",
     "preview": "vite preview",
     "clean": "rm -rf dist",
     "lint": "tsc --noEmit"

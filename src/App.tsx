@@ -1,7 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion, useMotionValue, useMotionValueEvent, useScroll, useTransform } from 'motion/react';
 import Lenis from 'lenis';
-import NexusPage from './NexusPage';
+import UndrdrPage from './UndrdrPage';
+import UndrdrGraph from './UndrdrGraph';
+import UndrdrSubmitPage from './UndrdrSubmitPage';
+import UndrdrLogPage from './UndrdrLogPage';
 
 type NavigateFn = (path: string) => void;
 type ThemeName = 'purple' | 'cyan' | 'amber';
@@ -229,9 +232,6 @@ const HomeStickyHeader: React.FC<{
       <BlogNavLink path="/undrdr" className="hover-accent-text cursor-pointer transition-colors">
         UNDRDR
       </BlogNavLink>
-      <BlogNavLink path="/nexus" className="hover-accent-text cursor-pointer transition-colors">
-        NEXUS
-      </BlogNavLink>
       <BlogNavLink path="/blog" className="hover-accent-text cursor-pointer transition-colors">
         BLOG
       </BlogNavLink>
@@ -309,9 +309,6 @@ const Phase0: React.FC<{
         </BlogNavLink>
         <BlogNavLink path="/undrdr" className="hover-accent-text cursor-pointer transition-colors">
           UNDRDR
-        </BlogNavLink>
-        <BlogNavLink path="/nexus" className="hover-accent-text cursor-pointer transition-colors">
-          NEXUS
         </BlogNavLink>
         <BlogNavLink path="/blog" className="hover-accent-text cursor-pointer transition-colors">
           BLOG
@@ -819,6 +816,18 @@ const BlogIndex: React.FC<{ theme: ThemeName; onToggleTheme: () => void }> = ({ 
       </p>
 
       <BlogNavLink
+        path="/blog/the-great-ai-divergence"
+        className="group blog-index-entry accent-border block bg-transparent p-8 transition-all duration-300 hover-accent-border-strong"
+      >
+        <p className="mb-3 text-xs uppercase tracking-[0.35em] text-gray-300">Tuesday, April 15, 2026</p>
+        <h2 className="mb-3 font-display text-3xl tracking-tighter text-gray-100 md:text-5xl">the great ai divergence</h2>
+        <p className="max-w-3xl leading-relaxed text-gray-100">
+          we're not building one future with ai. we're building three. gemma 4 is the brain you own. apple intelligence is the nervous system. lmx is the engine room. a late-night breakdown.
+        </p>
+        <p className="accent-text-soft mt-6 text-sm transition-colors group-hover:text-white">open post →</p>
+      </BlogNavLink>
+
+      <BlogNavLink
         path="/blog/three-tools-that-run-my-life"
         className="group blog-index-entry accent-border block bg-transparent p-8 transition-all duration-300 hover-accent-border-strong"
       >
@@ -1183,6 +1192,150 @@ const BlogPostThreeTools: React.FC<{ theme: ThemeName; onToggleTheme: () => void
   </BlogShell>
 );
 
+const BlogPostAIDivergence: React.FC<{ theme: ThemeName; onToggleTheme: () => void }> = ({ theme, onToggleTheme }) => {
+  React.useEffect(() => {
+    const prevTitle = document.title;
+    document.title = 'The Great AI Divergence — KIKA';
+
+    const metaDesc = document.querySelector('meta[name="description"]');
+    const prevDesc = metaDesc?.getAttribute('content');
+    metaDesc?.setAttribute('content', 'We are not building one future with AI. We are building three: the brain you own (Gemma 4), the nervous system (Apple Intelligence), and the engine room (LMX). A late-night breakdown of where intelligence is actually going.');
+
+    const ogTitle = document.querySelector('meta[property="og:title"]');
+    const prevOgTitle = ogTitle?.getAttribute('content');
+    ogTitle?.setAttribute('content', 'The Great AI Divergence');
+
+    const ogDesc = document.querySelector('meta[property="og:description"]');
+    const prevOgDesc = ogDesc?.getAttribute('content');
+    ogDesc?.setAttribute('content', 'Three layers of AI are forming: intelligence you own, intelligence that knows you, and intelligence that evolves. Here is what that means.');
+
+    const ogUrl = document.querySelector('meta[property="og:url"]');
+    const prevOgUrl = ogUrl?.getAttribute('content');
+    ogUrl?.setAttribute('content', 'https://www.akakika.com/blog/the-great-ai-divergence');
+
+    const canonical = document.querySelector('link[rel="canonical"]');
+    const prevCanonical = canonical?.getAttribute('href');
+    canonical?.setAttribute('href', 'https://www.akakika.com/blog/the-great-ai-divergence');
+
+    // Inject Article schema
+    const schemaEl = document.createElement('script');
+    schemaEl.type = 'application/ld+json';
+    schemaEl.id = 'blog-schema-ai-divergence';
+    schemaEl.textContent = JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'BlogPosting',
+      headline: 'The Great AI Divergence',
+      description: 'A late-night breakdown of the three layers forming in AI: open-weight models (Gemma 4), contextual intelligence (Apple Intelligence), and large-scale experimentation (LMX).',
+      author: { '@type': 'Person', name: 'aka kika', url: 'https://www.akakika.com' },
+      datePublished: '2026-04-15',
+      dateModified: '2026-04-15',
+      url: 'https://www.akakika.com/blog/the-great-ai-divergence',
+      image: 'https://www.akakika.com/og-image.png',
+      keywords: ['AI divergence', 'Gemma 4', 'Apple Intelligence', 'LMX', 'open weights', 'local AI', 'on-device AI', 'generative engine optimization'],
+      mainEntityOfPage: { '@type': 'WebPage', '@id': 'https://www.akakika.com/blog/the-great-ai-divergence' },
+      publisher: { '@type': 'Person', name: 'aka kika', url: 'https://www.akakika.com' },
+      articleSection: 'AI Opinion',
+      wordCount: 1100,
+    });
+    document.head.appendChild(schemaEl);
+
+    return () => {
+      document.title = prevTitle;
+      metaDesc?.setAttribute('content', prevDesc || '');
+      ogTitle?.setAttribute('content', prevOgTitle || '');
+      ogDesc?.setAttribute('content', prevOgDesc || '');
+      ogUrl?.setAttribute('content', prevOgUrl || '');
+      canonical?.setAttribute('href', prevCanonical || '');
+      document.getElementById('blog-schema-ai-divergence')?.remove();
+    };
+  }, []);
+
+  return (
+  <BlogShell noCrt>
+    <HomeStickyHeader theme={theme} onToggleTheme={onToggleTheme} workHref="/" aboutHref="/" />
+
+    <article className="blog-article w-full">
+      <nav className="mb-8">
+        <BlogNavLink path="/blog" className="accent-text-soft transition-colors hover:text-white">
+          ← back to blog
+        </BlogNavLink>
+      </nav>
+      <div className="blog-hero mb-12 flex flex-col items-center text-center">
+        <p className="mb-4 text-sm text-gray-300">Tuesday, April 15, 2026</p>
+        <div className="mb-6 flex flex-wrap justify-center gap-2 text-xs uppercase tracking-[0.3em] text-gray-300">
+          <span>ai</span>
+          <span>opinion</span>
+          <span>open-source</span>
+          <span>apple</span>
+          <span>local-first</span>
+        </div>
+        <h1 className="mb-6 font-display text-4xl leading-none tracking-tighter text-gray-100 md:text-7xl">the great ai divergence</h1>
+        <p className="max-w-4xl text-lg leading-relaxed text-gray-200 md:text-xl">
+          we're not building one future with ai. we're building three. and they're running parallel. a late-night breakdown of where intelligence is actually going.
+        </p>
+      </div>
+
+      <div className="max-w-4xl space-y-10 text-lg leading-relaxed text-gray-200 font-sans">
+        <section className="blog-section">
+          <p>it's 3 am. again. the monitor is the only light in the room and i've been staring at three different ai stacks for the last six hours, and it just hit me: we're not building one future. we're building three. completely separate. completely incompatible.</p>
+          <p className="mt-4">let me explain.</p>
+        </section>
+
+        <section className="blog-section">
+          <h2 className="mb-4 font-display text-3xl tracking-tighter text-white">1. the brain you can own</h2>
+          <p>i've been running gemma 4 on my m4 for the last week. local. no api keys. no rate limits. no "please upgrade to pro." just… mine.</p>
+          <p className="mt-4">and that's the thing people keep missing. google didn't just release another model. they released the idea that intelligence itself can be something you <em>own</em>. not rent. not subscribe to. own.</p>
+          <p className="mt-4">i've got it sitting next to ollama, next to my own fine-tunes, doing things that would cost me $200/month on any api. code review at 2 am. summarizing my entire obsidian vault. running inference while i sleep.</p>
+          <p className="mt-4">the "open weights" movement isn't about altruism. it's about control. when the brain lives on your machine, nobody can take it away from you. nobody can nerf it. nobody can decide that your use case isn't "aligned" enough.</p>
+          <p className="mt-4">gemma 4 is the brain. and for the first time, the brain is actually yours.</p>
+        </section>
+
+        <section className="blog-section">
+          <h2 className="mb-4 font-display text-3xl tracking-tighter text-white">2. the nervous system nobody talks about</h2>
+          <p>apple intelligence is doing something completely different, and honestly? it's more interesting than any chatbot.</p>
+          <p className="mt-4">i don't want to <em>talk</em> to my ai. i want it to know things. i want it to know that when i say "send that to mom," i mean the photo from tuesday, not the screenshot from slack. i want it to understand that my 3 am coding sessions aren't "anomalous behavior" — they're just… me.</p>
+          <p className="mt-4">apple isn't building a smarter chatbot. they're building a nervous system. it sits underneath everything — your emails, your calendar, your photos, your habits — and it connects dots that no standalone model ever could.</p>
+          <p className="mt-4">the <a href="https://developer.apple.com/documentation/foundationmodels" target="_blank" rel="noopener noreferrer" className="accent-text-soft underline transition-colors hover:text-white">foundation models framework</a> just dropped, and i've been playing with it. on-device. private. the model doesn't see your data; your data sees the model. that's a fundamentally different architecture than anything google or openai is doing.</p>
+          <p className="mt-4">apple intelligence is invisible. that's the point. you don't visit it. it just… lives there. in the background. like a reflex.</p>
+        </section>
+
+        <section className="blog-section">
+          <h2 className="mb-4 font-display text-3xl tracking-tighter text-white">3. the engine room</h2>
+          <p>and then there's the part nobody posts about on twitter: the raw experimentation. the lmx (large model experimentation) layer.</p>
+          <p className="mt-4">while everyone's arguing about which chatbot is best, the real work is happening in labs throwing massive compute at fundamental questions. how does intelligence actually scale? what happens when you push a model past the point where it should stop working? when does a statistical pattern matcher become something… else?</p>
+          <p className="mt-4">this is where i live most nights. not using ai. <em>breaking</em> it. fine-tuning on weird datasets. running benchmarks that nobody asked for. testing whether a 30b parameter model can outperform a 200b one if you train it right.</p>
+          <p className="mt-4">lmx is the engine room. it's not pretty. it's not user-facing. but it's where the actual breakthroughs happen — the ones that trickle down into everything else six months later.</p>
+        </section>
+
+        <section className="blog-section">
+          <h2 className="mb-4 font-display text-3xl tracking-tighter text-white">the synthesis</h2>
+          <p>here's what's wild: these three layers aren't competing. they're <em>stratifying</em>.</p>
+          <ul className="mt-4 list-inside list-disc space-y-2 text-gray-200">
+            <li><strong className="text-white">gemma 4</strong> = intelligence you own</li>
+            <li><strong className="text-white">apple intelligence</strong> = intelligence that knows you</li>
+            <li><strong className="text-white">lmx</strong> = intelligence that evolves</li>
+          </ul>
+          <p className="mt-4">we're leaving the era of "chat with a bot" and entering the era of "live with intelligence." the ai isn't a destination anymore. it's infrastructure. it's the water in the pipes.</p>
+          <p className="mt-4">and the people who get this — who understand that these three layers need each other — are the ones building the next decade. not the ones arguing about which model scored 2% higher on some benchmark.</p>
+        </section>
+
+        <section className="blog-section">
+          <h2 className="mb-4 font-display text-3xl tracking-tighter text-white">what this means for you</h2>
+          <p>if you're building anything with ai right now, stop asking "which model should i use?" and start asking "which layer am i building on?"</p>
+          <p className="mt-4">are you building the brain? go open-weights. own it.<br />
+          are you building the nervous system? go deep integration. make it invisible.<br />
+          are you building the engine room? go wild. break things. push limits.</p>
+          <p className="mt-4">the divergence isn't a problem. it's a signal. the future isn't one ai to rule them all. it's a stack. and the stack is already here.</p>
+          <p className="mt-4">now if you'll excuse me, it's 4 am and my gemma fine-tune just finished training.</p>
+        </section>
+
+        <p className="mt-12 text-sm italic text-gray-400">written at 3 am, powered by local inference and too much coffee.</p>
+      </div>
+    </article>
+  </BlogShell>
+  );
+};
+
 const HomeExperience: React.FC<{ theme: ThemeName; onToggleTheme: () => void }> = ({ theme, onToggleTheme }) => {
   const [phase, setPhase] = useState(0);
   const [phaseDirection, setPhaseDirection] = useState<1 | -1>(1);
@@ -1411,221 +1564,31 @@ export default function App() {
         <BlogPostGithubTools theme={theme} onToggleTheme={cycleTheme} />
       ) : path === '/blog/mlx-apple-silicons-secret-weapon' ? (
         <BlogPostMLX theme={theme} onToggleTheme={cycleTheme} />
+      ) : path === '/blog/the-great-ai-divergence' ? (
+        <BlogPostAIDivergence theme={theme} onToggleTheme={cycleTheme} />
       ) : path === '/apps' ? (
         <AppsPage theme={theme} onToggleTheme={cycleTheme} />
-      ) : path === '/undrdr' ? (
-        <UndrdrPage theme={theme} onToggleTheme={cycleTheme} />
-      ) : path === '/nexus' ? (
-        <NexusPage theme={theme} onToggleTheme={cycleTheme} />
       ) : path === '/goodnews' ? (
         <GoodNewsPage theme={theme} onToggleTheme={cycleTheme} />
+      ) : path === '/undrdr/graph' ? (
+        <UndrdrGraph />
+      ) : path === '/undrdr/submit' ? (
+        <UndrdrSubmitPage theme={theme} onToggleTheme={cycleTheme} />
+      ) : path === '/undrdr/log' ? (
+        <UndrdrLogPage theme={theme} onToggleTheme={cycleTheme} />
+      ) : path === '/undrdr' ? (
+        <UndrdrPage theme={theme} onToggleTheme={cycleTheme} />
       ) : (
         <HomeExperience theme={theme} onToggleTheme={cycleTheme} />
       )}
     </div>
   );
 }
-type UndrdrRepo = {
-  org: string;
-  name: string;
-  url: string;
-  stars: number;
-  description: string;
-  language: string | null;
-  topics: string[];
-  why: string;
-  tags: string[];
-  lang: string;
-  temp: string;
-};
 
-type UndrdrData = {
-  week: number;
-  year: number;
-  generated_at: string;
-  repos: {
-    boss: UndrdrRepo;
-    hot: UndrdrRepo[];
-    warm: UndrdrRepo[];
-    cold: UndrdrRepo[];
-  };
-};
 
-const TEMP_META: Record<string, { label: string; border: string; bg: string; text: string; glow: string }> = {
-  boss: { label: 'BOSS', border: 'var(--accent-border-strong)', bg: 'var(--accent-900)', text: 'var(--accent-300)', glow: 'var(--accent-shadow)' },
-  hot: { label: 'HOT', border: 'rgba(248, 113, 113, 0.45)', bg: 'rgba(153, 27, 27, 0.20)', text: '#fca5a5', glow: 'rgba(239, 68, 68, 0.22)' },
-  warm: { label: 'WARM', border: 'rgba(251, 191, 36, 0.35)', bg: 'rgba(146, 64, 14, 0.18)', text: '#fde68a', glow: 'rgba(245, 158, 11, 0.18)' },
-  cold: { label: 'COLD', border: 'rgba(125, 211, 252, 0.30)', bg: 'rgba(12, 74, 110, 0.18)', text: '#93c5fd', glow: 'rgba(56, 189, 248, 0.15)' },
-};
 
-const LANG_COLORS: Record<string, string> = {
-  typescript: '#3178c6', javascript: '#f1e05a', python: '#3572a5', rust: '#dea584',
-  swift: '#f05138', go: '#00add8', ruby: '#701516', java: '#b07219', c: '#555555',
-  'c++': '#f34b7d', 'c#': '#178600', kotlin: '#a97bff', dart: '#00b4ab', html: '#e34c26',
-  css: '#563d7c', shell: '#89e051', zig: '#ec915c', scala: '#c22d40', elixir: '#6e4a7e',
-  haskell: '#5e5086', lua: '#000080', r: '#198ce7', vue: '#41b883', svelte: '#ff3e00',
-};
 
-const UndrdrRepoCard: React.FC<{ repo: UndrdrRepo; temp: string }> = ({ repo, temp }) => {
-  const meta = TEMP_META[temp] || TEMP_META.cold;
-  const langColor = LANG_COLORS[repo.lang] || '#8b949e';
 
-  return (
-    <a
-      href={repo.url}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="group block rounded-xl border border-[#2a2a3a] bg-[#1e1e2e] px-5 py-5 transition-all duration-200 hover:border-[#3a3a4e] hover:bg-[#252538]"
-    >
-      <div className="mb-3 flex items-center gap-2.5">
-        <span
-          className="rounded-full px-2.5 py-0.5 text-[11px] font-bold tracking-wider uppercase"
-          style={{ color: meta.text, background: meta.bg, border: `1px solid ${meta.border}` }}
-        >
-          {meta.label}
-        </span>
-        <span className="text-sm text-gray-400 font-medium">★ {repo.stars.toLocaleString()}</span>
-        <span className="ml-auto flex items-center gap-1.5 text-sm text-gray-400 font-medium">
-          <span className="inline-block h-2 w-2 rounded-full" style={{ background: langColor }} />
-          {repo.lang || '—'}
-        </span>
-      </div>
-      <h3 className="font-display text-base font-bold tracking-tight text-white leading-snug">
-        {repo.name}
-      </h3>
-      <p className="mt-2 text-sm text-gray-300 leading-relaxed line-clamp-3">
-        {repo.description}
-      </p>
-      <p className="mt-2.5 text-[13px] text-gray-500 leading-relaxed italic line-clamp-2">
-        {repo.why}
-      </p>
-    </a>
-  );
-};
-
-const UndrdrPage: React.FC<{ theme: ThemeName; onToggleTheme: () => void }> = ({ theme, onToggleTheme }) => {
-  const [data, setData] = useState<UndrdrData | null>(null);
-  const [history, setHistory] = useState<UndrdrData[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [showArchive, setShowArchive] = useState(false);
-  const [maxStars, setMaxStars] = useState(1000);
-
-  const starOptions = [1000, 500, 100, 10] as const;
-
-  useEffect(() => {
-    fetch('/assets/data/undrdr.json')
-      .then((r) => r.json())
-      .then((d) => { setData(d); setLoading(false); })
-      .catch(() => setLoading(false));
-    fetch('/assets/data/undrdr-history.json')
-      .then((r) => r.json())
-      .then((h) => setHistory(h.map((w: any) => w.repos ? w : { week: w.week, year: w.year, repos: { boss: w.boss, hot: w.hot, warm: w.warm, cold: w.cold } })))
-      .catch(() => {});
-  }, []);
-
-  const filterRepos = (repos: { repo: UndrdrRepo; temp: string }[]) =>
-    repos.filter(({ repo }) => repo.stars <= maxStars);
-
-  const allReposUnfiltered = data ? [
-    ...(data.repos.boss ? [{ repo: data.repos.boss, temp: 'boss' as string }] : []),
-    ...data.repos.hot.map((r) => ({ repo: r, temp: 'hot' as string })),
-    ...data.repos.warm.map((r) => ({ repo: r, temp: 'warm' as string })),
-    ...data.repos.cold.map((r) => ({ repo: r, temp: 'cold' as string })),
-  ] : [];
-
-  const allRepos = filterRepos(allReposUnfiltered);
-
-  return (
-    <BlogShell noCrt>
-      <HomeStickyHeader theme={theme} onToggleTheme={onToggleTheme} workHref="/" aboutHref="/" />
-
-      <div className="w-full">
-          <div>
-            <p className="accent-text-soft mb-1 text-xs">kika@portfolio:~$ ls undrdr/</p>
-            <h1 className="font-display text-5xl tracking-tighter text-white md:text-7xl">
-              UNDRDR.
-            </h1>
-          </div>
-        <p className="mb-4 max-w-3xl text-lg leading-relaxed text-gray-200 md:text-xl">
-          under the radar. github repos that deserve more eyes. curated daily.
-        </p>
-        <div className="mb-4 flex flex-wrap items-center gap-2">
-          <span className="text-sm text-gray-500 mr-1">max stars:</span>
-          {starOptions.map((opt) => (
-            <button
-              key={opt}
-              type="button"
-              onClick={() => setMaxStars(opt)}
-              className={`rounded-full px-3 py-1 text-sm font-medium transition-all ${
-                maxStars === opt
-                  ? 'bg-white/15 text-white border border-white/20'
-                  : 'bg-white/[0.04] text-gray-500 border border-white/[0.06] hover:bg-white/[0.08] hover:text-gray-300'
-              }`}
-            >
-              ≤{opt.toLocaleString()}
-            </button>
-          ))}
-        </div>
-        {data && (
-          <p className="accent-text mb-10 text-xs tracking-[0.2em]">
-            {data.repos ? new Date(data.generated_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) : ''} · {allRepos.length} repos
-          </p>
-        )}
-
-        {loading ? (
-          <div className="flex items-center gap-3 py-20 text-sm text-gray-400">
-            <span className="blink h-4 w-3 accent-bg" /> scanning repos...
-          </div>
-        ) : data ? (
-          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-            {allRepos.map(({ repo, temp }) => (
-              <UndrdrRepoCard key={repo.url} repo={repo} temp={temp} />
-            ))}
-          </div>
-        ) : (
-          <p className="text-gray-400">no data available. check back soon.</p>
-        )}
-
-        {history.length > 0 && (
-          <div className="mt-12">
-            <button
-              type="button"
-              onClick={() => setShowArchive(!showArchive)}
-              className="accent-text text-xs tracking-[0.2em] transition-opacity hover:opacity-70"
-            >
-              {showArchive ? '↑ less' : '↓ show more'}
-            </button>
-
-            {showArchive && history.map((week) => {
-              const weekReposUnfiltered = [
-                ...(week.repos.boss ? [{ repo: week.repos.boss, temp: 'boss' as string }] : []),
-                ...week.repos.hot.map((r) => ({ repo: r, temp: 'hot' as string })),
-                ...week.repos.warm.map((r) => ({ repo: r, temp: 'warm' as string })),
-                ...week.repos.cold.map((r) => ({ repo: r, temp: 'cold' as string })),
-              ];
-              const weekRepos = filterRepos(weekReposUnfiltered);
-              if (weekRepos.length === 0) return null;
-              return (
-                <div key={`w${week.week}`} className="mt-14">
-                  <p className="mb-4 text-xs tracking-[0.2em] text-gray-500">
-                    week {week.week} — {week.year} · {weekRepos.length} repos
-                  </p>
-                  <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-                    {weekRepos.map(({ repo, temp }) => (
-                      <UndrdrRepoCard key={repo.url} repo={repo} temp={temp} />
-                    ))}
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        )}
-
-        <div className="flex h-20 items-center justify-center text-xs text-gray-500">EOF</div>
-      </div>
-    </BlogShell>
-  );
-};
 
 type GoodNewsData = {
   date: string;
