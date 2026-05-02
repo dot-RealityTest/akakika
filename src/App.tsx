@@ -356,7 +356,7 @@ const Phase0: React.FC<{
             href="https://twitter.com/kika_hub"
             target="_blank"
             rel="noopener noreferrer"
-            className="hover-accent-text transition-colors"
+            className="text-gray-300 transition-colors hover:text-white"
           >
             TWITTER
           </a>
@@ -365,16 +365,16 @@ const Phase0: React.FC<{
             href="https://github.com/dot-RealityTest"
             target="_blank"
             rel="noopener noreferrer"
-            className="hover-accent-text transition-colors"
+            className="text-gray-300 transition-colors hover:text-white"
           >
             GITHUB
           </a>
           <span className="opacity-30">·</span>
-          <BlogNavLink path="/apps" className="hover-accent-text transition-colors">
+          <BlogNavLink path="/apps" className="text-gray-300 transition-colors hover:text-white">
             APPS
           </BlogNavLink>
         </div>
-        <div className="accent-text-soft">
+        <div className="text-gray-400">
           © 2026 NICA LOREN · ALL RIGHTS RESERVED
         </div>
       </motion.div>
