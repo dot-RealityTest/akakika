@@ -346,9 +346,9 @@ const Phase0: React.FC<{
       </div>
     ) : hasBooted ? (
       <motion.div
-        className="accent-text-soft absolute bottom-0 left-0 right-0 z-10 flex items-center justify-between px-6 pb-6 text-[10px] tracking-[0.2em] md:px-10 md:pb-8"
+        className="absolute bottom-0 left-0 right-0 z-10 flex items-center justify-between px-6 pb-6 text-[10px] tracking-[0.2em] text-gray-300 md:px-10 md:pb-8"
         initial={{ opacity: 0, y: 8 }}
-        animate={{ opacity: 0.6, y: 0 }}
+        animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.4, duration: 0.5 }}
       >
         <div className="flex items-center gap-4">
