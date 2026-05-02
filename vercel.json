@@ -7,6 +7,8 @@
     { "source": "/undrdr/graph/(.*)", "destination": "/undrdr/graph/$1" },
     { "source": "/undrdr", "destination": "/undrdr/index.html" },
     { "source": "/undrdr/(.*)", "destination": "/undrdr/$1" },
+    { "source": "/brand", "destination": "/brand/index.html" },
+    { "source": "/brand/(.*)", "destination": "/brand/$1" },
     {
       "source": "/(.*)",
       "destination": "/index.html"
