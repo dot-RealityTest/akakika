@@ -5,6 +5,24 @@ import UndrdrPage from './UndrdrPage';
 import UndrdrGraph from './UndrdrGraph';
 import UndrdrSubmitPage from './UndrdrSubmitPage';
 import UndrdrLogPage from './UndrdrLogPage';
+import UndrdrQueuePage from './UndrdrQueuePage';
+import { Analytics } from '@vercel/analytics/react';
+import { useMeta } from './useMeta';
+
+const PAGE_META: Record<string, { title: string; description: string }> = {
+  '/': { title: 'KIKA — Digital Craft macOS Systems', description: 'Navigating the digital unknown, pixel by pixel. macOS apps, AI experiments, and digital tools built by an indie developer.' },
+  '/apps': { title: 'Apps — KIKA', description: 'Free, local-first macOS apps built with SwiftUI. No SaaS, no subscriptions, no cloud dependency.' },
+  '/blog': { title: 'Blog — KIKA', description: 'Late-night raw takes on AI, indie dev, and building sovereign tools. No corporate fluff.' },
+  '/blog/three-tools-that-run-my-life': { title: 'Three Tools That Run My Life — KIKA', description: 'The three tools that actually stick. Not the flashy ones — the ones you reach for at 2am.' },
+  '/blog/5-github-tools-that-ship': { title: '5 GitHub Tools That Ship — KIKA', description: 'Five open source repos that solve real problems without the bloat. All under 1000 stars.' },
+  '/blog/mlx-apple-silicons-secret-weapon': { title: 'MLX: Apple Silicon\'s Secret Weapon — KIKA', description: 'Apple Silicon isn\'t just fast — it\'s a different paradigm. MLX makes it accessible.' },
+  '/blog/the-great-ai-divergence': { title: 'The Great AI Divergence — KIKA', description: 'The gap between AI that serves you and AI that replaces you is widening. Here\'s what that means.' },
+  '/goodnews': { title: 'Good News — KIKA', description: 'Positive signals from the tech world. Because someone has to curate the good stuff.' },
+  '/undrdr': { title: 'UNDRDR — Hidden GitHub Repos | KIKA', description: '683 hand-picked open source repos under 1000 stars. AI agents, dev tools, creative code — curated weekly.' },
+  '/undrdr/graph': { title: 'UNDRDR Graph — Interactive Network | KIKA', description: 'Explore the connections between 683 hidden GitHub repos. Interactive force-directed graph visualization.' },
+  '/undrdr/submit': { title: 'Submit a Repo — UNDRDR | KIKA', description: 'Know a repo flying under the radar? Submit it to UNDRDR. If it fits, it goes in.' },
+  '/blog/683-repos-nobody-knows-about': { title: '683 Repos Nobody Knows About — KIKA', description: 'What I learned curating UNDRDR for a year. The patterns in what gets ignored. Why stars are a garbage metric. And the repos that changed how I work.' },
+};
 
 type NavigateFn = (path: string) => void;
 type ThemeName = 'purple' | 'cyan' | 'amber';
@@ -217,21 +235,12 @@ const HomeStickyHeader: React.FC<{
       <BlogNavLink path="/" className="hover-accent-text cursor-pointer transition-colors">
         HOME
       </BlogNavLink>
-      <BlogNavLink path="/apps" className="hover-accent-text cursor-pointer transition-colors">
-        APPS
-      </BlogNavLink>
       <BlogNavLink path="/undrdr" className="hover-accent-text cursor-pointer transition-colors">
         UNDRDR
       </BlogNavLink>
       <BlogNavLink path="/blog" className="hover-accent-text cursor-pointer transition-colors">
         BLOG
       </BlogNavLink>
-      <BlogNavLink path="/goodnews" className="hover-accent-text cursor-pointer transition-colors">
-        GOOD NEWS ✦
-      </BlogNavLink>
-      <a href="#about" className="hover-accent-text cursor-pointer transition-colors">
-        ABOUT
-      </a>
       <ThemeToggle theme={theme} onToggle={onToggleTheme} />
     </div>
   </motion.div>
@@ -800,6 +809,18 @@ const BlogIndex: React.FC<{ theme: ThemeName; onToggleTheme: () => void }> = ({ 
       </p>
 
       <BlogNavLink
+        path="/blog/683-repos-nobody-knows-about"
+        className="group blog-index-entry accent-border block bg-transparent p-8 transition-all duration-300 hover-accent-border-strong"
+      >
+        <p className="mb-3 text-xs uppercase tracking-[0.35em] text-gray-300">Monday, April 28, 2026</p>
+        <h2 className="mb-3 font-display text-3xl tracking-tighter text-gray-100 md:text-5xl">683 repos nobody knows about</h2>
+        <p className="max-w-3xl leading-relaxed text-gray-100">
+          what i learned curating undrdr for a year. the patterns in what gets ignored. why stars are a garbage metric. and the repos that changed how i work.
+        </p>
+        <p className="accent-text-soft mt-6 text-sm transition-colors group-hover:text-white">open post →</p>
+      </BlogNavLink>
+
+      <BlogNavLink
         path="/blog/the-great-ai-divergence"
         className="group blog-index-entry accent-border block bg-transparent p-8 transition-all duration-300 hover-accent-border-strong"
       >
@@ -1176,6 +1197,86 @@ const BlogPostThreeTools: React.FC<{ theme: ThemeName; onToggleTheme: () => void
   </BlogShell>
 );
 
+const BlogPost683Repos: React.FC<{ theme: ThemeName; onToggleTheme: () => void }> = ({ theme, onToggleTheme }) => (
+  <BlogShell>
+    <HomeStickyHeader theme={theme} onToggleTheme={onToggleTheme} />
+
+    <article className="mx-auto max-w-4xl px-6 py-16 md:px-12">
+      <div className="mb-12">
+        <p className="accent-text-soft mb-4 text-xs uppercase tracking-[0.35em]">Monday, April 28, 2026</p>
+        <h1 className="mb-6 font-display text-4xl leading-none tracking-tighter text-gray-100 md:text-7xl">683 repos nobody knows about</h1>
+        <p className="max-w-4xl text-lg leading-relaxed text-gray-200 md:text-xl">
+          what i learned curating undrdr for a year. the patterns in what gets ignored. why stars are a garbage metric. and the repos that changed how i work.
+        </p>
+      </div>
+
+      <div className="max-w-4xl space-y-10 text-lg leading-relaxed text-gray-200 font-sans">
+        <section className="blog-section">
+          <p>six hundred and eighty-three.</p>
+          <p className="mt-4">that's how many open source repos i've hand-picked, one by one, over the last year. all of them under 1,000 stars. most of them under 100. some of them at zero.</p>
+          <p className="mt-4">nobody asked me to do this. there's no business model. no vc pitch. i just kept finding incredible work buried under the algorithm's preference for things that are already popular, and it started to feel criminal not to organize it.</p>
+          <p className="mt-4">so i built undrdr. and here's what a year of staring at the long tail of open source taught me.</p>
+        </section>
+
+        <section className="blog-section">
+          <h2 className="mb-4 font-display text-3xl tracking-tighter text-white">stars are a garbage metric</h2>
+          <p>here's the number that broke my brain: 316 of the 683 repos i curated have under 50 stars. 427 have under 100. the median is 59.</p>
+          <p className="mt-4">fifty-nine stars. that's it. that's the "middle" of open source quality.</p>
+          <p className="mt-4">and yet — some of the most inventive, well-architected, genuinely useful code i've ever seen lives in that under-50 bucket. mcp servers that wire ai agents into your workflow. swift tools that do one thing perfectly. rust crates that solve problems you didn't know you had.</p>
+          <p className="mt-4">the repo with 3,000 stars? probably a todo app tutorial. the repo with 12 stars? probably a security auditor that actually works. stars measure distribution, not quality. they measure marketing budgets, not engineering. they measure "found product-market fit," not "solved a real problem."</p>
+          <p className="mt-4">i stopped caring about stars around week three. what i care about now is: does this solve something? is the code honest? would i use it?</p>
+        </section>
+
+        <section className="blog-section">
+          <h2 className="mb-4 font-display text-3xl tracking-tighter text-white">the mac is quietly eating everything</h2>
+          <p>173 of the 683 repos are written in swift. that's more than python (48), typescript (25), go (14), and rust (12) combined.</p>
+          <p className="mt-4">the narrative says the future is web-first. the data says otherwise. there's an entire ecosystem of people building native mac tools — menu bar apps, cli utilities, system-level integrations — and almost none of them get the attention they deserve.</p>
+          <p className="mt-4">the biggest category? "mac tool" with 124 repos. that's not a coincidence. apple silicon changed the game, and a generation of developers who actually use their machines (instead of just deploying to them) are building for it.</p>
+          <p className="mt-4">the second biggest? "mcp server" with 63 repos. model context protocol is less than a year old and it's already the nervous system of the agent ecosystem. six months ago, nobody knew what it was. now it's the standard for how ai tools talk to the world.</p>
+        </section>
+
+        <section className="blog-section">
+          <h2 className="mb-4 font-display text-3xl tracking-tighter text-white">what gets ignored (and why)</h2>
+          <p>the pattern is consistent. repos get ignored when:</p>
+          <ul className="mt-4 list-inside list-disc space-y-2 text-gray-200">
+            <li>they solve a problem developers <em>have</em> but don't <em>talk</em> about (dependency auditing, log parsing, config management)</li>
+            <li>they're written for a platform that tech twitter doesn't use (macos, linux desktop, self-hosted)</li>
+            <li>they do one thing well instead of ten things poorly</li>
+            <li>the readme is bad (this is the biggest one — great code, terrible marketing)</li>
+          </ul>
+          <p className="mt-4">the last point is the tragic one. i've lost count of how many repos i found where the code was exceptional but the readme was two sentences and a broken badge. if you can't explain what your thing does in ten seconds, it doesn't matter how good it is. that's not fair. but it's how it works.</p>
+        </section>
+
+        <section className="blog-section">
+          <h2 className="mb-4 font-display text-3xl tracking-tighter text-white">the ones that changed me</h2>
+          <p>i didn't just curate undrdr. i used it. and some of these repos genuinely changed how i work:</p>
+          <p className="mt-4">mcp servers that let my agents talk to databases, filesystems, and apis without me writing glue code. that shifted my entire architecture from "build the integration" to "wire the protocol."</p>
+          <p className="mt-4">a cli tool that does one thing — sanitizes my clipboard — and does it so well i forgot it's there. that reminded me what software is supposed to feel like.</p>
+          <p className="mt-4">a rust-based search tool that's faster than anything i've used. it made me realize that "fast enough" is never fast enough. there's always room for a rewrite in rust.</p>
+          <p className="mt-4">these aren't the repos with the most stars. they're the ones that made me stop scrolling and start building.</p>
+        </section>
+
+        <section className="blog-section">
+          <h2 className="mb-4 font-display text-3xl tracking-tighter text-white">why i keep going</h2>
+          <p>every week i run the generator. it scans github with a mix of queries — topics, languages, organizations. it pulls candidates, filters out forks and archived projects, checks star counts, and queues the ones that fit.</p>
+          <p className="mt-4">then i look at every single one.</p>
+          <p className="mt-4">that's the part that scales can't replicate. curation isn't filtering. it's judgment. it's looking at a repo and knowing: this matters. not because it's popular, but because someone sat down and solved a real problem in a real way, and the only thing standing between them and the people who need it is an algorithm that prefers things that are already seen.</p>
+          <p className="mt-4">undrdr is my way of fighting that. one repo at a time. 683 so far. and i'm not stopping.</p>
+        </section>
+
+        <section className="blog-section">
+          <h2 className="mb-4 font-display text-3xl tracking-tighter text-white">if you take one thing from this</h2>
+          <p>next time you're searching for a tool, sort by "recently updated" instead of "most stars." scroll past the first page. look at the repos with 12 stars and a README that actually explains what it does.</p>
+          <p className="mt-4">you'll find better software. i guarantee it.</p>
+          <p className="mt-4">and if you find something good — the kind of repo that makes you go "how does nobody know about this?" — send it my way. <a href="/undrdr/submit" className="accent-text-soft underline transition-colors hover:text-white">undrdr/submit</a>. i'll check it. if it fits, it goes in.</p>
+        </section>
+
+        <p className="mt-12 text-sm italic text-gray-400">written after running the weekly undrdr generator at 2 am. 683 repos and counting.</p>
+      </div>
+    </article>
+  </BlogShell>
+);
+
 const BlogPostAIDivergence: React.FC<{ theme: ThemeName; onToggleTheme: () => void }> = ({ theme, onToggleTheme }) => {
   React.useEffect(() => {
     const prevTitle = document.title;
@@ -1512,6 +1613,76 @@ const HomeExperience: React.FC<{ theme: ThemeName; onToggleTheme: () => void }> 
   );
 };
 
+const FOOTER_APPS = [
+  { name: 'BreakPoint', url: 'https://akakika.com/breakpoint/' },
+  { name: 'LocalhostWatcher', url: 'https://akakika.com/localhostwatcher/' },
+  { name: 'DGMD', url: 'https://akakika.com/dgmd/' },
+  { name: 'RESQ', url: 'https://akakika.com/resq/' },
+  { name: "Mochi's Daily Quest", url: 'https://akakika.com/mochi/' },
+  { name: 'ClipboardSanitizer', url: 'https://akakika.com/clipsan/' },
+  { name: 'Focus', url: 'https://focus.akakika.com/' },
+  { name: 'FolderWardrobe', url: 'https://akakika.com/folderwardrobe/' },
+];
+
+function SiteFooter() {
+  return (
+    <footer className="border-t border-white/[0.04] px-6 py-5 md:px-12">
+      <div className="mx-auto max-w-6xl">
+        <div className="grid gap-6 md:grid-cols-4">
+          {/* Apps */}
+          <div>
+            <p className="mb-1.5 font-mono text-[9px] uppercase tracking-widest text-gray-600">apps</p>
+            <div className="flex flex-col gap-0.5">
+              {FOOTER_APPS.map(app => (
+                <a key={app.name} href={app.url} target="_blank" rel="noopener noreferrer"
+                  className="font-mono text-[10px] text-gray-600 transition-colors hover:text-gray-300"
+                >{app.name}</a>
+              ))}
+            </div>
+          </div>
+
+          {/* Explore */}
+          <div>
+            <p className="mb-1.5 font-mono text-[9px] uppercase tracking-widest text-gray-600">explore</p>
+            <div className="flex flex-col gap-0.5">
+              <BlogNavLink path="/undrdr" className="font-mono text-[10px] text-gray-600 transition-colors hover:text-gray-300">UNDRDR</BlogNavLink>
+              <BlogNavLink path="/undrdr/graph" className="font-mono text-[10px] text-gray-600 transition-colors hover:text-gray-300">graph</BlogNavLink>
+              <BlogNavLink path="/undrdr/submit" className="font-mono text-[10px] text-gray-600 transition-colors hover:text-gray-300">submit</BlogNavLink>
+              <BlogNavLink path="/blog" className="font-mono text-[10px] text-gray-600 transition-colors hover:text-gray-300">blog</BlogNavLink>
+              <BlogNavLink path="/goodnews" className="font-mono text-[10px] text-gray-600 transition-colors hover:text-gray-300">good news ✦</BlogNavLink>
+              <BlogNavLink path="/apps" className="font-mono text-[10px] text-gray-600 transition-colors hover:text-gray-300">apps</BlogNavLink>
+            </div>
+          </div>
+
+          {/* About */}
+          <div>
+            <p className="mb-1.5 font-mono text-[9px] uppercase tracking-widest text-gray-600">about</p>
+            <div className="flex flex-col gap-0.5">
+              <BlogNavLink path="/" className="font-mono text-[10px] text-gray-600 transition-colors hover:text-gray-300">about me</BlogNavLink>
+              <a href="https://github.com/alienator88" target="_blank" rel="noopener noreferrer"
+                className="font-mono text-[10px] text-gray-600 transition-colors hover:text-gray-300"
+              >github</a>
+              <span className="font-mono text-[10px] text-gray-800">socials — soon</span>
+            </div>
+          </div>
+
+          {/* Brand */}
+          <div>
+            <p className="mb-1.5 font-mono text-[9px] uppercase tracking-widest text-gray-600">aka kika</p>
+            <p className="font-mono text-[10px] leading-snug text-gray-700">
+              digital craft · macos systems<br />
+              free apps · local-first · no SaaS tax
+            </p>
+            <p className="mt-2 font-mono text-[9px] text-gray-800">
+              © {new Date().getFullYear()} kika
+            </p>
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
+}
+
 export default function App() {
   const [path, setPath] = useState(window.location.pathname);
   const [theme, setTheme] = useState<ThemeName>(() => {
@@ -1530,6 +1701,10 @@ export default function App() {
     window.localStorage.setItem('kika-theme', theme);
   }, [theme]);
 
+  // Dynamic meta tags per route
+  const meta = PAGE_META[path] || PAGE_META['/'];
+  useMeta({ title: meta.title, description: meta.description, path: path || '/' });
+
   const cycleTheme = () => {
     const order: ThemeName[] = ['purple', 'cyan', 'amber'];
     const next = order[(order.indexOf(theme) + 1) % order.length];
@@ -1538,7 +1713,9 @@ export default function App() {
 
   return (
     <div style={THEMES[theme].vars}>
-      {path === '/blog' ? (
+      {path === '/blog/683-repos-nobody-knows-about' ? (
+        <BlogPost683Repos theme={theme} onToggleTheme={cycleTheme} />
+      ) : path === '/blog' ? (
         <BlogIndex theme={theme} onToggleTheme={cycleTheme} />
       ) : path === '/blog/three-tools-that-run-my-life' ? (
         <BlogPostThreeTools theme={theme} onToggleTheme={cycleTheme} />
@@ -1558,11 +1735,15 @@ export default function App() {
         <UndrdrSubmitPage theme={theme} onToggleTheme={cycleTheme} />
       ) : path === '/undrdr/log' ? (
         <UndrdrLogPage theme={theme} onToggleTheme={cycleTheme} />
+      ) : path === '/undrdr/queue' ? (
+        <UndrdrQueuePage theme={theme} onToggleTheme={cycleTheme} />
       ) : path === '/undrdr' ? (
         <UndrdrPage theme={theme} onToggleTheme={cycleTheme} />
       ) : (
         <HomeExperience theme={theme} onToggleTheme={cycleTheme} />
       )}
+      <SiteFooter />
+      <Analytics />
     </div>
   );
 }

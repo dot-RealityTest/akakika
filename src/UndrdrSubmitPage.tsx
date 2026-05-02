@@ -17,14 +17,7 @@ export default function UndrdrSubmitPage({ theme, onToggleTheme }: { theme: stri
     setTimeout(() => setSubmitted(false), 5000);
   };
 
-  // Update meta tags for SEO
-  React.useEffect(() => {
-    document.title = 'Submit a Repo — UNDRDR | AKAKIKA';
-    const desc = document.querySelector('meta[name="description"]');
-    if (desc) desc.setAttribute('content', 'Submit an open source GitHub repository to UNDRDR. Know a hidden gem under 1,000 stars? Send it to be reviewed and featured in the curated collection of 683 repos.');
-    const canonical = document.querySelector('link[rel="canonical"]');
-    if (canonical) canonical.setAttribute('href', 'https://akakika.com/undrdr/submit');
-  }, []);
+  // meta handled by useMeta in App.tsx
 
   return (
     <div className="min-h-[100dvh] bg-[#0a0a0a] text-white">
@@ -36,10 +29,8 @@ export default function UndrdrSubmitPage({ theme, onToggleTheme }: { theme: stri
         </div>
         <div className="flex items-center gap-3 font-mono text-xs tracking-widest text-gray-400 md:gap-6">
           <a href="/" className="cursor-pointer transition-colors hover:text-gray-100">HOME</a>
-          <a href="/apps" className="cursor-pointer transition-colors hover:text-gray-100">APPS</a>
           <a href="/undrdr" className="cursor-pointer transition-colors hover:text-gray-100">UNDRDR</a>
           <a href="/blog" className="cursor-pointer transition-colors hover:text-gray-100">BLOG</a>
-          <a href="/goodnews" className="cursor-pointer transition-colors hover:text-gray-100">GOOD NEWS</a>
         </div>
       </div>
 

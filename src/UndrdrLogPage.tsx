@@ -39,7 +39,7 @@ export default function UndrdrLogPage({ theme, onToggleTheme }: { theme: string;
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    document.title = 'UNDRDR — Log | AKAKIKA';
+    // meta handled by useMeta in App.tsx
   }, []);
 
   const handleAuth = (e: React.FormEvent) => {
@@ -136,10 +136,8 @@ export default function UndrdrLogPage({ theme, onToggleTheme }: { theme: string;
         </div>
         <div className="flex items-center gap-3 font-mono text-xs tracking-widest text-gray-400 md:gap-6">
           <a href="/" className="cursor-pointer transition-colors hover:text-gray-100">HOME</a>
-          <a href="/apps" className="cursor-pointer transition-colors hover:text-gray-100">APPS</a>
           <a href="/undrdr" className="cursor-pointer transition-colors hover:text-gray-100">UNDRDR</a>
           <a href="/blog" className="cursor-pointer transition-colors hover:text-gray-100">BLOG</a>
-          <a href="/goodnews" className="cursor-pointer transition-colors hover:text-gray-100">GOOD NEWS</a>
         </div>
       </div>
 

@@ -5,13 +5,14 @@
   "type": "module",
   "scripts": {
     "dev": "vite --port=3000 --host=0.0.0.0",
-    "build": "vite build && mkdir -p dist/undrdr/graph dist/undrdr/submit && cp dist/index.html dist/undrdr/index.html && cp dist/index.html dist/undrdr/submit/index.html",
+    "build": "vite build && mkdir -p dist/undrdr/graph dist/undrdr/submit dist/undrdr/queue dist/brand && cp dist/index.html dist/undrdr/index.html && cp dist/index.html dist/undrdr/submit/index.html && cp dist/index.html dist/undrdr/queue/index.html && cp -r public/brand/* dist/brand/",
     "preview": "vite preview",
     "clean": "rm -rf dist",
     "lint": "tsc --noEmit"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.14",
+    "@vercel/analytics": "^2.0.1",
     "@vitejs/plugin-react": "^5.0.4",
     "dotenv": "^17.2.3",
     "express": "^4.21.2",

@@ -161,6 +161,7 @@ export default function UndrdrPage({ theme, onToggleTheme }: { theme: string; on
   const [showAllCats, setShowAllCats] = useState(false);
   const [expandedGroups, setExpandedGroups] = useState<Set<string>>(new Set());
   const [syncMsg, setSyncMsg] = useState('');
+  const [showMobileFilters, setShowMobileFilters] = useState(false);
 
   const copyFavs = () => {
     const list = JSON.stringify([...favs]);
@@ -306,10 +307,8 @@ export default function UndrdrPage({ theme, onToggleTheme }: { theme: string; on
         </div>
         <div className="flex items-center gap-3 font-mono text-xs tracking-widest text-gray-400 md:gap-6">
           <a href="/" className="cursor-pointer transition-colors hover:text-gray-100">HOME</a>
-          <a href="/apps" className="cursor-pointer transition-colors hover:text-gray-100">APPS</a>
           <span className="text-gray-100">UNDRDR</span>
           <a href="/blog" className="cursor-pointer transition-colors hover:text-gray-100">BLOG</a>
-          <a href="/goodnews" className="cursor-pointer transition-colors hover:text-gray-100">GOOD NEWS</a>
         </div>
       </div>
 
@@ -459,6 +458,80 @@ export default function UndrdrPage({ theme, onToggleTheme }: { theme: string; on
             </div>
           )}
         </div>
+
+        {/* Mobile filter toggle — visible below lg only */}
+        <button
+          onClick={() => setShowMobileFilters(true)}
+          className="mt-3 flex items-center gap-2 rounded-lg border border-white/[0.06] px-3 py-2 font-mono text-xs text-gray-400 transition-colors hover:text-white lg:hidden"
+        >
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M3 6h18M6 12h12M9 18h6"/></svg>
+          filters
+          {(activeCategory || activeGroup || activeTier !== 'All') && <span className="h-1.5 w-1.5 rounded-full bg-sky-400" />}
+        </button>
+
+        {/* Mobile filter drawer overlay */}
+        {showMobileFilters && (
+          <div className="fixed inset-0 z-50 lg:hidden" onClick={() => setShowMobileFilters(false)}>
+            <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
+            <div className="absolute bottom-0 left-0 right-0 max-h-[80vh] overflow-y-auto rounded-t-2xl bg-[#0f1219] p-5" onClick={e => e.stopPropagation()}>
+              <div className="mb-4 flex items-center justify-between">
+                <span className="font-mono text-sm text-gray-300">filters</span>
+                <button onClick={() => setShowMobileFilters(false)} className="text-gray-500 hover:text-white">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M18 6L6 18M6 6l12 12"/></svg>
+                </button>
+              </div>
+              {/* Tier pills */}
+              <div className="mb-4 flex flex-wrap gap-2">
+                {TIERS.map(s => (
+                  <button key={s} onClick={() => setActiveTier(s)}
+                    className={`rounded-lg px-3 py-2 font-mono text-xs transition-colors ${activeTier === s ? 'bg-white/10 text-white' : 'text-gray-500 hover:text-gray-300'}`}
+                  >{s}</button>
+                ))}
+              </div>
+              {/* Categories — reuse same logic */}
+              <div className="flex flex-col gap-1">
+                <button onClick={() => { setActiveGroup(activeGroup === "Kika's Fav" ? null : "Kika's Fav"); setActiveCategory(null); }}
+                  className={`flex items-center justify-between rounded px-3 py-2.5 font-mono text-xs ${activeGroup === "Kika's Fav" ? 'bg-amber-400/10 text-amber-400' : 'text-amber-400/60'}`}>
+                  <span>★ Kika's Fav</span><span className="text-[10px]">{KIKAS_FAVS.length}</span>
+                </button>
+                <div className="my-1 border-b border-white/[0.04]" />
+                {Object.entries(CATEGORY_GROUPS).map(([group, subs]) => {
+                  const groupCount = subs.reduce((s, cat) => s + (categoryCounts[cat] || 0), 0);
+                  const isExpanded = expandedGroups.has(group);
+                  const hasActiveSub = activeCategory && subs.includes(activeCategory);
+                  return (
+                    <div key={group}>
+                      <button onClick={() => { setActiveGroup(activeGroup === group ? null : group); setActiveCategory(null); toggleGroup(group); }}
+                        className={`flex w-full items-center justify-between rounded px-3 py-2.5 font-mono text-xs transition-colors ${activeGroup === group || hasActiveSub ? 'text-white' : 'text-gray-400'}`}
+                      >
+                        <span className="flex items-center gap-1.5">
+                          <span className={`text-[10px] transition-transform ${isExpanded ? 'rotate-90' : ''}`}>▶</span>
+                          {group}
+                        </span>
+                        <span className="text-[10px] text-gray-600">{groupCount}</span>
+                      </button>
+                      {isExpanded && (
+                        <div className="ml-5 flex flex-col gap-0.5">
+                          {subs.filter(cat => categoryCounts[cat]).map(cat => (
+                            <button key={cat} onClick={() => { setActiveCategory(activeCategory === cat ? null : cat); setActiveGroup(null); }}
+                              className={`rounded px-2 py-1.5 text-left font-mono text-[11px] transition-colors ${activeCategory === cat ? 'text-sky-400' : 'text-gray-600 hover:text-gray-400'}`}
+                            >{cat} <span className="text-gray-700">{categoryCounts[cat]}</span></button>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
+              {/* Clear all */}
+              {(activeCategory || activeGroup || activeTier !== 'All') && (
+                <button onClick={() => { setActiveTier('All'); setActiveCategory(null); setActiveGroup(null); }}
+                  className="mt-4 w-full rounded-lg border border-white/[0.06] py-2.5 font-mono text-xs text-gray-500 transition-colors hover:text-white"
+                >clear all filters</button>
+              )}
+            </div>
+          </div>
+        )}
 
         {/* Layout: sidebar + content */}
         <div className="mt-4 flex gap-6">
