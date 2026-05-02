@@ -346,12 +346,37 @@ const Phase0: React.FC<{
       </div>
     ) : hasBooted ? (
       <motion.div
-        className="accent-text-soft absolute right-8 bottom-8 z-10 text-xs tracking-[0.25em]"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 0.8 }}
-        transition={{ delay: 0.2, duration: 0.5 }}
+        className="accent-text-soft absolute bottom-0 left-0 right-0 z-10 flex items-center justify-between px-6 pb-6 text-[10px] tracking-[0.2em] md:px-10 md:pb-8"
+        initial={{ opacity: 0, y: 8 }}
+        animate={{ opacity: 0.6, y: 0 }}
+        transition={{ delay: 0.4, duration: 0.5 }}
       >
-        [ BOOTING... ]
+        <div className="flex items-center gap-4">
+          <a
+            href="https://twitter.com/kika_hub"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover-accent-text transition-colors"
+          >
+            TWITTER
+          </a>
+          <span className="opacity-30">·</span>
+          <a
+            href="https://github.com/dot-RealityTest"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover-accent-text transition-colors"
+          >
+            GITHUB
+          </a>
+          <span className="opacity-30">·</span>
+          <BlogNavLink path="/apps" className="hover-accent-text transition-colors">
+            APPS
+          </BlogNavLink>
+        </div>
+        <div className="accent-text-soft">
+          © 2026 NICA LOREN · ALL RIGHTS RESERVED
+        </div>
       </motion.div>
     ) : null}
   </motion.div>
